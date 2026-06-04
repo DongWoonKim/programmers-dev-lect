@@ -10,5 +10,51 @@
 public class E_casting {
     static void main(String[] args) {
 
+        double d = 3.14;
+        System.out.println(d);
+        int score = (int) d;
+        System.out.println(score);
+
+        // int -> char
+        int n = 65;
+        System.out.println(n);
+        char c = (char) n;
+        System.out.println(c);
+
+        // char -> int (암시적 형변환)
+        char c2 = 'A';
+        System.out.println(c2);
+        int n2 = c2;
+        System.out.println(n2);
+
+        // float -> int
+        float f = 3.14f;
+        System.out.println(f);
+        int n3 = (int) f;
+        System.out.println(n3);
+
+        // int -> float (암시적 형변환)
+        int n4 = 3;
+        System.out.println(n4);
+        float f2 = n4;
+        System.out.println(f2);
+
+        // 암시적 형변환
+        byte b = 10;
+        int i = b;  // 암시적 형변환: byte → int
+
+        char cc = 'A';
+        int j = cc;  // 암시적 형변환: char → int
+
+        int k = 100;
+        double dd = k;  // 암시적 형변환: int → double
+
+        // 명시적 형변환
+        int i2 = 100;
+        byte b2 = (byte) i;  // 명시적 형변환: int → byte
+
+        double ddd = 9.78;
+        int j2 = (int) d;  // 명시적 형변환: double → int
+
     }
 }
