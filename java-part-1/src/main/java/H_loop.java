@@ -2,6 +2,8 @@
 // * 반복문
 // 어떤 작업이 반복적으로 수행되도록 할 때 사용된다.
 
+import java.util.Scanner;
+
 public class H_loop {
 
     /*
@@ -201,14 +203,29 @@ public class H_loop {
     // 다시 정수값을 입력받아 합계를 낸다.
     // 사용자가 0을 입력하면 종료한다.
     public static void practice6() {
-        // 사용자한테 정수 값을 입력받는다.
+        Scanner sc = new Scanner(System.in);
         // 무한루프를 건다.
-        // 합계 로직을 구현한다.
-        // 0을 누르면 탈출하는 조건을 넣어준다.
+        while ( true ) {
+            // 사용자한테 정수 값을 입력받는다.
+            System.out.println("합을 구할 정수를 입력해주세요.(만약 종료를 원하면 0을 누르시요.)");
+            int num = sc.nextInt();
+
+            // 0을 누르면 탈출하는 조건을 넣어준다.
+            if ( num == 0 ) break;
+
+            // 합계 로직을 구현한다.
+            int sum = 0; // 합계값
+            for ( int i = 1; i <= num; i++ ) {
+                sum += i; // sum = sum + i;
+            }
+            System.out.println("결과 : " + sum);
+        }
+        // 0을 눌러 탈출했을 경우
+        System.out.println("감사합니다.");
     }
 
 
     static void main(String[] args) {
-        exam12();
+        practice6();
     }
 }
