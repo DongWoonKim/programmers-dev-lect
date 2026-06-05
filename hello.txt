@@ -33,3 +33,33 @@ Hello Programmers
 [ai]
 과제 -> 자판기, 가계부,... x
 이론 공부 -> ㅇ
+
+
+1-2 260606
+* 상황에 맞게 진행해주세요.
+* 수업 끝나기전 진행했던 내용 github링크 제출해주세요.
+* 간력하게 정리하셔서 금일 학습내용 DM메시지로 깃헙 전달, 블로그 링크
+
+-> 과제1
+문법 복습 ~loop
+
+-> 과제2
+자판기 예제
+어려웠던분 : 한번 똑같이 타이핑
+쉬웠던분 : 완전히 새로 
+
+-> 과제2-1
+이론 : 운영체제 학습
+
+-> 과제3
+가계부1(collections)
+
+-> 과제4
+가계부2(file i/o)
+
+-> 개발 과제완료시
+알고리즘 문제풀이를 진행해주세요.
+[PCCE] 
+https://school.programmers.co.kr/learn/challenges?order=recent&page=1&partIds=56388
+[PCCP]
+https://school.programmers.co.kr/learn/challenges?order=recent&page=1&partIds=56389
