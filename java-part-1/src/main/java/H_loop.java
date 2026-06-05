@@ -224,8 +224,58 @@ public class H_loop {
         System.out.println("감사합니다.");
     }
 
+    // 요구사항 : 원하는 구구단의 단을 입력하면 -> ex) 2 -> 2 * 1 = 2, 2 * 2 = 4, 2 * 3 = 6, 2 * 4 = 8, 2 * 5 = 10 .. 2*9 = 18
+    // 0을 입력하면 종료한다.
+    public static void practice7() {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+
+            System.out.println("원하는 구구단의 단을 입력하시오.(0을 누르면 종료됩니다)");
+            int dan = sc.nextInt();
+
+            if (dan == 0) break;
+
+            for (int i = 1; i <= 9; i++) {
+                System.out.println(dan + " * " + i + " = " + (dan * i));
+            }
+
+        }
+    }
+
+    // 짝수인 경우만 출력해주세요. while문 사용
+    // 1 ~ 10 까지 중
+    public static void exam14() {
+        int i = 1;
+        while ( i <= 10 ) {
+            if ( i % 2 == 0 ) {
+                System.out.println(i);
+            }
+            i++;
+        }
+    }
+
+    // * do-while문 : 최소한 한번은 수행될 것을 보장한다.
+    /*
+           do {
+                // 조건식의 연산결과가 참일 때 수행될 문장들을 적는다.
+           } while (조건식)
+           ...
+     */
+    public static void exam15() {
+        int i = 0;
+
+        while ( i != 0 ) {
+            System.out.println("while문입니다.");
+        }
+
+        do {
+            System.out.println("do-while문입니다.");
+        } while ( i != 0 );
+
+    }
 
     static void main(String[] args) {
-        practice6();
+        exam15();
     }
 }
