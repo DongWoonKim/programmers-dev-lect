@@ -32,6 +32,54 @@ public class K_member_management {
         return sc.nextInt();
     }
 
+    // 2. 회원조회(메일)
+    // 1. 회원추가
+    public static void addMember(String[][] members) {
+        // 1-1. 회원이 꽉찼을 때 -> 추가 x '회원이 꽉 찼습니다' 를 사용자한테 안내하고 종료
+        if (memberCnt == totalCnt) {
+            System.out.println("회원이 꽉찼습니다.");
+            return;
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("이름을 입력하세요.");
+        String name = sc.nextLine();
+        System.out.println("이메일을 입력하세요.");
+        String email = sc.nextLine();
+        System.out.println("연락처를 입력하세요.");
+        String phone = sc.nextLine();
+
+        if ( checkEmail(members, email) ) {
+            System.out.println("이미 존재하는 회원입니다.");
+            return;
+        }
+
+        // 저장
+        members[memberCnt][0] = name;
+        members[memberCnt][1] = email;
+        members[memberCnt][2] = phone;
+
+        memberCnt++;
+    }
+    // 1-2. checkEmail -> 이메일은 중복을 받지 않음. 기존에 이미 있는 경우 '이미 존재하는 회원입니다.'를 사용자한테 안내 종료
+    public static boolean checkEmail(String[][] members, String email) {
+        for (int i = 0; i < members.length; i++) {
+            if ( members[i][1].equals(email) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    // 3. 회원조회(이름)
+
+    // 4. 회원전체조회
+
+    // 5. 회원정보 수정
+    // -> 이메일을 입력 -> 수정 : 이름, 이메일, 연락처
+
     static void main(String[] args) {
 
         // printPricePlan을 실행 -> 2차원 저장공간이 생성되어야한다.
@@ -46,6 +94,9 @@ public class K_member_management {
             int menu = printMenu();
             System.out.println(menu);
             switch (menu) {
+                case 1:
+                    addMember(members);
+                    break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
                     return;
