@@ -28,11 +28,32 @@ public class K_member_management {
         System.out.println("[1]회원추가 [2]회원조회(메일) [3]회원조회(이름)");
         System.out.println("[4]회원전체조회 [5]회원정보 수정 [6]회원삭제");
         System.out.println("[7]프로그램 종료");
-        
+
         return sc.nextInt();
     }
 
     static void main(String[] args) {
+
+        // printPricePlan을 실행 -> 2차원 저장공간이 생성되어야한다.
+        // 이름, 이메일, 연락처 - 3열
+        int pricePlan = printPricePlan();
+        totalCnt = pricePlan * 10;
+        String[][] members = new String[totalCnt][3];
+        System.out.println(totalCnt);
+        // printMenu를 구성해주세요.
+        // loop문 -> 7번, 메뉴값을 잘못 눌렀을 경우 사용자한테 안내 멘트를 남겨주세요.
+        while ( true ) {
+            int menu = printMenu();
+            System.out.println(menu);
+            switch (menu) {
+                case 7:
+                    System.out.println("이용해주셔서 감사합니다.");
+                    return;
+                default:
+                    System.out.println("잘 못 눌렀습니다.");
+                    break;
+            }
+        }
 
     }
 }
