@@ -32,7 +32,6 @@ public class K_member_management {
         return sc.nextInt();
     }
 
-    // 2. 회원조회(메일)
     // 1. 회원추가
     public static void addMember(String[][] members) {
         // 1-1. 회원이 꽉찼을 때 -> 추가 x '회원이 꽉 찼습니다' 를 사용자한테 안내하고 종료
@@ -49,6 +48,9 @@ public class K_member_management {
         System.out.println("연락처를 입력하세요.");
         String phone = sc.nextLine();
 
+        members[memberCnt][0] = null;
+        members[memberCnt][1] = null;
+        members[memberCnt][2] = null;
         if ( checkEmail(members, email) ) {
             System.out.println("이미 존재하는 회원입니다.");
             return;
@@ -63,19 +65,57 @@ public class K_member_management {
     }
     // 1-2. checkEmail -> 이메일은 중복을 받지 않음. 기존에 이미 있는 경우 '이미 존재하는 회원입니다.'를 사용자한테 안내 종료
     public static boolean checkEmail(String[][] members, String email) {
+        // members 10행 3열
+        // String str = "Hello";
+        // null.equals(str) -> false
+        // "hello".equals(str) -> true"
         for (int i = 0; i < members.length; i++) {
-            if ( members[i][1].equals(email) ) {
+            if ( email.equals(members[i][1]) ) {
                 return true;
             }
         }
 
         return false;
     }
+    // 2. 회원조회(메일)
+    public static void selectEmail(String[][] members) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[조회] 이메일을 입력하세요.");
+        String email = sc.nextLine();
 
+        for (int i = 0; i < members.length; i++) {
+            if ( email.equals(members[i][1]) ) {
+                System.out.println("[이름] " + members[i][0] + ", [메일] " + members[i][1] + ", [연락처] " + members[i][2]);
+                return;
+            }
+        }
 
-    // 3. 회원조회(이름)
+        System.out.println("찾으시는 정보가 없습니다.");
+    }
+
+    // 3. 회원조회(이름) -> selectName
+    // 완성해주세요.
+    public static void selectName(String[][] members) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[조회] 이름을 입력하세요.");
+        String name = sc.nextLine();
+
+        for (int i = 0; i < members.length; i++) {
+            if ( name.equals(members[i][0]) ) {
+                System.out.println("[이름] " + members[i][0] + ", [메일] " + members[i][1] + ", [연락처] " + members[i][2]);
+                return;
+            }
+        }
+
+        System.out.println("찾으시는 정보가 없습니다.");
+    }
 
     // 4. 회원전체조회
+    public static void selectAll(String[][] members) {
+        for (int i = 0; i < members.length; i++) {
+            System.out.println("[이름] " + members[i][0] + ", [메일] " + members[i][1] + ", [연락처] " + members[i][2]);
+        }
+    }
 
     // 5. 회원정보 수정
     // -> 이메일을 입력 -> 수정 : 이름, 이메일, 연락처
@@ -96,6 +136,15 @@ public class K_member_management {
             switch (menu) {
                 case 1:
                     addMember(members);
+                    break;
+                case 2:
+                    selectEmail(members);
+                    break;
+                case 3:
+                    selectName(members);
+                    break;
+                case 4:
+                    selectAll(members);
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
