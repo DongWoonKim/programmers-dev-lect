@@ -48,9 +48,6 @@ public class K_member_management {
         System.out.println("연락처를 입력하세요.");
         String phone = sc.nextLine();
 
-        members[memberCnt][0] = null;
-        members[memberCnt][1] = null;
-        members[memberCnt][2] = null;
         if ( checkEmail(members, email) ) {
             System.out.println("이미 존재하는 회원입니다.");
             return;
@@ -117,8 +114,83 @@ public class K_member_management {
         }
     }
 
-    // 5. 회원정보 수정
+    // 5. 회원정보 수정 -> updateMember
     // -> 이메일을 입력 -> 수정 : 이름, 이메일, 연락처
+    public static void updateMember(String[][] members) {
+        // 이메일 조회
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[수정] 이메일을 입력하세요.");
+        String email = sc.nextLine();
+        // 조회한 데이터를 찾는다? -> 인덱스 몇번째 행인지를 찾기
+        // 1 : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        int idx = -1;
+        for (int i = 0; i < members.length; i++) {
+            if ( email.equals(members[i][1]) ) {
+                idx = i;
+                break;
+            }
+        }
+
+        if ( idx == -1 ) {
+            System.out.println("찾으시는 회원이 없습니다.");
+            return;
+        }
+
+        // 그행을 찾았으면 그행의 값을 수정한다. -> 사용자한테 받은 값으로.
+        System.out.println("변경할 이름을 입력하세요.");
+        String newName = sc.nextLine();
+        System.out.println("변경할 이메일을 입력하세요.");
+        String newEmail = sc.nextLine();
+        System.out.println("변경할 연락처를 입력하세요.");
+        String newPhone = sc.nextLine();
+
+        // 수정
+        members[idx][0] = newName;
+        members[idx][1] = newEmail;
+        members[idx][2] = newPhone;
+
+        System.out.println("수정이 완료되었습니다.");
+    }
+
+    // 6. 회원삭제
+    // 삭제할 이메일을 찾아 삭제를 진행해주세요.
+    // 해당하는 인덱스의 값들을 모두 null로 초기화한다.
+    public static void deleteMember(String[][] members) {
+        // 이메일 조회
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[삭제] 이메일을 입력하세요.");
+        String email = sc.nextLine();
+        int idx = -1;
+
+        for (int i = 0; i < members.length; i++) {
+            if ( email.equals(members[i][1]) ) {
+                idx = i;
+                break;
+            }
+        }
+
+        if ( idx == -1 ) {
+            System.out.println("찾으시는 회원이 없습니다.");
+            return;
+        }
+
+        // 값 땡기기 -> 0, 1, 3, 4, 4, X, X, X, X, X
+        // memberCnt = 6
+        for (int i = idx; i < memberCnt-1; i++) {
+            members[i][0] = members[i+1][0];
+            members[i][1] = members[i+1][1];
+            members[i][2] = members[i+1][2];
+        }
+
+        // 값 갱신
+        // 값 땡기기 -> 0, 1, 3, 4, null, X, X, X, X, X
+        members[memberCnt-1][0] = null;
+        members[memberCnt-1][1] = null;
+        members[memberCnt-1][2] = null;
+
+        // 회원수 감소
+        memberCnt--;
+    }
 
     static void main(String[] args) {
 
@@ -145,6 +217,12 @@ public class K_member_management {
                     break;
                 case 4:
                     selectAll(members);
+                    break;
+                case 5:
+                    updateMember(members);
+                    break;
+                case 6:
+                    deleteMember(members);
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
