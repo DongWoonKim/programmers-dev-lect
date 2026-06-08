@@ -40,6 +40,7 @@
 ### etc
 - [인텔리j 단축키](https://chaeyami.tistory.com/216)
 - [인텔리j 6개월 쿠폰 튜토리얼](https://built.tistory.com/86)
+- [이미지 무료 호스팅 사이트](https://postimages.org/)
 ### MarkDown 
 - 마크다운은 유용하고 널리 쓰이는(특히 IT 쪽에서) 텍스트 작성문법입니다.
 - [마크다운 메뉴얼](https://gist.github.com/ihoneymon/652be052a0727ad59601)
