@@ -64,6 +64,14 @@ public class I_vending_machine {
                     }
                     break;
                 case 2:
+                    result = calcMoney(totalMoney, CIDER);
+                    // t : 300, coke : 500, result : -200
+                    if ( result < 0 ) {
+                        calcMoneyException();
+                    } else {
+                        totalMoney = result;
+                        System.out.println("콜라가 나왔습니다.");
+                    }
                     break;
                 case 3:
                     break;
