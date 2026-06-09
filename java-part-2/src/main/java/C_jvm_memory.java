@@ -66,7 +66,7 @@ public class C_jvm_memory {
         System.out.println(d3.x);
     }
 
-    
+
 
     public static Data copy(Data d) {
         Data temp = new Data();
