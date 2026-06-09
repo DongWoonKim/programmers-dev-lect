@@ -37,7 +37,70 @@ public class L_String {
         }
     }
 
+    // 4. toCharArray()
+    // 문자열을 문자 배열로 반환합니다.
+    public static void exam4() {
+        String str = "hello";
+        char[] chars = str.toCharArray();
+        for ( char c : chars ) {
+            System.out.println(c);
+        }
+    }
+
+    // 5. equals(String anotherString)
+    // 두 문자열의 값을 비교하여 같으면 true, 다르면 false를 반환합니다.
+    public static void exam5() {
+        String str1 = "hello1";
+        String str2 = "hello2";
+        System.out.println(str1.equals(str2));
+    }
+
+    // 6. contains(CharSequence s)
+    // 문자열이 특정 문자열을 포함하고 있는지 확인합니다.
+    public static void exam6() {
+        String str = "hello";
+        System.out.println(str.contains("ell"));
+    }
+
+    // 7. replace(char oldChar, char newChar) 및 replace(CharSequence target, CharSequence replacement)
+    // 문자열 내의 특정 문자 또는 문자열을 다른 문자 또는 문자열로 대체합니다.
+    public static void exam7() {
+        String str = "hello";
+        String newStr = str.replace('l', 'L');
+        System.out.println(newStr);
+    }
+
+    // 8. indexOf(String str) 및 lastIndexOf(String str)
+    // 특정 문자열이 처음 또는 마지막으로 나타나는 위치를 반환합니다.
+    public static void exam8() {
+        String str = "hello";
+        int index = str.indexOf("l"); // 2
+        int lastIndex = str.lastIndexOf("l"); // 3
+        System.out.println(index);
+        System.out.println(lastIndex);
+    }
+
+    // 9. StringBuilder 및 StringBuffer
+    // StringBuilder와 StringBuffer는 가변(mutable) 문자열을 다루기 위한 클래스입니다.
+    // StringBuilder는 성능이 우수하며, StringBuffer는 스레드 안전(thread-safe)한 버전입니다.
+    public static void exam9() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("hello");
+        sb.append(" world");
+        String result = sb.toString();
+        System.out.println(result);
+    }
+
+    // 10. reverse()
+    // 문자열을 뒤집습니다. String 자체는 reverse() 메서드가 없지만, StringBuilder를 사용하여 문자를 뒤집을 수 있습니다
+    public static void exam10() {
+        StringBuilder sb = new StringBuilder("hello");
+        String result = sb.reverse().toString();
+        System.out.println(result);
+    }
+
+
     static void main(String[] args) {
-        exam3();
+        exam10();
     }
 }
