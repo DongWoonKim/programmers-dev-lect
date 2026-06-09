@@ -17,6 +17,43 @@
 
 // 클래스 --> (인스턴스화) --> 인스턴스(객체)
 
+class TV {
+    // TV의 속성 -> 멤버 변수
+    String color;
+    boolean power;
+    int volume;
+    int channel;
+
+    // TV의 기능 -> 메서드
+    public void power() {
+        power = !power; // 토글
+        // 3항 연산자 : 조건식 ? true : false
+        // => if (poser) {} else {}
+        System.out.println("TV 전원을 " + ( power ? "켰다" : "껐다"));
+    }
+
+    public void volumeUp() {
+        volume++;
+        System.out.println("볼륨을 올렸다.");
+    }
+
+    public void volumeDown() {
+        volume--;
+        System.out.println("볼륨을 내렸다.");
+    }
+
+    public void channelUp() {
+        channel++;
+        System.out.println("채널을 올렸다.");
+    }
+
+    public void channelDown() {
+        channel--;
+        System.out.println("채널을 내렸다.");
+    }
+
+}
+
 public class A_object_class {
     static void main(String[] args) {
     }
