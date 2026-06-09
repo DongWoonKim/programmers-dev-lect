@@ -27,7 +27,7 @@ class Data {
 
 public class C_jvm_memory {
     static void main(String[] args) {
-        exam2();
+        exam3();
     }
 
     public static void exam1() {
@@ -51,6 +51,27 @@ public class C_jvm_memory {
 
     public static void changeData(Data d) { // * 참조형 매개변수 : 변수의 값을 읽고 변경할 수 있다.
         d.x = 10;
+    }
+
+    // 얕은복사 & 깊은복사
+    public static void exam3() {
+        // 얕은복사
+        Data d1 = new Data();
+        Data d2 = d1; // &123
+        // 깊은복사
+        Data d3 = copy(d1);
+        d1.x = 10;
+        System.out.println(d1.x);
+        System.out.println(d2.x);
+        System.out.println(d3.x);
+    }
+
+    
+
+    public static Data copy(Data d) {
+        Data temp = new Data();
+        temp.x = d.x;
+        return temp;
     }
 
 }
