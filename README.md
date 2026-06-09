@@ -8,7 +8,7 @@
 
 ---
 
-## [🔗 과제링크 - 과제는 여기서 확인하세요](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/hello.txt)
+## [🔗 과제링크 - 과제는 여기서 확인하세요](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/hello.md)
 
 ## 📌 수업
 ### 26.06.08
