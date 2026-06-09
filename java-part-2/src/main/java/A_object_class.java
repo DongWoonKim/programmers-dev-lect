@@ -56,5 +56,21 @@ class TV {
 
 public class A_object_class {
     static void main(String[] args) {
+        // 객체 생성
+        TV tv = new TV();
+
+        // 초기화 -> 멤버변수 접근
+        tv.channel = 7;
+        tv.color = "black";
+        tv.power = false;
+        tv.volume = 8;
+
+        // 기능 사용 -> 메서드 사용
+        tv.power();
+        tv.volumeUp();
+        tv.volumeDown();
+        tv.channelUp();
+        tv.channelDown();
+
     }
 }
