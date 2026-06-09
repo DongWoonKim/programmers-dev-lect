@@ -27,7 +27,7 @@ class Data {
 
 public class C_jvm_memory {
     static void main(String[] args) {
-        exam3();
+        exam4();
     }
 
     public static void exam1() {
@@ -66,12 +66,35 @@ public class C_jvm_memory {
         System.out.println(d3.x);
     }
 
-
-
     public static Data copy(Data d) {
         Data temp = new Data();
         temp.x = d.x;
         return temp;
     }
+
+    static void exam4() {
+        // * 재귀호출(Recursive Call)
+        // 메서드의 내부에서 메서드 자신을 다시 호출하는 것을 '재귀호출'이라고 하고,
+        // 재귀호출을 하는 메서드를 '재귀 메서드'라고 한다.
+        int result = factorial(5);
+        System.out.println(result);
+    }
+
+    static int factorial(int n) {
+
+        // 기저조건 -> 탈출조건
+        if (n == 1) {
+            return 1;
+        }
+
+        // 자기 자신으로 호출
+        return n * factorial(n - 1);
+    }
+
+    // f(2-1) 실행 -> 반환값 1 --> 스택에서 사라짐
+    // f(3-1) 실행 -> (3-1) * (1을 반환받음) -> 2를 반환 -> 스택에서 사라짐
+    // 3 -> 3 * f(3-1) -> 3 * 2 -> 스택에서 사라짐
+    // 4 -> 4 * f(4-1) -> 4 * (3 * 2) -> 스택에서 사라짐
+    // 5 -> 5 * f(5-1) -> 5 * (4 * (3 * (2 * 1))) -> 120 반환 -> 스택에서 사라짐
 
 }
