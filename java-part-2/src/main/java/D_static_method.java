@@ -15,10 +15,31 @@
 // * 결론
 // - 정적 메서드는 클래스에 속하는 메서드로, 특정 인스턴스와 관계없이 호출할 수 있다.
 // - 주로 유티리티 성격의 메서드나, 클래스 자체의 특성과 관련된 기능을 제공하는 메서드를 정의할 때 사용된다.
-// - 인스턴스 변수를 사용하지 않고, 클래스 차원에서 공통으로 사용할 수 있는 기능을 제공할 때 유용하다.ㄴ
+// - 인스턴스 변수를 사용하지 않고, 클래스 차원에서 공통으로 사용할 수 있는 기능을 제공할 때 유용하다.
+
+class MathOperation {
+
+    // 정적변수
+    static final double PI = 3.14159;
+
+    // 정적메서드
+    static double add(double a, double b) {
+        return a + b;
+    }
+
+    // 정적메서드
+    static double calculateArea(double radius) {
+        return PI * radius * radius;
+    }
+
+}
 
 public class D_static_method {
     static void main(String[] args) {
+        double added = MathOperation.add(10, 20);
+        double v = MathOperation.calculateArea(5);
 
+        System.out.println(added);
+        System.out.println(v);
     }
 }
