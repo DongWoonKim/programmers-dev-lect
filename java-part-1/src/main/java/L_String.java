@@ -99,8 +99,27 @@ public class L_String {
         System.out.println(result);
     }
 
+    // 11. compareTo(String anotherString)
+    // 두 문자열을 사전적으로 비교하여, 현재 문자열이 더 작으면 음수 -1, 같으면 0, 더 크면 양수 1을 반환합니다.
+    public static void exam11() {
+        String str1 = "apple";
+        String str2 = "banana";
+
+        int resultIdx = str1.compareTo(str2);
+        System.out.println(resultIdx);
+    }
+
+    // 12. toLowerCase(), toUpperCase()
+    // 문자열을 소문자 또는 대문자로 변환합니다.
+    public static void exam12() {
+        String str = "Hello";
+        String lower = str.toLowerCase();
+        String upper = str.toUpperCase();
+        System.out.println(lower);
+        System.out.println(upper);
+    }
 
     static void main(String[] args) {
-        exam10();
+        exam12();
     }
 }
