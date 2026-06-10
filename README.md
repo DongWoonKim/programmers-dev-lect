@@ -35,7 +35,6 @@
 ## 📌 관련 링크
 
 ### 학습 자료
-- [전자책 - 점프 투 자바](https://wikidocs.net/book/31)
 - [자바 튜토리얼 - 프로그래머스 자바 입문](https://school.programmers.co.kr/learn/courses/5/5-무료-자바-입문)
 - [자바 튜토리얼 - 프로그래머스 자바 중급](https://school.programmers.co.kr/learn/courses/9/9-자바-중급)
 - [Git 튜토리얼 - Learn Git Branching](https://learngitbranching.js.org/?locale=ko)
