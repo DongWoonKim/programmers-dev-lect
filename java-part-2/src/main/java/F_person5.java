@@ -4,6 +4,7 @@ public class F_person5 {
 
     public F_person5() {
 //        F_person5("John", 25); // 에러 반드시 this로 호출해야됨.
+        System.out.println("hello");
         this("John", 25);
     }
 
