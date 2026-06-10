@@ -9,5 +9,12 @@
 public class F_constructor {
     static void main(String[] args) {
 
+        // 기본 생성자를 사용하여 객체 생성
+        F_person1 person1 = new F_person1();
+        person1.display();
+
+
+
+
     }
 }
