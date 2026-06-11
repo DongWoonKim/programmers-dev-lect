@@ -43,6 +43,8 @@ public class K_polymorphism {
         myCat.sound(); // 런타임 시점에 Cat의 sound()호출
 
         // 다운캐스팅을 통해 다시 Dog 타입으로 변환
-//        K_dog myDog2 = (K_dog) myAnimal;
+//        K_dog myDog2 = (K_dog) myAnimal; // 실질적인 인스턴스는 animal -> dog(x)
+        K_dog myDog2 = (K_dog) myDog; // 실질적인 인스턴스가 dog이기 때문에 다운캐스팅 가능
+        myDog2.fetch();
     }
 }
