@@ -22,10 +22,50 @@
 // - 구현 유무 : 인터페이스는 구현을 포함하지 않지만, 추상 클래스는 일부 메서드의 구현을 포함할 수 있다.
 // - 상태 유지 : 인터페이스는 상태(필드)를 가질 없지만, 추상 클래스는 필드를 가질 수 있다.
 
-// 인터페이스 정의
+// 인터페이스 정의 -> 명세서
+interface M_animal {
+    void makeSound();
+    void eat();
+}
+
+class M_dog implements M_animal {
+
+    @Override
+    public void makeSound() {
+        System.out.println("Dog sound");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Dog eats meat");
+    }
+}
+
+class M_cat implements M_animal {
+
+    @Override
+    public void makeSound() {
+        System.out.println("Cat sound");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Cat eats fish");
+    }
+}
 
 public class M_interface {
     static void main(String[] args) {
+
+        // 인터페이스 타입의 변수로 여러 구현체를 참조 가능
+        M_animal myDog = new M_dog();
+        M_animal myCat = new M_cat();
+
+        myDog.makeSound();
+        myDog.eat();
+
+        myCat.makeSound();
+        myCat.eat();
 
     }
 }
