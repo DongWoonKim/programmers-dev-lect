@@ -25,7 +25,7 @@ class G_deck {
         for ( int i = 0; i < cards.length; i++ ) {
             int index = (int)(Math.random() * CARD_NUM);
 
-            Card2 temp = cards[i];
+            G_card temp = cards[i];
             cards[i] = cards[index];
             cards[index] = temp;
         }

@@ -34,5 +34,15 @@ class K_cat extends K_animal {
 public class K_polymorphism {
     static void main(String[] args) {
 
+        K_animal myAnimal = new K_animal(); // K_animal 타입의 객체
+        K_animal myDog = new K_dog(); // Dog타입의 객체, Animal타입으로 업캐스팅
+        K_animal myCat = new K_cat(); // Cat타입의 객체, Animal타입으로 업캐스팅
+
+        myAnimal.sound();
+        myDog.sound(); // 런타임 시점에 Dog의 sound()호출
+        myCat.sound(); // 런타임 시점에 Cat의 sound()호출
+
+        // 다운캐스팅을 통해 다시 Dog 타입으로 변환
+//        K_dog myDog2 = (K_dog) myAnimal;
     }
 }
