@@ -41,6 +41,10 @@ public class L_vendingmachine {
 
     // 종료 시 잔돈 반환
     public int returnMoney() {
+        int returnMoney = totalMoney;
+        totalMoney = 0;
+
+        return returnMoney;
     }
 
     // 메뉴출력
