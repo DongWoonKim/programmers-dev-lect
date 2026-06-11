@@ -50,7 +50,7 @@ public class L_vendingmachine {
     // 메뉴출력
     public void printMenu() {
         System.out.println("============== 자판기 ==============");
-        System.out.println("[1]콜라 : 500  [2]사이다 : 500  [3]환타 : 300  [4]물 : 200");
+        System.out.println("[1]콜라 : 500  [2]사이다 : 500  [3]환타 : 700  [4]물 : 200");
         System.out.println("[5]돈 넣기  [6]종료");
         System.out.println("현재 금액 : " + totalMoney);
         System.out.println("====================================");
