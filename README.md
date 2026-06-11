@@ -12,6 +12,10 @@
 ---
 
 ## 📌 수업
+### 26.06.11
+1. [java-part-2 : K ~ M](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2)
+2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3)
+
 ### 26.06.10
 1. [java-part-2 : E ~ J](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2)
 2. [운영체제 - 4. CPU 스케줄링 - 1](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/4.CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81-1.md)
