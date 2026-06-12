@@ -50,6 +50,46 @@ public class N_member_manager {
         return null;
     }
 
+    // 수정
+    public boolean update(String name, String email, String phone) {
+        // 조회
+        N_member member = findByEmail(email);
+        if ( member == null ) {
+            return false;
+        }
+
+        // 수정 객체에게 위임한다.
+        member.update(name, email, phone);
+
+        return true;
+    }
+
+    // 삭제 -> 뒤 회원들을 한 칸씩 당긴다.
+    public boolean delete(String email) {
+        int index = -1;
+        // 조회
+        for ( int i = 0; i < memberCount; i++ ) {
+            if ( email.equals(members[i].getEmail()) ) {
+                index = i;
+                break;
+            }
+        }
+
+        if ( index == -1 ) {
+            return false;
+        }
+
+        for ( int i = index; i < memberCount; i++ ) {
+            members[i] = members[i + 1]; // 객체 참조 하나만 당기면 됨
+        }
+
+        members[memberCount - 1] = null;
+        memberCount--;
+
+        return true;
+    }
+
+
     // 현재 회원수
     public int getMemberCount() {
         return memberCount;
