@@ -35,10 +35,7 @@
                         // &9 | &5 | d | null
 // ....
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class A_collections_list {
 
@@ -108,8 +105,78 @@ public class A_collections_list {
 
     // 2. LinkedList
     public void exam2() {
-        
+
+        List<String> list = new LinkedList<>();
+
+        // 추가
+        list.add("apple");
+        list.add(1, "banana");
+
+        list.removeLast();
+
+        // 해당 값을 인덱스로 가져온다.
+        System.out.println(list.get(0));
+
+        // 순회 방법 1 : for 루프 사용
+        for ( int i = 0; i < list.size(); i++ ) {
+            System.out.println(list.get(i));
+        }
+
+        // 순회 방법 2 : 향상된 for 루프 사용
+        for ( String fruit : list ) {
+            System.out.println(fruit);
+        }
+
+        // 순회 방법 3 : Iterator 사용
+        Iterator<String> iterator = list.iterator();
+        while ( iterator.hasNext() ) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
+
+        // 순회 방법 4 : ListIterator 사용 (양방향 순회 가능)
+        ListIterator<String> stringListIterator = list.listIterator();
+        // 정방향
+        while (stringListIterator.hasNext()) {
+            String element = stringListIterator.next();
+            System.out.println(element);
+        }
+        // 역방향
+        while (stringListIterator.hasPrevious()) {
+            String element = stringListIterator.next();
+            System.out.println(element);
+        }
+
     }
+
+    // 3. Stack
+    // 설명 : LIFO(Last In First Out) 후입선출 구조를 따른다.
+    // Vector 기반 : Stack은 Vector 클래스를 상속받아 구현되었다.
+    // 주요 메서드 : push() 요소삽입, pop() 요소제거, peek() 맨 위의 요소를 확인, empty() 스택이 비어 있는지를 확인
+    public void exam3() {
+        Stack<String> stack = new Stack<>();
+
+        // 추가
+        stack.push("apple");
+        stack.push("banana");
+
+        // POP
+        String topElement = stack.pop();
+        System.out.println("topElement : " + topElement);
+
+        // PEEK
+        String peekElement = stack.peek();
+        System.out.println("peekElement : " + peekElement);
+
+        // EMPTY
+        boolean isEmpty = stack.empty();
+        System.out.println("isEmpty : " + isEmpty);
+
+        // 순회 방법 1 : for 루프 사용
+        
+
+    }
+
 
     static void main(String[] args) {
 
