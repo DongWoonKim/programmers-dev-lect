@@ -34,4 +34,11 @@ public abstract class N_member {
                 + " / " + phone + " (혜택: " + getBenefit() + ")");
     }
 
+    // 정보 수정
+    public void update(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
+
 }
