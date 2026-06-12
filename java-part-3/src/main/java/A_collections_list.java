@@ -97,7 +97,7 @@ public class A_collections_list {
         }
         // 역방향
         while (stringListIterator.hasPrevious()) {
-            String element = stringListIterator.next();
+            String element = stringListIterator.previous();
             System.out.println(element);
         }
 
@@ -143,7 +143,7 @@ public class A_collections_list {
         }
         // 역방향
         while (stringListIterator.hasPrevious()) {
-            String element = stringListIterator.next();
+            String element = stringListIterator.previous();
             System.out.println(element);
         }
 
@@ -173,7 +173,40 @@ public class A_collections_list {
         System.out.println("isEmpty : " + isEmpty);
 
         // 순회 방법 1 : for 루프 사용
-        
+        for ( int i = 0; i < stack.size(); i++ ) {
+            System.out.println( stack.get(i) );
+        }
+
+        // 순회 방법 2 : 향상된 for 루프 사용
+        for (String element : stack) {
+            System.out.println("element : " + element);
+        }
+
+        // 순회 방법 3 : Iterator 사용
+        Iterator<String> iterator = stack.iterator();
+        while ( iterator.hasNext() ) {
+            String element = iterator.next();
+            System.out.println("element : " + element);
+        }
+
+        // 순회 방법 4 : ListIterator 사용 (양방향 순회 가능)
+        ListIterator<String> stringListIterator = stack.listIterator();
+        // 정방향
+        while (stringListIterator.hasNext()) {
+            String element = stringListIterator.next();
+            System.out.println("element : " + element);
+        }
+        // 역방향
+        while (stringListIterator.hasPrevious()) {
+            String element = stringListIterator.previous();
+            System.out.println("element : " + element);
+        }
+
+        // 순회 방법 5 : pop()을 사용한 순회 (스택의 특성 활용)
+        while ( !stack.isEmpty() ) {
+            String element = stack.pop();
+            System.out.println("element : " + element);
+        }
 
     }
 
