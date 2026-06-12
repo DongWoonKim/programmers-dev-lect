@@ -35,8 +35,105 @@
                         // &9 | &5 | d | null
 // ....
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class A_collections_list {
+
+    // 1. ArrayList
+    public void exam1() {
+
+        List<String> list = new ArrayList<>();
+
+        // 요소 추가
+        list.add("apple");
+        list.add("banana");
+        list.add("orange");
+        list.add("grape");
+        list.add("watermelon");
+
+        // 특정 인덱스에  요소 추가
+        list.add(1, "lemon");
+
+        // 리스트의 크기 확인
+        System.out.println("List size : " + list.size());
+
+        // 인덱스를 사용하여 요소 접근
+        System.out.println("Apple : " + list.get(0));
+
+        // 요소 제거
+        list.remove(2);
+
+        // 특정 요소가 리스트에 포함되어 있는지 확인
+        if (list.contains("banana")) {
+            System.out.println("banana is in the list");
+        }
+
+        // 리스트의 모든 요소 제거
+        list.clear();
+
+        // 순회 방법 1 : for 루프 사용
+        for ( int i = 0; i < list.size(); i++ ) {
+            System.out.println(list.get(i));
+        }
+
+        // 순회 방법 2 : 향상된 for 루프 사용
+        for ( String fruit : list ) {
+            System.out.println(fruit);
+        }
+
+        // 순회 방법 3 : Iterator 사용
+        Iterator<String> iterator = list.iterator();
+        while ( iterator.hasNext() ) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
+
+        // 순회 방법 4 : ListIterator 사용 (양방향 순회 가능)
+        ListIterator<String> stringListIterator = list.listIterator();
+        // 정방향
+        while (stringListIterator.hasNext()) {
+            String element = stringListIterator.next();
+            System.out.println(element);
+        }
+        // 역방향
+        while (stringListIterator.hasPrevious()) {
+            String element = stringListIterator.next();
+            System.out.println(element);
+        }
+
+    }
+
+    // 2. LinkedList
+    public void exam2() {
+        
+    }
+
     static void main(String[] args) {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
