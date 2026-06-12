@@ -60,9 +60,9 @@ public class N_member_manager {
     }
 
     // 수정
-    public boolean update(String name, String email, String phone) {
+    public boolean update(String name, String email, String phone, String byEmail) {
         // 조회
-        N_member member = findByEmail(email);
+        N_member member = findByEmail(byEmail);
         if ( member == null ) {
             return false;
         }

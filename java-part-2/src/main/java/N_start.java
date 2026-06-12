@@ -62,6 +62,40 @@ public class N_start {
                     }
 
                     break;
+                case 3: // 이름으로 조회
+                    System.out.println("[조회] 찾고자하는 이름을 입력해주세요");
+                    String userName = sc.nextLine();
+
+                    N_member byName = manager.findByName(userName);
+
+                    if ( byName == null ) {
+                        System.out.println("찾으시는 정보가 없습니다.");
+                    } else {
+                        byName.printInfo();
+                    }
+
+                    break;
+                case 4: // 전체 조회
+                    manager.printAll();
+                    break;
+                case 5:
+                    System.out.println("[수정] 찾고자하는 이메일을 입력해주세요");
+                    String byMail = sc.nextLine();
+
+                    System.out.println("새 이름 ");
+                    String newName = sc.nextLine();
+                    System.out.println("새 이메일");
+                    String newEmail = sc.nextLine();
+                    System.out.println("새 연락처 ");
+                    String newPhone = sc.nextLine();
+
+                    if ( manager.update(newName, newEmail, newPhone, byMail) ) {
+
+                    }
+
+                    break;
+                case 6:
+                    break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
                     return;
