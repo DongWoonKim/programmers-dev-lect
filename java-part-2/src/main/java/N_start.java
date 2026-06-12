@@ -1,6 +1,28 @@
+import java.util.Scanner;
 
 public class N_start {
     static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("[요금제를 선택하세요]");
+        System.out.println("[1]Lite : 10명 [2]Basic : 20명 [3]Premium : 30명");
+
+        // 문자열 -> 숫자 변환 => parse -> 다른 타입으로 변환하는 것을 파싱
+        // 숫자 -> 문자열
+        int plan = Integer.parseInt(sc.nextLine()); // buffer <- "문자열을 사용자한테 받은 문자열" -> buffer 비워준다.
+        N_member_manager manager = new N_member_manager(plan * 10);
+
         // while
+        while (true) {
+            System.out.println("\n[수행할 업무 - 현재 회원수 : "
+                    + manager.getMemberCount() + "/" + manager.getCapacity() + "]");
+            System.out.println("[1]회원추가 [2]회원조회(메일) [3]회원조회(이름)");
+            System.out.println("[4]전체조회 [5]수정 [6]삭제 [7]종료");
+            System.out.println("원하는 번호를 입력해주세요.");
+
+            int menu = Integer.parseInt(sc.nextLine());
+
+        }
+
     }
 }
