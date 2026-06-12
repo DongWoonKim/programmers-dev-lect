@@ -20,6 +20,7 @@
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class A_collections_map {
 
@@ -69,7 +70,33 @@ public class A_collections_map {
 
     }
 
+    // 2. TreeMap
+    // 설명
+    //	•	이진 검색 트리 기반: TreeMap은 내부적으로 레드-블랙 트리 구조를 사용하여 데이터를 저장합니다.
+    //	•	정렬된 순서: 키에 따라 요소들이 자동으로 정렬됩니다(기본적으로 오름차순).
+    //	•	성능: 삽입, 삭제, 검색 작업이 O(log n)의 시간 복잡도를 가집니다.
+    // 대부분의 경우는 HashMap이 기본 선택입니다. "키로 빠르게 찾고 저장만 하면 된다, 순서는 상관없다" → HashMap.
+    // 반면 키가 정렬돼 있어야 하거나, 범위/이웃 키 탐색이 필요하면 TreeMap 을 씁니다.
+    public static void exam2() {
+        TreeMap<String, Integer> treeMap = new TreeMap<>();
+
+        treeMap.put("apple", 10);
+        treeMap.put("banana", 20);
+        treeMap.put("orange", 30);
+
+        System.out.println(treeMap);
+
+        // 첫 번째 요소의 키 얻기
+        String firstKey = treeMap.firstKey();
+        System.out.println("firstKey : " + firstKey);
+
+        // 마지막 요소의 값 얻기
+        int value = treeMap.lastEntry().getValue();
+        System.out.println("value : " + value);
+
+    }
+
     static void main(String[] args) {
-        exam1();
+        exam2();
     }
 }
