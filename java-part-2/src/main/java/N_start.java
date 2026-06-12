@@ -97,6 +97,14 @@ public class N_start {
 
                     break;
                 case 6: // 삭제
+                    System.out.println("[삭제] 찾고자하는 이메일을 입력해주세요");
+
+                    if ( manager.delete(sc.nextLine()) ) {
+                        System.out.println("삭제가 되었습니다.");
+                    } else {
+                        System.out.println("찾으시는 회원이 없습니다.");
+                    }
+
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
