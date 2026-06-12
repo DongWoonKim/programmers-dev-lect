@@ -14,6 +14,16 @@
 ## 📌 수업
 
 <details open>
+<summary><b>26.06.12</b></summary>
+
+1. [java-part-2 : N](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2)
+2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3)
+
+</details>
+
+<details>
+
+<details>
 <summary><b>26.06.11</b></summary>
 
 1. [java-part-2 : K ~ M](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2)
