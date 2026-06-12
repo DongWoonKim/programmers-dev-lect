@@ -28,4 +28,37 @@ public class N_member_manager {
         }
     }
 
+    // 이름으로 찾기
+    public N_member findByName(String name) {
+        for ( int i = 0; i < memberCount; i++ ) {
+            if ( name.equals(members[i].getName()) ) {
+                return members[i];
+            }
+        }
+
+        return null;
+    }
+
+    // 이메일로 찾기
+    public N_member findByEmail(String email) {
+        for ( int i = 0; i < memberCount; i++ ) {
+            if ( email.equals(members[i].getEmail()) ) {
+                return members[i];
+            }
+        }
+
+        return null;
+    }
+
+    // 현재 회원수
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    // 현재 요금제
+    public int getCapacity() {
+        return members.length;
+    }
+
+
 }
