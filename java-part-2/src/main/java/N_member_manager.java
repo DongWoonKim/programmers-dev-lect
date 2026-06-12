@@ -54,6 +54,11 @@ public class N_member_manager {
         return null;
     }
 
+    // 이메일 중복 체크
+    public boolean existsEmail(String email) {
+        return findByEmail(email) != null; // -> true or false
+    }
+
     // 수정
     public boolean update(String name, String email, String phone) {
         // 조회

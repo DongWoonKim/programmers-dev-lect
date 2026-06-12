@@ -35,9 +35,31 @@ public class N_start {
                     String email = sc.nextLine();
                     String phone = sc.nextLine();
 
+                    // 완성해주세요 : 이메일 중복 체크
+                    if ( manager.existsEmail(email) ) {
+                        System.out.println("이미 존재하는 회원입니다.");
+                        break;
+                    }
+
+                    // 삼항연산자
                     N_member member = (grade == 2)
                             ? new N_vip_member(name, email, phone)
                             : new N_normal_member(name, email, phone);
+
+                    manager.add(member);
+                    System.out.println("회원이 추가되었습니다.");
+                    break;
+                case 2: // 이메일 조회
+                    System.out.println("[조회] 찾고자하는 이메일을 입력해주세요");
+                    String userEmail = sc.nextLine();
+
+                    N_member m = manager.findByEmail(userEmail);
+
+                    if ( m == null ) {
+                        System.out.println("찾으시는 정보가 없습니다.");
+                    } else {
+                        m.printInfo();
+                    }
 
                     break;
                 case 7:
