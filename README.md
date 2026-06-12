@@ -22,8 +22,6 @@
 </details>
 
 <details>
-
-<details>
 <summary><b>26.06.11</b></summary>
 
 1. [java-part-2 : K ~ M](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2)
