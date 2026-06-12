@@ -16,6 +16,10 @@ public class N_member_manager {
         members[memberCount++] = m;
     }
 
+    public boolean isFull() {
+        return memberCount == members.length;
+    }
+
     // 전체출력
     public void printAll() {
         if (memberCount == 0) {

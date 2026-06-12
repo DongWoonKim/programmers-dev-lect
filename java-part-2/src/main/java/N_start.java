@@ -21,6 +21,31 @@ public class N_start {
             System.out.println("원하는 번호를 입력해주세요.");
 
             int menu = Integer.parseInt(sc.nextLine());
+            switch (menu) {
+                case 1: // 회원추가
+                    if (manager.isFull()) {
+                        System.out.println("회원이 꽉 찼습니다.");
+                        break;
+                    }
+
+                    System.out.println("등급 [1]일반 [2]VIP");
+                    int grade = Integer.parseInt(sc.nextLine());
+
+                    String name = sc.nextLine();
+                    String email = sc.nextLine();
+                    String phone = sc.nextLine();
+
+                    N_member member = (grade == 2)
+                            ? new N_vip_member(name, email, phone)
+                            : new N_normal_member(name, email, phone);
+
+                    break;
+                case 7:
+                    System.out.println("이용해주셔서 감사합니다.");
+                    return;
+                default:
+                    System.out.println("잘 못 입력하셨습니다.");
+            }
 
         }
 
