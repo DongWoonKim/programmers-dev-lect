@@ -90,11 +90,13 @@ public class N_start {
                     String newPhone = sc.nextLine();
 
                     if ( manager.update(newName, newEmail, newPhone, byMail) ) {
-
+                        System.out.println("수정이 완료되었습니다.");
+                    } else {
+                        System.out.println("찾으시는 회원이 없습니다.");
                     }
 
                     break;
-                case 6:
+                case 6: // 삭제
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
