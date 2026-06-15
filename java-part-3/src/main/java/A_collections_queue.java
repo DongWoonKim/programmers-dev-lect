@@ -12,10 +12,7 @@
 //	•	element(): 큐의 맨 앞에 있는 요소를 반환하지만, 제거하지는 않습니다. 큐가 비어 있는 경우 예외를 발생시킵니다.
 //	•	peek(): 큐의 맨 앞에 있는 요소를 반환하지만, 제거하지는 않습니다. 큐가 비어 있으면 null을 반환합니다.
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class A_collections_queue {
 
@@ -113,9 +110,100 @@ public class A_collections_queue {
 
     }
 
+    public static void exam2_2() {
+        // 나이를 기준으로 오름차순 정렬
+//        Queue<A_person> queue = new PriorityQueue<>(Comparator.comparingInt(A_person::getAge));
+
+        Comparator<A_person> ageComparator = new Comparator<A_person>() {
+            @Override
+            public int compare(A_person p1, A_person p2) {
+                // - 음수 값 : p1이 p2보다 작을 때
+                // - 0 : p1과 p2가 같을 때
+                // - 양수 값 : p1이 p2보다 클 때
+                return Integer.compare(p1.getAge(), p2.getAge());
+            }
+        };
+
+        Queue<A_person> priorityQueue = new PriorityQueue<>(ageComparator);
+
+        // 요소 추가
+        priorityQueue.add(new A_person("Alice", 30));
+        priorityQueue.add(new A_person("Bob", 25));
+        priorityQueue.add(new A_person("Charlie", 35));
+        priorityQueue.add(new A_person("Dave", 20));
+
+
+        // 요소를 하나씩 꺼내면서 출력
+        while (!priorityQueue.isEmpty()) {
+            System.out.println("Element: " + priorityQueue.poll());
+        }
+
+    }
+
+    public static void exam2_3() {
+        // 이름을 기준으로 오름차순 정렬
+//        Queue<A_person> queue = new PriorityQueue<>(Comparator.comparing(A_person::getName));
+
+        Comparator<A_person> nameComparator = new Comparator<A_person>() {
+            @Override
+            public int compare(A_person p1, A_person p2) {
+                return p1.getName().compareTo(p2.getName());
+            }
+        };
+
+        Queue<A_person> priorityQueue = new PriorityQueue<>(nameComparator);
+
+        // 요소 추가
+        priorityQueue.add(new A_person("Alice", 30));
+        priorityQueue.add(new A_person("Bob", 25));
+        priorityQueue.add(new A_person("Charlie", 35));
+        priorityQueue.add(new A_person("Dave", 20));
+
+        // 우선순위에 따라 요소를 하나씩 처리 (이름의 오름차순 정렬된 순서로)
+        while (!priorityQueue.isEmpty()) {
+            System.out.println("Poll: " + priorityQueue.poll());
+        }
+
+    }
+
+    public static void exam2_4() {
+        // 이름을 내림차순으로 정렬하는 Comparator -> 익명클래스로 구현
+        Comparator<A_person> nameComparator = new Comparator<A_person>() {
+            @Override
+            public int compare(A_person p1, A_person p2) {
+                return p2.getName().compareTo(p1.getName());
+            }
+        };
+    }
+
     static void main(String[] args) {
 
     }
+}
+
+class A_person {
+
+    String name;
+    int age;
+
+    public A_person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+        public int getAge() {
+            return age;
+        }
+
+    @Override
+    public String toString() {
+        return name + "(" + age + ")";
+    }
+
 }
 
 
