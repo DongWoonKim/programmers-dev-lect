@@ -17,7 +17,7 @@
 <summary><b>26.06.15</b></summary>
 
 1. [java-part-2 : O](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
-2. [java-part-3 : B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+2. [java-part-3 : A ~ B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
 
 </details>
 
