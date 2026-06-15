@@ -57,4 +57,45 @@ public class O_member_manager {
         }
     }
 
+    // 수정
+    public boolean update(String name, String email, String phone) {
+        O_member byEmail = findByEmail(email);
+        if ( byEmail == null ) {
+            return false;
+        }
+
+        // 실질적인 수정 기능은 객체한테 위임
+        byEmail.update(name, email, phone);
+        return true;
+    }
+
+    // 삭제
+    public boolean delete(String email) {
+        int index = -1;
+        for (int i = 0; i < memberCount; i++) {
+            if (email.equals(members[i].getEmail())) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) return false;
+        for (int i = index; i < memberCount - 1; i++) {
+            members[i] = members[i + 1];
+        }
+
+        members[memberCount - 1] = null;
+        memberCount--;
+
+        return true;
+    }
+
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    public int getCapacity() {
+        return members.length;
+    }
+
 }
