@@ -46,7 +46,54 @@ class MyArrayList {
 
 // * LinkedList : 노드가 prev/next 주소를 들고 논리적으로 연결
 class MyLinkedList {
-    
+
+    // 노드 한 칸
+    static class Node {
+        String data;
+        Node prev;
+        Node next;
+
+        Node(String data) {
+            this.data = data;
+        }
+    }
+
+    private Node head; // 첫 노드
+    private Node tail; // 마지막 노드
+    private int size;
+
+    // * 맨 뒤에 추가
+    void addLast(String data) {
+        Node node = new Node(data);
+        if (head == null) {
+            head = tail = node;
+        } else {
+            node.prev = tail;
+            tail.next = node;
+            tail = node;
+        }
+        size++;
+    }
+
+    // * 맨 앞에 추가
+    void addFirst(String data) {
+        Node node = new Node(data);
+        if (head == null) {
+            head = tail = node;
+        } else {
+            node.next = head;
+            head.prev = node;
+            head = node;
+        }
+        size++;
+    }
+
+    // * index번째 노드 찾기 :
+
+    // * index 위치에 삽입
+
+    // * 각 노드의 정보를 그 대로 출력하여 연결 상태 확인 [ prev <- data -> next ]
+
 }
 
 public class A_collections_list_exercise {
