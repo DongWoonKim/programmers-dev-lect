@@ -84,6 +84,14 @@ public class O_start {
                     }
 
                     break;
+                case 6:
+                    System.out.println("[삭제] 이메일 : ");
+                    if ( manager.delete(sc.nextLine()) ) {
+                        System.out.println("삭제가 되었습니다.");
+                    } else {
+                        System.out.println("찾으시는 회원이 없습니다.");
+                    }
+                    break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
                     return;
