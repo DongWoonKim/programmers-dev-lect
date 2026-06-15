@@ -88,11 +88,52 @@ class MyLinkedList {
         size++;
     }
 
-    // * index번째 노드 찾기 :
+    // * index번째 노드 찾기 : head부터 next를 타고 한 칸씩 이동한다
+    private Node nodeAt(int index) {
+        Node cur = head;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur;
+    }
 
-    // * index 위치에 삽입
+    // * index 위치에 삽입 : 그 자리 양옆 노드의 연결만 바꾼다
+    void insert(int index, String data) {
 
-    // * 각 노드의 정보를 그 대로 출력하여 연결 상태 확인 [ prev <- data -> next ]
+        if ( index == 0 ) addFirst(data);
+        if ( index == size ) addLast(data);
+
+        // 원래 그자리에 있던 노드
+        Node next = nodeAt(index);
+        // 그 이전의 노드
+        Node prev = next.prev;
+        // 새로 삽입될 노드
+        Node node = new Node(data);
+
+        // 새 노드가 양옆을 가리킨다.
+        node.prev = prev;
+        node.next = next;
+        // 기존 노드의 양옆도 새 노드를 가리킨다.
+        prev.next = node;
+        next.prev = node;
+
+        size++;
+    }
+
+    // * 각 노드의 정보를 그 대로 출력하여 연결 상태 확인 출력예시 : [ prev <- data -> next ]
+    void printLinks() {
+        Node cur = head;
+        while ( cur != null ) {
+            String p = (cur.prev == null) ? "null" : cur.prev.data;
+            String n = (cur.next == null) ? "null" : cur.next.data;
+            System.out.println("[" + p + " <- " + cur.data + " -> " + n + "]");
+            cur = cur.next;
+        }
+    }
+
+    String get(int index) {
+        return nodeAt(index).data;
+    }
 
 }
 
@@ -111,7 +152,29 @@ public class A_collections_list_exercise {
         System.out.println("결과: 0번=" + arr.get(0) + ", 1번=" + arr.get(1) + ", 2번=" + arr.get(2));
     }
 
+    public static void exam2() {
+        System.out.println("=== 직접 만든 LinkedList (노드가 prev/next로 논리적 연결) ===");
+        MyLinkedList list = new MyLinkedList();
+        list.addLast("가");
+        list.addLast("나");
+        list.addLast("다");
+        System.out.println("addLast 3번 후       : ");
+        list.printLinks();   // [null <- 가 -> 나] [가 <- 나 -> 다] [나 <- 다 -> null]
+
+        list.addFirst("앞");
+        System.out.println("addFirst(\"앞\") 후     : ");
+        list.printLinks();   // 맨 앞 노드의 연결만 바뀐다 (다른 노드는 그대로)
+
+        list.insert(2, "끼움");
+        System.out.println("insert(2, \"끼움\") 후   : ");
+        list.printLinks();   // 2번 자리 "양옆 노드의 연결"만 바뀐다
+
+        System.out.println("get(2) = " + list.get(2)
+                + "   <- head부터 next를 2번 타고 걸어가서 찾음");
+        System.out.println();
+    }
+
     static void main(String[] args) {
-        exam1();
+        exam2();
     }
 }
