@@ -23,8 +23,66 @@ public class O_start {
                         System.out.println("회원이 꽉 찼습니다.");
                         break;
                     }
+
+                    System.out.println("등급 [1]일반 [2]VIP");
+                    int grade = Integer.parseInt(sc.nextLine());
+                    System.out.println("이름 : ");
+                    String name = sc.nextLine();
+                    System.out.println("이메일 : ");
+                    String email = sc.nextLine();
+                    System.out.println("연락처 : ");
+                    String phone = sc.nextLine();
+
+                    if ( manager.existsEmail(email) ) {
+                        System.out.println("이미 존재하는 회원입니다.");
+                        break;
+                    }
+
+                    O_member m = (grade == 2)
+                            ? new O_vip_member(name, email, phone)
+                            : new O_normal_member(name, email, phone);
+                    manager.add(m);
+                    System.out.println("회원이 차가되었습니다.");
                     break;
                 case 2:
+                    System.out.println("[조회] 이메일 : ");
+                    O_member byEmail = manager.findByEmail(sc.nextLine());
+                    if ( byEmail == null ) {
+                        System.out.println("찾으시는 정보가 없습니다.");
+                    } else {
+                        byEmail.printInfo();
+                    }
+
+                    break;
+                case 3:
+                    System.out.println("[조회] 이름 : ");
+                    O_member byName = manager.findByName(sc.nextLine());
+                    if ( byName == null ) {
+                        System.out.println("찾으시는 정보가 없습니다.");
+                    } else {
+                        byName.printInfo();
+                    }
+                    break;
+                case 4:
+                    manager.printAll();
+                    break;
+                case 5:
+                    System.out.println("[수정] 대상 이메일 : ");
+                    String byMail = sc.nextLine();
+
+                    System.out.println("새 이름 : ");
+                    String newName = sc.nextLine();
+                    System.out.println("새 이메일 : ");
+                    String newEmail = sc.nextLine();
+                    System.out.println("새 연락처 : ");
+                    String newPhone = sc.nextLine();
+
+                    if ( manager.update(newName, byMail, newPhone, newEmail) ) {
+                        System.out.println("수정이 완료되었습니다.");
+                    } else {
+                        System.out.println("찾으시는 회원이 없습니다.");
+                    }
+
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");

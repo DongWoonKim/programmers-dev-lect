@@ -58,14 +58,15 @@ public class O_member_manager {
     }
 
     // 수정
-    public boolean update(String name, String email, String phone) {
+    public boolean update(String name, String email, String phone, String newEmail) {
+        // 기존 이메일 검색
         O_member byEmail = findByEmail(email);
         if ( byEmail == null ) {
             return false;
         }
 
         // 실질적인 수정 기능은 객체한테 위임
-        byEmail.update(name, email, phone);
+        byEmail.update(name, newEmail, phone);
         return true;
     }
 
@@ -88,6 +89,11 @@ public class O_member_manager {
         memberCount--;
 
         return true;
+    }
+
+    // 추가
+    public void add(O_member m) {
+        members[memberCount++] = m;
     }
 
     public int getMemberCount() {
