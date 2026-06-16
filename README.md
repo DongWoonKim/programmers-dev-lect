@@ -14,6 +14,14 @@
 ## 📌 수업
 
 <details open>
+<summary><b>26.06.16</b></summary>
+
+1. [java-part-3 : B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+2. 재정비 : 부족했던 부분 보완 및 학습 진행
+
+</details>
+
+<details>
 <summary><b>26.06.15</b></summary>
 
 1. [java-part-2 : O](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
