@@ -55,7 +55,40 @@ public class B_try_catch {
         }
     }
 
+    // 3. finally
+    //	•	finally 블록은 예외가 발생하든 안 하든, try/catch가 끝나면 "항상" 실행된다.
+    //	•	파일 닫기, 연결 해제 등 반드시 처리해야 하는 마무리 작업에 사용한다.
+    public static void exam3() {
+        try {
+            System.out.println("try 블록 실행");
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("catch 블록 실행");
+        } finally {
+            // 예외가 발생해도, 발생하지 않아도 이 블록은 무조건 실행.
+            System.out.println("finally 항상 실행됩니다.");
+        }
+    }
+
+    // 4. throw / throws
+    // 19세 체크
+    private void checkAge(int age) {
+        if (age < 19) {
+            throw new IllegalArgumentException("미성년자는 가입할 수 없습니다 : " + age);
+        }
+        System.out.println("가입이 가능한 나이입니다.");
+    }
+
+    public static void exam4() {
+        try {
+            B_try_catch tryCatch = new B_try_catch();
+            tryCatch.checkAge(18);
+        } catch ( IllegalArgumentException e ) {
+            System.out.println("나이 검증 실패 : " + e.getMessage());
+        }
+    }
+
     static void main(String[] args) {
-        exam2_2();
+        exam4();
     }
 }
