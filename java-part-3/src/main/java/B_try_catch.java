@@ -44,7 +44,18 @@ public class B_try_catch {
         }
     }
 
+    // 2_2. 멀티 catch
+    //	•	처리 방식이 같은 여러 예외는 |(파이프)로 묶어 하나의 catch에서 처리할 수 있다. (Java 7 이상)
+    public static void exam2_2() {
+        try {
+            String text = null;
+            System.out.println(text.length());
+        } catch ( NullPointerException | ArithmeticException e) {
+            System.out.println("Null 이거나 산술 예외 발생 : " + e.getMessage());
+        }
+    }
+
     static void main(String[] args) {
-        exam2();
+        exam2_2();
     }
 }
