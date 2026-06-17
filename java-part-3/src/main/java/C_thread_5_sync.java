@@ -15,6 +15,8 @@
 // * 뮤텍스(상호 배제)
 // "열쇠는 단 1개" -> 한 번에 오직 한 스레드만 임계 영역에 들어갈 수 있게 하는 잠금.
 
+
+
 class ThreadEx_account {
 
     private int balance = 1000;
@@ -24,20 +26,36 @@ class ThreadEx_account {
     }
 
     // 출금
+    // 동기화 X
+//    public void withdraw(int money) {
+//
+//        if ( balance >= money ) {
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            balance -= money;
+//        }
+//
+//    }
+
+    // 동기화 O
     public void withdraw(int money) {
+        synchronized (this) {
+            // 코드 작성
+            if ( balance >= money ) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-        if ( balance >= money ) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                balance -= money;
             }
-
-            balance -= money;
         }
-
     }
-
 }
 
 // 통자에서 계속 돈을 출금
