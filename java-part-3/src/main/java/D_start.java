@@ -26,7 +26,6 @@ public class D_start {
 
             switch (choice) {
                 case 1:
-
                     if ( manager.isFull() ) {
                         System.out.println("정원이 꽉 찼습니다.");
                         break;
@@ -52,6 +51,47 @@ public class D_start {
 
                     manager.add(memeber);
                     System.out.println("추가되었습니다.");
+                    break;
+                case 2:
+                    System.out.println("[조회] 이메일");
+
+                    D_member byEmail = manager.findByEmail(sc.nextLine());
+
+                    if (byEmail == null)  System.out.println("찾으시는 정보가 없습니다.");
+                    else byEmail.printInfo();
+
+                    break;
+                case 3:
+                    System.out.println("[조회] 이름");
+
+                    D_member byName = manager.findByName(sc.nextLine());
+
+                    if (byName == null)  System.out.println("찾으시는 정보가 없습니다.");
+                    else byName.printInfo();
+
+                    break;
+                case 4:
+                    manager.printAll();
+                    break;
+                case 5:
+                    System.out.println("[수정] 이메일 ");
+                    String userEmail = sc.nextLine();
+                    System.out.println("새 이름 ");
+                    String newName = sc.nextLine();
+                    System.out.println("새 이메일 ");
+                    String newEmail = sc.nextLine();
+                    System.out.println("새 연락처 ");
+                    String newPhone = sc.nextLine();
+
+                    if ( manager.update(userEmail, newName, newEmail, newPhone) ) System.out.println("수정되었습니다.");
+                    else System.out.println("찾으시는 회원이 없습니다.");
+
+                    break;
+                case 6:
+                    System.out.println("[삭제] 이메일 ");
+                    if (manager.delete(sc.nextLine())) System.out.println("삭제되었습니다.");
+                    else System.out.println("찾으시는 회원이 없습니다.");
+
                     break;
                 case 7:
                     System.out.println("이용해주셔서 감사합니다.");
