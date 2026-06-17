@@ -115,6 +115,8 @@
 - [IntelliJ 단축키](https://chaeyami.tistory.com/216)
 - [IntelliJ 6개월 쿠폰 튜토리얼](https://built.tistory.com/86)
 - [이미지 무료 호스팅 사이트](https://postimages.org/)
+- [mysql 설치 튜토리얼 for mac](https://datarian.io/blog/installing-mysql-on-a-mac)
+- [mysql 설치 튜토리얼 for windows](https://datarian.io/blog/installing-mysql-on-windows)
 
 ---
 
