@@ -18,6 +18,49 @@ public class D_start {
         System.out.println("선택: " + plan + " (정원 " + plan.getCapacity() + ")");
 
         // 메뉴 루프
+        while (true) {
+            System.out.println("\n[현재 " + manager.size() + "/" + manager.capacity() + "]");
+            System.out.println("[1]추가 [2]메일조회 [3]이름조회 [4]전체 [5]수정 [6]삭제 [7]종료");
+
+            int choice = raedInt(sc);
+
+            switch (choice) {
+                case 1:
+
+                    if ( manager.isFull() ) {
+                        System.out.println("정원이 꽉 찼습니다.");
+                        break;
+                    }
+
+                    System.out.println("등급 [1]일반 [2]VIP");
+                    int grade = raedInt(sc);
+                    System.out.println("이름");
+                    String name = sc.nextLine();
+                    System.out.println("이메일");
+                    String email = sc.nextLine();
+                    System.out.println("연락처");
+                    String phone = sc.nextLine();
+
+                    if (manager.existsEmail(email)) {
+                        System.out.println("이미 있는 회원입니다.");
+                        break;
+                    }
+
+                    D_member memeber = ( grade == 2 )
+                            ? new D_vip_member(name, email, phone)
+                            : new D_normal_member(name, email, phone);
+
+                    manager.add(memeber);
+                    System.out.println("추가되었습니다.");
+                    break;
+                case 7:
+                    System.out.println("이용해주셔서 감사합니다.");
+                    return;
+                default:
+                    System.out.println("1~7번 중에서 선택하세요.");
+            }
+
+        }
 
     }
 
