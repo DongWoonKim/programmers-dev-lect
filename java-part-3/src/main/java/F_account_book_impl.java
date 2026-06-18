@@ -11,7 +11,7 @@ public class F_account_book_impl implements F_account_book {
 
     // 1. 내역 추가
     @Override
-    public void addAcound() {
+    public void addAccount() {
         System.out.println("날짜 입력 (예: 2026-06-18)");
         String date = sc.nextLine().trim();
 
@@ -39,9 +39,30 @@ public class F_account_book_impl implements F_account_book {
         printItem( data.get(date) );
     }
 
+    // 2. 내역 조회
     @Override
     public void showAccount() {
+        if ( data.isEmpty() ) {
+            System.out.println("기록이 없습니다.");
+            return;
+        }
 
+        System.out.println("=== 기록된 날짜 ===");
+        List<String> dates = new ArrayList<>(data.keySet());
+        Collections.sort(dates, Collections.reverseOrder()); // 최신순
+        for ( String date : dates ) {
+            System.out.println(date);
+        }
+
+        System.out.println("조회할 날짜 : ");
+        String date = sc.nextLine().trim();
+        if ( !data.containsKey(date)) {
+            System.out.println("그런 날짜가 없습니다.");
+            return;
+        }
+
+        System.out.println("[" + date + "]");
+        printItem( data.get(date) );
     }
 
     @Override
