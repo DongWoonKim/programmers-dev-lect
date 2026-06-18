@@ -17,10 +17,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -158,9 +155,35 @@ public class E_input_output_stream {
 
     }
 
+    // 2-2. 파일에 내용 쓰기 - 문자
+    //	•	exam2()는 바이트 스트림(FileOutputStream)이라 문자열을 getBytes()로 byte 배열로 바꿔서 써야 했다.
+    //	•	문자 스트림(FileWriter)은 문자(char) 단위로 처리하므로 String을 그대로 write()에 넘길 수 있다. (byte 변환 불필요)
+    //	•	그래서 텍스트 파일을 다룰 때는 문자 스트림이 더 간편하다.
+    public void exam2_2() {
+        today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        todayFile = myFolder.resolve(today + "_writer.txt");
+
+        if ( Files.notExists(todayFile) ) {
+
+            try ( FileWriter fw = new FileWriter(todayFile.toFile()) ) {
+
+                String content = "Hello World!";
+                fw.write(content);
+                System.out.println("파일을 생성하고 내용을 썼습니다.");
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            System.out.println("이미 존재합니다.");
+        }
+
+    }
+
     static void main(String[] args) {
         E_input_output_stream e = new E_input_output_stream();
-        e.exam2_1();
+        e.exam2_2();
 
     }
 }
