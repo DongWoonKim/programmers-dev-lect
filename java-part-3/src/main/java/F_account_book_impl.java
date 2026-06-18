@@ -16,12 +16,27 @@ public class F_account_book_impl implements F_account_book {
         String date = sc.nextLine().trim();
 
         // 같은 날짜가 이미 있으면 기존 목록에 이어서 추가
+        // key가 맵에 있으면 -> 거기에 맵핑된 값을 반환
+        // key가 없으면 -> 두 번째 인자로 넘긴 값을 반환
         List<F_item> list = data.getOrDefault(date, new ArrayList<>());
 
         while (true) {
-            
+            System.out.println("항목 이름 : ");
+            String name = sc.nextLine().trim();
+            System.out.println("금액 : ");
+            int price = readInt();
+
+            list.add( new F_item(name, price) );
+
+            System.out.println("더 추가할까요? (y/n)");
+
+            if ( sc.nextLine().trim().equals("n") ) break;
         }
 
+        data.put(date, list);
+        System.out.println("[" + date + "] 등록완료");
+
+        printItem( data.get(date) );
     }
 
     @Override
@@ -37,5 +52,24 @@ public class F_account_book_impl implements F_account_book {
     @Override
     public void deleteItem() {
 
+    }
+
+    private int readInt() {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("숫자로 다시 입력");
+            }
+        }
+    }
+
+    private void printItem(List<F_item> list) {
+        int sum = 0;
+        for ( F_item item : list ) {
+            System.out.println(item.getName() + " : " + item.getPrice() + "원");
+            sum += item.getPrice();
+        }
+        System.out.println("합계 : " + sum + "원");
     }
 }
