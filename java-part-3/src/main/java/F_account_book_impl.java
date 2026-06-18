@@ -67,12 +67,48 @@ public class F_account_book_impl implements F_account_book {
 
     @Override
     public void deleteAll() {
+        System.out.println("전체 삭제할 날짜 입력 : ");
+        String date = sc.nextLine().trim();
+
+        if ( data.containsKey(date) ) {
+            data.remove(date);
+            System.out.println(date + " 삭제가 되었습니다.");
+        } else {
+            System.out.println("그런 날짜가 없습니다.");
+        }
 
     }
 
     @Override
     public void deleteItem() {
+        System.out.println("삭제할 날짜 입력 : ");
+        String date = sc.nextLine().trim();
 
+        if ( !data.containsKey(date) ) {
+            System.out.println("그런 날짜가 없습니다.");
+            return;
+        }
+
+        List<F_item> items = data.get(date);
+        for ( int i = 0; i < items.size(); i++ ) {
+            F_item item = items.get(i);
+            System.out.println( (i + 1) + ". " + item.getName() + " : " + item.getPrice() + "원" );
+        }
+
+        System.out.println("삭제할 번호 : ");
+        int no = readInt();
+        if ( no < 1 || no > items.size() ) {
+            System.out.println("잘못된 번호입니다.");
+            return;
+        }
+
+        F_item removed = items.remove(no - 1);
+        System.out.println(removed.getName() + " 삭제되었습니다.");
+
+        if ( items.isEmpty() ) {
+            data.remove(date);
+            System.out.println("(" + date + ") 의 항목 모두 사려져 날짜도 삭제됨");
+        }
     }
 
     private int readInt() {
