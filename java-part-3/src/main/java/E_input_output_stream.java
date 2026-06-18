@@ -11,12 +11,15 @@
 // -> 스트림 사용후 반드시 close()로 자원을 해제해야한다. -> (try-with-resources)
 
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -181,9 +184,67 @@ public class E_input_output_stream {
 
     }
 
+    // 3. 파일 내용 일기 <-> exam2()의 짝
+    //	•	FileInputStream으로 파일을 1바이트 단위로 읽어 들인다.
+    //	•	읽은 byte 배열을 new String(...)으로 다시 문자열로 변환해야 사람이 읽을 수 있다.
+    public void exam3() {
+        today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        todayFile = myFolder.resolve(today + ".txt");
+
+        if ( Files.exists(todayFile) ) {
+
+            try ( FileInputStream fis = new FileInputStream(todayFile.toFile()) ) {
+
+                byte[] bytes = fis.readAllBytes();
+                String content = new String(bytes);
+                System.out.println("내용 : "  + content);
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            System.out.println("파일이 존재하지 않습니다.");
+        }
+
+    }
+
+    // 3-1. QR코드 이미지 읽기
+    public void exam3_1() {
+        today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        todayFile = myFolder.resolve(today + ".png");
+
+        if ( Files.exists(todayFile) ) {
+
+            try {
+                // 1) ImageIO.read(...) : PNG 파일을 BufferedImage(이미지 객체)로 읽어온다
+                BufferedImage image = ImageIO.read(todayFile.toFile());
+
+                // 2) 이미지를 ZXing이 해석할 수 있는 형태(BinaryBitmap)로 변환
+                LuminanceSource source = new BufferedImageLuminanceSource(image);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+                // 3) MultiFormatReader.decode(...) : 비트맵에서 QR코드 내용을 추출
+                Result result = new MultiFormatReader().decode(bitmap);
+                System.out.println("내용 : " + result.getText());
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (NotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            System.out.println("파일이 존재하지 않습니다.");
+        }
+
+    }
+
     static void main(String[] args) {
         E_input_output_stream e = new E_input_output_stream();
-        e.exam2_2();
+        e.exam3_1();
 
     }
 }
