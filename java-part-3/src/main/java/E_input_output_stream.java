@@ -212,6 +212,8 @@ public class E_input_output_stream {
     }
 
     // 3-1. QR코드 이미지 읽기
+    //	•	저장된 PNG를 BufferedImage로 읽고, ZXing으로 다시 문자열을 추출(decode)한다.
+    //	•	쓰기(encode)의 반대 과정이다: 문자열 → 이미지 였다면, 여기선 이미지 → 문자열.
     public void exam3_1() {
         today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         todayFile = myFolder.resolve(today + ".png");
@@ -242,9 +244,42 @@ public class E_input_output_stream {
 
     }
 
+    // 3-2. 파일 내용 읽기 문자 스트림
+    //	•	FileReader로 파일을 문자(char) 단위로 읽는다.
+    //	•	바이트 스트림과 달리 byte → String 변환이 필요 없다.
+    //	•	보통 BufferedReader로 감싸 한 줄씩(readLine) 편하게 읽는다.
+    public void exam3_2() {
+
+        today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        todayFile = myFolder.resolve(today + "_writer.txt");
+
+        if ( Files.exists(todayFile) ) {
+
+            // FileReader(문자 스트림)를 BufferedReader로 감싸 줄 단위로 읽는다
+            try ( BufferedReader br = new BufferedReader(new FileReader(todayFile.toFile())) ) {
+                String line;
+                StringBuilder sb = new StringBuilder();
+
+                while ( (line = br.readLine()) != null ) {
+                    sb.append(line).append("\n");
+                }
+
+                System.out.println("내용 : " + sb);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            System.out.println("파일이 존재하지 않습니다.");
+        }
+
+    }
+
     static void main(String[] args) {
         E_input_output_stream e = new E_input_output_stream();
-        e.exam3_1();
+        e.exam3_2();
 
     }
 }
