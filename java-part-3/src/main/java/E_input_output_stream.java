@@ -65,6 +65,8 @@ public class E_input_output_stream {
     }
 
     // 2. 파일에 내용 쓰기
+    //	•	FileOutputStream으로 파일에 바이트 데이터를 기록한다.
+    //	•	바이트 스트림은 1바이트 단위로 처리하므로, 문자열은 getBytes()로 byte 배열로 변환한 뒤 write()로 쓴다.
     public void exam2() {
         // LocalDate.now() : 오늘 날짜를 가져오고, 지정한 패턴("yyyy-MM-dd")의 문자열로 포맷
         today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -111,6 +113,14 @@ public class E_input_output_stream {
         } else {
             System.out.println( today + ".txt 파일이 이미 존재합니다." );
         }
+
+    }
+
+    // 2-1. QR코드 이미지 만들기 (바이트 스트림 활용)
+    //	•	QR코드는 이미지(PNG)이므로 문자가 아닌 "바이너리 데이터"다. → 바이트 스트림이 적합하다.
+    //	•	exam2()처럼 텍스트가 아니라 이미지라서, 문자 스트림으로는 다룰 수 없는 대표 예시다.
+    //	•	ZXing 라이브러리로 문자열을 QR코드 행렬(BitMatrix)로 만든 뒤 PNG 파일로 저장한다.
+    public void exam2_1() {
 
     }
 
