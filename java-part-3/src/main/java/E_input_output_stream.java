@@ -72,9 +72,33 @@ public class E_input_output_stream {
         todayFile = myFolder.resolve(today + ".txt");
 
         if ( Files.notExists(todayFile) ) {
+            // 방법.1 : 전통적인 방식 (직접 close)
+            // finally 블록에서 스트림을 직접 닫아주어야 하므로 코드가 길고 복잡하다.
+            /*
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(todayFile.toFile());
+                String content = "Hello World!";
+                fos.write(content.getBytes());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            */
 
+            // 방법.2 -> try-with-resources
+            // try(...) 괄호 안에서 선언한 자원은 try 블록이 끝나면 자동으로 close()가 호출된다.
+            // 따라서 finally로 직접 닫을 필요가 없어 코드가 간결하고 안전하다.
             try ( FileOutputStream fos = new FileOutputStream(todayFile.toFile()) ) {
-
                 String content = "Hello World!";
                 fos.write(content.getBytes());
                 System.out.println( today + ".txt 파일을 생성하고 내용을 썼습니다." );
