@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class F_account_book_impl implements F_account_book {
 
@@ -17,6 +14,13 @@ public class F_account_book_impl implements F_account_book {
     public void addAcound() {
         System.out.println("날짜 입력 (예: 2026-06-18)");
         String date = sc.nextLine().trim();
+
+        // 같은 날짜가 이미 있으면 기존 목록에 이어서 추가
+        List<F_item> list = data.getOrDefault(date, new ArrayList<>());
+
+        while (true) {
+            
+        }
 
     }
 
