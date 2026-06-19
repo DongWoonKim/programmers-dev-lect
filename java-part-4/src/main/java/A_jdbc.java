@@ -95,10 +95,56 @@ public class A_jdbc {
         }
     }
 
+    public void updateData( int id, String name, int age, String phone ) {
+        String query = "UPDATE member SET name = ?, age = ?, phone = ? WHERE id = ?";
+
+        try (
+                Connection conn = connection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+        ) {
+
+            pstmt.setString(1, name);
+            pstmt.setInt(2, age);
+            pstmt.setString(3, phone);
+            pstmt.setInt(4, id);
+
+            int result = pstmt.executeUpdate();
+            if ( result > 0 ) {
+                System.out.println("update success!");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteData(int id) {
+        String query = "DELETE FROM member WHERE id = ?";
+
+        try (
+                Connection conn = connection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+        ) {
+            pstmt.setInt(1, id);
+            int result = pstmt.executeUpdate();
+
+            if ( result > 0 ) {
+                System.out.println("delete success!");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     static void main(String[] args) {
         A_jdbc aJdbc = new A_jdbc();
 //        aJdbc.insertData("홍길순", 21, "010-1234-5678");
-//        aJdbc.selectAll();
-        aJdbc.selectOne(1);
+        aJdbc.selectAll();
+//        aJdbc.selectOne(1);
+//        aJdbc.updateData(2, "홍홍홍", 30, "010-3232-4545");
+//        aJdbc.deleteData(2);
     }
+
 }
