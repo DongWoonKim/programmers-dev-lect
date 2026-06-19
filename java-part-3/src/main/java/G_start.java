@@ -25,6 +25,13 @@ public class G_start {
 
             switch (choice) {
                 case 1:
+                    book.addAccount();
+                    break;
+                case 2:
+                    book.showAccount();
+                    break;
+                case 3:
+                    book.deleteAccount();
                     break;
                 case 4:
                     System.out.println("프로그램을 종료합니다.");

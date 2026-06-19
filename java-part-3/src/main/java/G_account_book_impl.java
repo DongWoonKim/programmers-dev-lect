@@ -1,7 +1,8 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class G_account_book_impl implements G_account_book {
@@ -52,6 +53,40 @@ public class G_account_book_impl implements G_account_book {
 
     @Override
     public void showAccount() {
+        String[] dates = listDates();
+
+        if ( dates.length == 0 ) {
+            System.out.println("기록이 없습니다.");
+            return;
+        }
+
+        System.out.println("== 기록된 날짜 ==");
+        for ( String date : dates ) System.out.println(date);
+
+        System.out.println("조회할 날짜 입력 : ");
+        String date = sc.nextLine().trim();
+        File file = new File(DIR, date + ".txt");
+        if ( !file.exists() ) {
+            System.out.println("그런 날짜가 없습니다.");
+            return;
+        }
+
+        System.out.println("\n== " + date + " ==");
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(file)) ) {
+
+            String line;
+
+            while ( (line = br.readLine()) != null ) {
+                System.out.println(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
@@ -68,5 +103,22 @@ public class G_account_book_impl implements G_account_book {
                 System.out.println("숫자로 다시 입력");
             }
         }
+    }
+
+    private String[] listDates() {
+        File folder = new File(DIR);
+        String[] files = folder.list();
+
+        if ( files == null ) return new String[0];
+
+        List<String> dates = new ArrayList<>();
+        for ( String name : files ) {
+            if ( name.endsWith(".txt") ) {
+                dates.add(name.replace(".txt", ""));
+            }
+        }
+        Collections.sort(dates, Collections.reverseOrder()); // 최신순 정렬
+
+        return dates.toArray(new String[0]);
     }
 }
