@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -34,7 +36,18 @@ public class G_account_book_impl implements G_account_book {
             String more = sc.nextLine().trim();
             if (more.equals("n")) break;
         }
+        sb.append("합계 : ").append(total).append("원\n");
 
+        // append 모드 활성화 : 파일이 없으면 새로 만들고, 있으면 뒤에 이어 붙인다.
+        try ( FileWriter fw = new FileWriter( file, true ) ) {
+            fw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println("저장 오류 : " + e.getMessage());
+            return;
+        }
+
+        System.out.println("\n" + today + ".txt 저장 완료!");
+        System.out.println(sb);
     }
 
     @Override
