@@ -24,6 +24,8 @@ public class G_start {
             }
 
             switch (choice) {
+                case 1:
+                    break;
                 case 4:
                     System.out.println("프로그램을 종료합니다.");
                     return;
