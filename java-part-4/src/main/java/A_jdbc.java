@@ -69,10 +69,36 @@ public class A_jdbc {
 
     }
 
+    public void selectOne (int id) {
+        String query = "SELECT id, name, age, phone FROM member WHERE id = ?";
+
+        try (
+                Connection conn = connection();
+                PreparedStatement pstmt = conn.prepareStatement( query );
+                ) {
+
+            pstmt.setInt(1, id);
+
+            ResultSet resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+                int id2 = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int age = resultSet.getInt("age");
+                String phone = resultSet.getString("phone");
+
+                System.out.println( id2 + " : " + name + " : " + age + " : " + phone );
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static void main(String[] args) {
         A_jdbc aJdbc = new A_jdbc();
 //        aJdbc.insertData("홍길순", 21, "010-1234-5678");
-        aJdbc.selectAll();
-
+//        aJdbc.selectAll();
+        aJdbc.selectOne(1);
     }
 }
