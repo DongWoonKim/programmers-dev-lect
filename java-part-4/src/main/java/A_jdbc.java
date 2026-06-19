@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class A_jdbc {
 
@@ -44,9 +41,38 @@ public class A_jdbc {
 
     }
 
+    public void selectAll() {
+        String query = "SELECT id, name, age, phone FROM member";
+
+        try (
+                Connection conn = connection();
+                PreparedStatement pstmt = conn.prepareStatement( query );
+                ) {
+
+            ResultSet resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int age = resultSet.getInt("age");
+                String phone = resultSet.getString("phone");
+
+                System.out.println( id + " " + name + " " + age + " " + phone );
+                System.out.println("==========");
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     static void main(String[] args) {
         A_jdbc aJdbc = new A_jdbc();
-        aJdbc.connection();
+//        aJdbc.insertData("홍길순", 21, "010-1234-5678");
+        aJdbc.selectAll();
 
     }
 }
