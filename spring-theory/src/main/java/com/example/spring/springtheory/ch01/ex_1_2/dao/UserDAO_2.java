@@ -25,7 +25,7 @@ public abstract class UserDAO_2 {
     private SimpleConnectionMaker_2 simpleConnectionMaker;
 
     public UserDAO_2() {
-        simpleConnectionMaker = new DConnectionMaker_2();
+        simpleConnectionMaker = new NConnectionMaker_2();
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
