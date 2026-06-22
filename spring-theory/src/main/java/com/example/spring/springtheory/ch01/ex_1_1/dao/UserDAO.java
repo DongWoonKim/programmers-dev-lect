@@ -2,10 +2,7 @@ package com.example.spring.springtheory.ch01.ex_1_1.dao;
 
 import com.example.spring.springtheory.ch01.ex_1_1.domain.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 // DAO(Data Access Object)
 // DB를 사용해 데이터를 조회하거나 조작하는 기능을 전담하도록 만든 오브젝트
@@ -34,7 +31,27 @@ public class UserDAO {
 
     }
 
-    public User get(String id) {
+    public User get(String id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String query = "SELECT * FROM users WHERE id = ?";
+
+        try (
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/springtheory", "root", "1234");
+                PreparedStatement pstmt = conn.prepareStatement(query);
+        ) {
+            pstmt.setString(1, id);
+            ResultSet resultSet = pstmt.executeQuery();
+
+            resultSet.next();
+
+            User user = new User();
+            user.setId( resultSet.getString("id") );
+            user.setName( resultSet.getString("name") );
+            user.setPassword( resultSet.getString("password") );
+
+            return user;
+        }
+
         return null;
     }
 
