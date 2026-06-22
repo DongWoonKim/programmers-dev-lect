@@ -52,7 +52,6 @@ public class UserDAO {
             return user;
         }
 
-        return null;
     }
 
 }
