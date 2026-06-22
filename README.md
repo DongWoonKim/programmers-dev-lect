@@ -14,6 +14,12 @@
 ## 📌 수업
 
 <details open>
+<summary><b>26.06.22</b></summary>
+
+1. [spring-theory : ch01(ex_1_1 ~ ex_1_3)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch01)
+</details>
+
+<details>
 <summary><b>26.06.19</b></summary>
 
 1. [java-part-3 : G](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)

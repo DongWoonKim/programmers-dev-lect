@@ -8,6 +8,19 @@
 
 ---
 <details open>
+<summary><b>4-1 (2026.06.22)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업예제 복습
+  - 필수 : 자바에서 미비된 부분 -> 학습
+- **과제2 — 실습**
+  - (필수)SOLID 5원칙 익히기 (나쁜 코드를 좋은 코드로 리팩터링하기)
+  - (필수)[SQL 고득점 KIT](https://school.programmers.co.kr/learn/challenges?tab=sql_practice_kit)
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>3-5 (2026.06.19)</b></summary>
 
 - **과제1 — 복습**
