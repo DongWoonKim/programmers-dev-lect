@@ -22,7 +22,7 @@ import java.sql.SQLException;
 
 public abstract class UserDAO_2 {
 
-    private DConnectionMaker_2 simpleConnectionMaker;
+    private SimpleConnectionMaker_2 simpleConnectionMaker;
 
     public UserDAO_2() {
         simpleConnectionMaker = new DConnectionMaker_2();
