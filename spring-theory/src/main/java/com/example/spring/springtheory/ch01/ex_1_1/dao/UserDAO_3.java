@@ -16,7 +16,7 @@ import java.sql.*;
 // 클래스 계층구조를 통해 두 개의 관심이 독립적으로 분리되면서 변경 작업은 한층 용이해졌다.
 // 새로운 DB 연결 방법을 적용해야 할 때는 UserDAO를 상속을 통해 확장해주기만 하면 된다.
 
-public class UserDAO_3 {
+public abstract class UserDAO_3 {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -56,13 +56,10 @@ public class UserDAO_3 {
 
     }
 
-    // 중복 코드의 메서드 추출 -> "메서드 추출"
-    // 리팩토링 : 기존의 코드를 외부의 동작방식에는 변화 없이 내부 구조를 변경해서 재구성하는 작업
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/springtheory", "root", "1234");
-
-        return conn;
-    }
+    // UserDAO의 소스코드를 제공하면, getConnection() 메서드를 원하는 방식으로 확장한후
+    // UserDAO의 기능과 함께 사용할 수 있다.
+    // 기존에는 같은 클래스에 다른 메서드로 분리됐던 DB 커넥션 연결이라는 관심을
+    // 이번에는 상속을 통해 서브클래스로 분리해버리는 것이다.
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 }
