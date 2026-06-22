@@ -12,6 +12,10 @@ import java.sql.*;
 // -> 이런 경우 UserDAO 소스코드를 N사와 D사에 제공해주지 않고도
 // -> 고객 스스로 원하는 DB커넥션 생성 방식을 적용해가면서 UserDAO를 사용하게 할 수 있을까?
 
+// "상속을 통한 확장"
+// 클래스 계층구조를 통해 두 개의 관심이 독립적으로 분리되면서 변경 작업은 한층 용이해졌다.
+// 새로운 DB 연결 방법을 적용해야 할 때는 UserDAO를 상속을 통해 확장해주기만 하면 된다.
+
 public class UserDAO_3 {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
