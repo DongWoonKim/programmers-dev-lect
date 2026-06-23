@@ -8,6 +8,21 @@
 
 ---
 <details open>
+<summary><b>4-2 (2026.06.23)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습
+  - 필수 : 자바에서 미비된 부분 -> 학습
+- **과제2 — 실습**
+  - (필수)스프링 : 제어의 역전
+  - (필수)스프링 : 싱글톤 기본
+  - (필수)스프링 : 싱글톤 심화
+  - (필수)[SQL 고득점 KIT](https://school.programmers.co.kr/learn/challenges?tab=sql_practice_kit)
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>4-1 (2026.06.22)</b></summary>
 
 - **과제1 — 복습**
