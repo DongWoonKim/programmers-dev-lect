@@ -9,8 +9,11 @@ package com.example.spring.springtheory.ch01.ex_1_4;
 // '오브젝트 팩토리'
 // 객체의 생성 방법을 결정하고 그렇게 만들어진 오브젝트를 돌려주는 일을 하는 오브젝트를 '팩토리'라고 한다.
 
+import com.example.spring.springtheory.ch01.ex_1_4.dao.DaoFactory;
+import com.example.spring.springtheory.ch01.ex_1_4.dao.UserDAO;
+
 public class Start {
     static void main(String[] args) {
-
+        UserDAO dao = new DaoFactory().userDAO();
     }
 }
