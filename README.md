@@ -13,6 +13,16 @@
 
 ## 📌 수업
 <details open>
+<summary><b>26.06.24</b></summary>
+
+1. [spring-theory : ch01(ex_1_7)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch01)
+2. [spring-theory : ch02(ex_2_1)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch02),
+[ch02(test code)](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/spring-theory/src/test/java/com/example/spring/springtheory/ch02/ex_2_1/dao/UserDAOTest.java)
+3. [spring-theory : ch03(ex_3_1 ~ ex_3_2)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
+
+</details>
+
+<details>
 <summary><b>26.06.23</b></summary>
 
 1. [spring-theory : ch01(ex_1_4 ~ ex_1_6)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch01)
