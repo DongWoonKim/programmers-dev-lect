@@ -1,4 +1,4 @@
-package com.example.spring.springtheory.ch03;
+package com.example.spring.springtheory.ch03.ex_3_1;
 
 // * 템플릿
 // 개방 폐쇄의 원칙은 변화의 특성이 다른 부분을 구분해주고,
