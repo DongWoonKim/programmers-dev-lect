@@ -54,4 +54,17 @@ public class UserDAO {
 
     }
 
+    // 테스트 시작 전에 호출해 DB를 깨끗한 상태로 만드는 용도
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+
+        String query = "DELETE FROM users";
+
+        try (
+                Connection conn = simpleConnectionMaker.makeNewConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+        ) {
+            pstmt.executeUpdate();
+        }
+    }
+
 }
