@@ -42,29 +42,29 @@
   <details>
   <summary><b>06.19</b></summary>
 
-  1. [java-part-3 : G](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
-  2. [java-part-4 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-4/src/main/java)
+  1. [java-part-3 : G](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
+  2. [java-part-4 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-4/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.18</b></summary>
 
-  1. [java-part-3 : E ~ F](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-3 : E ~ F](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.17</b></summary>
 
-  1. [java-part-3 : C ~ D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-3 : C ~ D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.16</b></summary>
 
-  1. [java-part-3 : B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-3 : B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
   2. 재정비 : 부족했던 부분 보완 및 학습 진행
 
   </details>
@@ -72,31 +72,31 @@
   <details>
   <summary><b>06.15</b></summary>
 
-  1. [java-part-2 : O](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
-  2. [java-part-3 : A ~ B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-2 : O](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-2/src/main/java)
+  2. [java-part-3 : A ~ B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.12</b></summary>
 
-  1. [java-part-2 : N](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
-  2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-2 : N](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-2/src/main/java)
+  2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.11</b></summary>
 
-  1. [java-part-2 : K ~ M](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
-  2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-3/src/main/java)
+  1. [java-part-2 : K ~ M](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-2/src/main/java)
+  2. [java-part-3 : A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-3/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.10</b></summary>
 
-  1. [java-part-2 : E ~ J](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
+  1. [java-part-2 : E ~ J](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-2/src/main/java)
   2. [운영체제 - 4. CPU 스케줄링 - 1](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/4.CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81-1.md)
 
   </details>
@@ -104,15 +104,15 @@
   <details>
   <summary><b>06.09</b></summary>
 
-  1. [java-part-1 : L](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-1/src/main/java)
-  2. [java-part-2 : A ~ D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-2/src/main/java)
+  1. [java-part-1 : L](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-1/src/main/java)
+  2. [java-part-2 : A ~ D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-2/src/main/java)
 
   </details>
 
   <details>
   <summary><b>06.08</b></summary>
 
-  1. [java-part-1 : J ~ L](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-1/src/main/java)
+  1. [java-part-1 : J ~ L](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-1/src/main/java)
   2. [운영체제 - 3. 프로세스와 스레드](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/3.%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
 
   </details>
@@ -120,7 +120,7 @@
   <details>
   <summary><b>06.05</b></summary>
 
-  1. [java-part-1 : G ~ I](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-1/src/main/java)
+  1. [java-part-1 : G ~ I](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-1/src/main/java)
   2. [운영체제 - 2. 운영체제 시작하기](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/2.%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0.md)
 
   </details>
@@ -131,7 +131,7 @@
   1. [Git, GitHub?](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/GIT/git%2C%20github%3F.md)
   2. [JDK](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/JDK)
   3. [운영체제 - 1. 컴퓨터 구조의 큰 그림](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/1.%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0%EC%9D%98%20%ED%81%B0%EA%B7%B8%EB%A6%BC.md)
-  4. [java-part-1 : A ~ G](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java-part-1/src/main/java)
+  4. [java-part-1 : A ~ G](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/java/java-part-1/src/main/java)
 
   </details>
 
