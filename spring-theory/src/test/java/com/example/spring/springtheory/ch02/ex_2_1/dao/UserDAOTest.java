@@ -1,17 +1,16 @@
 package com.example.spring.springtheory.ch02.ex_2_1.dao;
 
 import com.example.spring.springtheory.ch02.ex_2_1.domain.User;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // * UserDAO 단위 테스트 (JUnit 5)
 // Start.java의 main() + System.out.println 방식을 JUnit 테스트로 옮긴 것이다.
@@ -28,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringJUnitConfig(DaoFactory.class)
 class UserDAOTest {
 
-    // @Autowired : 타입(UserDAO)이 일치하는 빈을 스프링이 찾아 이 필드에 주입해준다.
+    // @Autowired : 타입(UserDAO)이 일치하는 빈을 스프링이 찾아 이 필드에 주입해x준다.
     @Autowired // 더 이상 직접 new AnnotationConfigApplicationContext / getBean 을 호출할 필요가 없다.
     private UserDAO userDAO;
 
