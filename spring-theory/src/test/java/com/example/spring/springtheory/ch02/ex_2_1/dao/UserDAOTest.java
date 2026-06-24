@@ -3,7 +3,9 @@ package com.example.spring.springtheory.ch02.ex_2_1.dao;
 import com.example.spring.springtheory.ch02.ex_2_1.domain.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -73,5 +75,41 @@ class UserDAOTest {
         assertEquals("test234", userDAO.get("test123").getName());
     }
 
+    @Test
+    void add_중복_id_예외() throws SQLException, ClassNotFoundException {
+
+        final User user = newUser("dup_id", "사용자1", "3210");
+
+        // 정상동작
+        userDAO.add(user);
+
+        // 익명클래스
+        /*
+        Executable action = new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                // 예외
+                userDAO.add(user);
+            }
+        };
+
+        assertThrows(SQLException.class, action);
+        */
+
+        assertThrows(SQLException.class, () -> userDAO.add(user));
+    }
+
+    @Test
+    void get_없는_id_예외() {
+        assertThrows(SQLException.class, () -> userDAO.get("존재하지_않는_id"));
+    }
+
+    @Disabled("일부러 틀린 기댓값을 넣은 학습용 실패 예제 - 실패 메시지를 보고 싶을 때만 활성화")
+    @Test
+    void 일부러_실패하는_테스트() throws SQLException, ClassNotFoundException {
+        userDAO.add( newUser("fail_demo", "fail", "1234") );
+
+        assertEquals(2, userDAO.getCount());
+    }
 
 }
