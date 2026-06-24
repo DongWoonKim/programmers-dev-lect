@@ -41,7 +41,7 @@ public class UserDAO {
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        jdbcContextWithStatementStrategy(new UserDAOAdd(user));
+        jdbcContextWithStatementStrategy( new UserDAOAdd(user) );
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
