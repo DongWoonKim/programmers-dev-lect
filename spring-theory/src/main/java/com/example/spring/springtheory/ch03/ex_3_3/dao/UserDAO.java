@@ -40,10 +40,36 @@ public class UserDAO {
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        jdbcContextWithStatementStrategy( new UserDAOAdd(user) );
+
+        class UserDAOAdd implements StatementStrategy {
+
+            @Override
+            public PreparedStatement makeStatement(Connection conn) throws SQLException {
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "INSERT INTO users(id, name, password) VALUES(?, ?, ?)"
+                );
+
+                pstmt.setString(1, user.getId());
+                pstmt.setString(2, user.getName());
+                pstmt.setString(3, user.getPassword());
+
+                return pstmt;
+            }
+        }
+
+        jdbcContextWithStatementStrategy( new UserDAOAdd() );
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
+
+        class UserDAODeleteAll implements StatementStrategy {
+
+            @Override
+            public PreparedStatement makeStatement(Connection conn) throws SQLException {
+                return conn.prepareStatement("DELETE FROM users");
+            }
+        }
+
         jdbcContextWithStatementStrategy( new UserDAODeleteAll() );
     }
 
