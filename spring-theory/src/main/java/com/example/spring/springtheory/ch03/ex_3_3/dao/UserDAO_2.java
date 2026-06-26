@@ -7,16 +7,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-// * 로컬 클래스
-public class UserDAO {
+// * 익면 내부 클래스
+public class UserDAO_2 {
 
     private SimpleConnectionMaker simpleConnectionMaker;
 
-    public UserDAO(SimpleConnectionMaker simpleConnectionMaker) {
+    public UserDAO_2(SimpleConnectionMaker simpleConnectionMaker) {
         this.simpleConnectionMaker = simpleConnectionMaker;
     }
 
-    protected UserDAO() {}
+    protected UserDAO_2() {}
 
     public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException, ClassNotFoundException {
         try (
@@ -29,8 +29,7 @@ public class UserDAO {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
-        class UserDAOAdd implements StatementStrategy {
-
+        StatementStrategy strategy = new StatementStrategy() {
             @Override
             public PreparedStatement makeStatement(Connection conn) throws SQLException {
                 PreparedStatement pstmt = conn.prepareStatement(
@@ -43,22 +42,21 @@ public class UserDAO {
 
                 return pstmt;
             }
-        }
+        };
 
-        jdbcContextWithStatementStrategy( new UserDAOAdd() );
+        jdbcContextWithStatementStrategy( strategy );
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
 
-        class UserDAODeleteAll implements StatementStrategy {
-
+        StatementStrategy strategy = new StatementStrategy() {
             @Override
             public PreparedStatement makeStatement(Connection conn) throws SQLException {
                 return conn.prepareStatement("DELETE FROM users");
             }
-        }
+        };
 
-        jdbcContextWithStatementStrategy( new UserDAODeleteAll() );
+        jdbcContextWithStatementStrategy( strategy );
     }
 
 
