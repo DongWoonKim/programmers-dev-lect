@@ -17,7 +17,14 @@
 
 <blockquote>
 
-  <details open>
+<details open>
+  <summary><b>06.26</b></summary>
+
+  3. [spring-theory : ch03(ex_3_3)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
+
+  </details>
+
+  <details>
   <summary><b>06.24</b></summary>
 
   1. [spring-theory : ch01(ex_1_7)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch01)
