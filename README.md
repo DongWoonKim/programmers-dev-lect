@@ -17,10 +17,20 @@
 
 <blockquote>
 
-<details open>
+  <details open>
+  <summary><b>06.29</b></summary>
+
+  1. [spring-theory : ch03(ex_3_4)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
+  2. [spring-theory : ch04(ex01 ~ ex03)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch04)
+  3. [spring-theory : ch05(ex_5_1)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch05)
+
+  </details>
+
+  <details>
+  <details>
   <summary><b>06.26</b></summary>
 
-  3. [spring-theory : ch03(ex_3_3)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
+  1. [spring-theory : ch03(ex_3_3)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
 
   </details>
 
