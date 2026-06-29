@@ -27,7 +27,6 @@
   </details>
 
   <details>
-  <details>
   <summary><b>06.26</b></summary>
 
   1. [spring-theory : ch03(ex_3_3)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
