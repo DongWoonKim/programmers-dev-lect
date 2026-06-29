@@ -36,7 +36,7 @@ public enum Level {
             case SILVER:
                 return GOLD;
             default:
-                return null;
+                return GOLD;
         }
     }
 

@@ -5,18 +5,30 @@ import com.example.spring.springtheory.ch05.ex_5_1.domain.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
 
     private JdbcContext jdbcContext;
 
+    protected UserDAO() {}
+
     public UserDAO(JdbcContext jdbcContext) {
         this.jdbcContext = jdbcContext;
     }
 
-    protected UserDAO() {}
-
+    private RowMapper<User> userRowMapper = new RowMapper<>() {
+        @Override
+        public User mapRow(ResultSet rs) throws SQLException {
+            User user = new User();
+            user.setId( rs.getString("id") );
+            user.setName( rs.getString("name") );
+            user.setPassword( rs.getString("password") );
+            user.
+            return null;
+        }
+    };
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
