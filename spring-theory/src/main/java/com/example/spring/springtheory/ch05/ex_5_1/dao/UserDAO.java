@@ -94,5 +94,42 @@ public class UserDAO {
         return jdbcContext.query(strategy, userRowMapper);
     }
 
+    public int getCount() throws SQLException, ClassNotFoundException {
+        StatementStrategy strategy = new StatementStrategy() {
+            @Override
+            public PreparedStatement makeStatement(Connection conn) throws SQLException {
+                PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) FROM users");
+                return pstmt;
+            }
+        };
+
+        return jdbcContext.queryForObject(strategy, new RowMapper<>() {
+            @Override
+            public Integer mapRow(ResultSet rs) throws SQLException {
+                rs.next();
+                return rs.getInt(1);
+            }
+        });
+    }
+
+    public void update(User user) throws SQLException, ClassNotFoundException {
+        StatementStrategy strategy = new StatementStrategy() {
+            @Override
+            public PreparedStatement makeStatement(Connection conn) throws SQLException {
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "UPDATE users SET name = ?, password = ?, level = ?, login = ?, recommend = ? WHERE id = ?");
+                pstmt.setString(1, user.getName());
+                pstmt.setString(2, user.getPassword());
+                pstmt.setInt(3, user.getLevel().getValue());
+                pstmt.setInt(4, user.getLogin());
+                pstmt.setInt(5, user.getRecommand());
+                pstmt.setString(6, user.getId());
+
+                return pstmt;
+            }
+        };
+
+        jdbcContext.workWithStatementStrategy(strategy);
+    }
 
 }
