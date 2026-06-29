@@ -9,22 +9,14 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    private SimpleConnectionMaker simpleConnectionMaker;
+    private JdbcContext jdbcContext;
 
-    public UserDAO(SimpleConnectionMaker simpleConnectionMaker) {
-        this.simpleConnectionMaker = simpleConnectionMaker;
+    public UserDAO(JdbcContext jdbcContext) {
+        this.jdbcContext = jdbcContext;
     }
 
     protected UserDAO() {}
 
-    public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException, ClassNotFoundException {
-        try (
-                Connection conn = simpleConnectionMaker.makeNewConnection();
-                PreparedStatement pstmt = statementStrategy.makeStatement(conn); // 변하는 부분을 전략에 위임
-        ) {
-            pstmt.executeUpdate();
-        }
-    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -43,7 +35,7 @@ public class UserDAO {
             }
         };
 
-        jdbcContextWithStatementStrategy( strategy );
+        jdbcContext.workWithStatementStrategy(strategy);
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
@@ -55,7 +47,7 @@ public class UserDAO {
             }
         };
 
-        jdbcContextWithStatementStrategy( strategy );
+        jdbcContext.workWithStatementStrategy(strategy);
     }
 
 
