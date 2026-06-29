@@ -19,7 +19,52 @@ package com.example.spring.springtheory.ch04;
 //     - RuntimeException의 자식(NullPointerException, IllegalArgumentException 등).
 //     - catch/throws를 강제하지 않는다. 주로 '프로그램의 버그' 성격이라, 복구보다 코드 수정 대상이다.
 
+import java.sql.SQLException;
+
 public class Exception_01 {
+
+    // 안티패턴 1 : 예외블랙홀 - 아무것도 하지 않음
+    //  - 예외가 났다는 사실 자체가 흔적도 없이 사라진다. 프로그램은 아무 일 없다는 듯 계속 진행된다.
+    //  - 가장 위험하다. 나중에 엉뚱한 곳에서 문제가 터지고, 원인 추적이 거의 불가능해진다.
+    void 예외블랙홀() {
+        try {
+            reskyjob();
+        } catch (SQLException e) {
+            // 아무것도 안함
+        }
+    }
+
+    // 안티패턴 2 : 찍기만하고 진행
+    //  - printStackTrace()나 println()으로 '찍는 것'은 예외를 '처리'한 것이 아니다.
+    //  - 운영 환경에선 그 출력이 묻혀서 아무도 못 보고, 프로그램은 잘못된 상태로 계속 동작한다.
+    void 찍기만하고진행() {
+        try {
+            reskyjob();
+        } catch (SQLException e) {
+            e.printStackTrace();                    // 찍기만함
+            System.out.println(e.getMessage());     // 찍기만함
+        }
+    }
+
+    // 안티패턴 3 : 무의미하고 무책임한 throws
+    //  - 어떤 예외가 왜 날 수 있는지 고민하지 않고, 그냥 throws Exception으로 전부 떠넘긴다.
+    //  - 이 메서드를 쓰는 쪽도 의미 있는 정보를 못 받고 똑같이 throws Exception으로 떠넘기게 된다.
+    void 무책임throws() throws Exception {
+        method1();
+    }
+
+    void method1() throws Exception {
+        method2();
+    }
+
+    void method2() throws Exception {
+        throw new Exception();
+    }
+
+    void reskyjob() throws SQLException {
+        throw new SQLException("데이터베이스 연결실패");
+    }
+
     static void main(String[] args) {
 
     }
