@@ -1,8 +1,6 @@
 package com.example.spring.springtheory.ch05.ex_5_4.dao;
 
-import com.example.spring.springtheory.ch05.ex_5_4.service.UserService;
-import com.example.spring.springtheory.ch05.ex_5_4.service.UserServiceImpl;
-import com.example.spring.springtheory.ch05.ex_5_4.service.UserServiceTx;
+import com.example.spring.springtheory.ch05.ex_5_4.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -14,6 +12,14 @@ import javax.sql.DataSource;
 // DaoFactory를 스프링 빈 팩토리가 사용할 수 있는 설정정보로 리팩토링
 @Configuration // 애플리케이션 컨텍스트 또는 빈 팩토리가 사용할 설정 정보라는 표시
 public class DaoFactory {
+    // * 메일 발송 구현을 여기서 결정한다(추상화의 교체 지점).
+    //  - 지금은 실제 SMTP 서버가 없으므로 DummyMailSender(아무것도 안 함)를 꽂는다.
+    //  - 운영에서는 JavaMail 기반 실제 발송 구현으로 '이 한 줄만' 바꾸면 된다.
+    //    UserServiceImpl 코드는 전혀 손대지 않는다.
+    @Bean
+    public MailSender mailSender() {
+        return new DummyMailSender();
+    }
 
     @Bean
     public UserService userService() {
@@ -22,7 +28,7 @@ public class DaoFactory {
 
     @Bean
     public UserServiceImpl userServiceImpl() {
-        return new UserServiceImpl(userDAO());
+        return new UserServiceImpl(userDAO(), mailSender());
     }
 
     @Bean // 오브젝트 생성을 담당하는 IoC용 메서드라는 표시
