@@ -16,8 +16,14 @@
 <summary><b>📅 26.06</b></summary>
 
 <blockquote>
-
   <details open>
+  <summary><b>06.30</b></summary>
+
+  1. [spring-theory : ch05(ex_5_2 ~ ex_5_4)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch05)
+
+  </details>
+
+  <details>
   <summary><b>06.29</b></summary>
 
   1. [spring-theory : ch03(ex_3_4)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch03)
