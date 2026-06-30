@@ -6,7 +6,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class UserServiceTx implements UserService {
 
