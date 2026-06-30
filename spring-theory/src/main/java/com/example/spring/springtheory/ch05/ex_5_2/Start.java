@@ -8,8 +8,14 @@ package com.example.spring.springtheory.ch05.ex_5_2;
 // '트랜잭션'
 // 여러 update를 '하나의 트랜잭션'으로 묶고, 실패 시 전부 롤백한다.
 
+import com.example.spring.springtheory.ch05.ex_5_2.dao.DaoFactory;
+import com.example.spring.springtheory.ch05.ex_5_2.service.UserService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 public class Start {
     static void main(String[] args) {
-
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserService userService = context.getBean("userService", UserService.class);
     }
 }
