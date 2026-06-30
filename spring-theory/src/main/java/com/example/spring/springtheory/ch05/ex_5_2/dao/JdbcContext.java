@@ -2,6 +2,7 @@ package com.example.spring.springtheory.ch05.ex_5_2.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public class JdbcContext {
 
-    private SimpleConnectionMaker simpleConnectionMaker;
+    private DataSource dataSource;
 
-    public JdbcContext(SimpleConnectionMaker simpleConnectionMaker) {
-        this.simpleConnectionMaker = simpleConnectionMaker;
+    public JdbcContext(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public void workWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException, ClassNotFoundException {
