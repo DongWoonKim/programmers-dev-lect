@@ -23,8 +23,15 @@ package com.example.spring.springtheory.ch06.ex_6_2;
 // - Advisor           : Advice + Pointcut 묶음 (예: DefaultPointcutAdvisor)
 // - ProxyFactoryBean  : target + advisor를 받아 '프록시'를 생산하는 스프링 팩토리 빈
 
+import com.example.spring.springtheory.ch06.ex_6_2.dao.DaoFactory;
+import com.example.spring.springtheory.ch06.ex_6_2.service.UserService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 public class Start {
     static void main(String[] args) {
-
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        userService.upgradeLevels(); // Pointcut("upgrade*") -> TransactionAdvice 적용
+//        userService.add(...); // 매칭 안됨 -> 트랜잭션 없이 그대로 진행
     }
 }
