@@ -14,6 +14,7 @@
   - 필수 : 수업내용 복습(IoC/DI, 추상화, AOP)
 - **과제2 — 실습**
   - (필수)스프링 : 8.AOP.md
+  - (필수)PBL : Stage 2 — mission-04-library-rental
 - **과제3 — 알고리즘**
 
 </details>
