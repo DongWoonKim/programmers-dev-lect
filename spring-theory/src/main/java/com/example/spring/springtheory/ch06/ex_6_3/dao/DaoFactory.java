@@ -33,7 +33,7 @@ public class DaoFactory {
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();
     }
-    
+
     // Advisor = Pointcut + Advice
     //  - 부가기능과 적용대상을 묶은 한 덩어리. ProxyFactoryBean에는 이 Advisor 단위로 등록한다.
     @Bean
