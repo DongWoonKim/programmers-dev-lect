@@ -8,6 +8,17 @@
 
 ---
 <details open>
+<summary><b>6-1 (2026.07.01)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(IoC/DI, 추상화, AOP)
+- **과제2 — 실습**
+  - (필수)스프링 : 8.AOP.md
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>5-2 (2026.06.30)</b></summary>
 
 - **과제1 — 복습**
