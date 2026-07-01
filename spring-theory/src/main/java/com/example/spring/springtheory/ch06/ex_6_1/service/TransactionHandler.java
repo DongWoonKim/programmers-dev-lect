@@ -13,8 +13,11 @@ package com.example.spring.springtheory.ch06.ex_6_1.service;
 //   다이내믹 프록시가 바로 이 리플렉션 위에서 동작한다.
 
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TransactionHandler implements InvocationHandler {
@@ -39,10 +42,27 @@ public class TransactionHandler implements InvocationHandler {
         // 예) pattern = "upgrade"이면 upgradeLevels()는 매칭, add()는 비매칭
         if( method.getName().startsWith(pattern) ) {
             // 트랜잭션 경계설정
-
+            return invokeTransaction(method, args);
         }
 
+        // 패턴에 안맞는 메서드는 부가기능 없이 target에게 그냥 위임한다.
+        //  method.invoke(target, args) = "target의 이 메서드를, 이 인자들로 실행하라"(리플렉션 호출).
         return method.invoke(target, args);
+    }
+
+    private Object invokeTransaction(Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
+        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+
+        try {
+
+            Object invoke = method.invoke(target, args);
+            transactionManager.commit(status);
+
+            return invoke;
+        } catch (Exception e) {
+            transactionManager.rollback(status);
+            throw e;
+        }
     }
 
 }
