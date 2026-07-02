@@ -8,6 +8,18 @@
 
 ---
 <details open>
+<summary><b>6-2 (2026.07.02)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(스프링부트 메커니즘, 세션, 쿠키)
+- **과제2 — 실습**
+  - (필수)스프링부트 : 1.세션_쿠키.md
+  - (필수)PBL : Stage 2 — mission-05-discount-policy
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>6-1 (2026.07.01)</b></summary>
 
 - **과제1 — 복습**

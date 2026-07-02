@@ -16,6 +16,13 @@
 <summary><b>📅 26.07</b></summary>
 <blockquote>
   <details open>
+  <summary><b>07.02</b></summary>
+  
+  1. [springboot: essentials(Session, Cookie)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/essentials/src/main/java/com/example/spring/essentials/controller)
+
+  </details>
+
+  <details>
   <summary><b>07.01</b></summary>
   
   1. [spring-theory : ch06(ex_6_1 ~ ex_6_4)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/spring-theory/src/main/java/com/example/spring/springtheory/ch06)
