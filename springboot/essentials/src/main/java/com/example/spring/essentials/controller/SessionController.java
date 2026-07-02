@@ -1,6 +1,7 @@
 package com.example.spring.essentials.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 // * 세션(Session)이란?
 // HTTP는 '무상태'라 각 요청이 서로를 기억하지 못한다
@@ -20,4 +21,10 @@ import org.springframework.stereotype.Controller;
 //   - session.invalidate()            : 세션을 통째로 비운다. (로그아웃 시 사용)
 @Controller
 public class SessionController {
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }
