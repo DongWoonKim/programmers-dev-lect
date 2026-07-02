@@ -32,4 +32,7 @@ import org.springframework.stereotype.Controller;
 //     브라우저에서 JS 로만 임시 데이터를 다루면 '웹 스토리지'를 쓴다.
 @Controller
 public class CookieController {
+
+
+
 }
