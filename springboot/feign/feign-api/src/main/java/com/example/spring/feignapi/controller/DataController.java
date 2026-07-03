@@ -45,7 +45,22 @@ public class DataController {
         dataStore.put(build.getId(), build);
 
         return build;
+    }
 
+    @PutMapping("/{id}")
+    public DataResponse updateData(
+            @PathVariable("id") Long id,
+            @RequestBody DataRequest dataRequest
+    ) {
+        DataResponse dataResponse = dataStore.get(id);
+
+        if (dataResponse == null) throw new RuntimeException("Data not found(update) " + id);
+
+        dataResponse.setName(dataRequest.getName());
+        dataResponse.setValue(dataRequest.getValue());
+        dataStore.put(id, dataResponse);
+
+        return dataResponse;
     }
 
 }
