@@ -8,6 +8,18 @@
 
 ---
 <details open>
+<summary><b>6-3 (2026.07.03)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(filter, feign)
+- **과제2 — 실습**
+  - (필수)스프링부트 : 2.외부api호출.md
+  - (필수)PBL : Stage 2 — mission-06-seat-reservation
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>6-2 (2026.07.02)</b></summary>
 
 - **과제1 — 복습**
