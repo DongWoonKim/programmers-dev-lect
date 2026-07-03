@@ -1,11 +1,9 @@
 package com.example.spring.feignapi.controller;
 
+import com.example.spring.feignapi.dto.DataRequest;
 import com.example.spring.feignapi.dto.DataResponse;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +31,21 @@ public class DataController {
         if (dataResponse == null) throw new RuntimeException("Data not found " + id);
 
         return dataResponse;
+    }
+
+    @PostMapping
+    public DataResponse createData(@RequestBody DataRequest dataRequest) {
+
+        DataResponse build = DataResponse.builder()
+                .id(idCounter++)
+                .value(dataRequest.getValue())
+                .name(dataRequest.getName())
+                .build();
+
+        dataStore.put(build.getId(), build);
+
+        return build;
+
     }
 
 }
