@@ -3,6 +3,8 @@ package com.example.spring.basicboard.domain.repository;
 import com.example.spring.basicboard.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 // 이 인터페이스에는 구현 클래스가 없다.
 // - 우리는 inerface만 선언하고 구현체(class)는 만들지 않는다.
 // - 애플리케이션이 뜰 때 Spring Data JPA 가 이 인터페이스의 구현체를 프록시로 자동 생성해서 빈으로 등록한다.
@@ -20,5 +22,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByUserId(String userId);
+
+    Optional<Member> findByUserId(String userId);
 
 }
