@@ -1,5 +1,7 @@
 package com.example.spring.basicboard.controller;
 
+import com.example.spring.basicboard.dto.LoginRequestDto;
+import com.example.spring.basicboard.dto.LoginResponseDto;
 import com.example.spring.basicboard.dto.MemberJoinReponseDto;
 import com.example.spring.basicboard.dto.MemberJoinRequestDto;
 import com.example.spring.basicboard.service.MemberService;
@@ -20,6 +22,11 @@ public class MemberApiController {
     public MemberJoinReponseDto join(@RequestBody MemberJoinRequestDto dto) {
         memberService.join( dto );
         return new MemberJoinReponseDto("/members/login");
+    }
+
+    @PostMapping("/login")
+    public LoginResponseDto login(@RequestBody LoginRequestDto dto) {
+
     }
 
 }
