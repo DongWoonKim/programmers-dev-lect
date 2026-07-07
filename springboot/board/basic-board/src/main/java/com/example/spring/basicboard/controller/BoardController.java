@@ -7,10 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BoardController {
+
     @GetMapping("/")
     public String boardList(HttpSession session, Model model) {
         setSession(session, model);
         return "board-list";
+    }
+
+    @GetMapping("/write")
+    public String write(HttpSession session, Model model) {
+        setSession(session, model);
+        return "/board-write";
     }
 
     private void setSession(HttpSession session, Model model) {
