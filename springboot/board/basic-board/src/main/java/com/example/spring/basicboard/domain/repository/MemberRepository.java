@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 // 이 인터페이스에는 구현 클래스가 없다.
-// - 우리는 inerface만 선언하고 구현체(class)는 만들지 않는다.
+// - 우리는 interface만 선언하고 구현체(class)는 만들지 않는다.
 // - 애플리케이션이 뜰 때 Spring Data JPA 가 이 인터페이스의 구현체를 프록시로 자동 생성해서 빈으로 등록한다.
 // - 그래서 서비스 memberRepository를 주입받아 바로 쓸 수 있는 것이다.(개발자가 SQL/구현을 안 짜도 된다.)
 

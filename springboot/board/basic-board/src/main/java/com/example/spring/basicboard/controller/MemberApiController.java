@@ -1,5 +1,6 @@
 package com.example.spring.basicboard.controller;
 
+import com.example.spring.basicboard.constant.SessionConst;
 import com.example.spring.basicboard.dto.LoginRequestDto;
 import com.example.spring.basicboard.dto.LoginResponseDto;
 import com.example.spring.basicboard.dto.MemberJoinReponseDto;
@@ -30,8 +31,8 @@ public class MemberApiController {
         return memberService.login( dto )
                 .map(
                         member -> {
-                            session.setAttribute("userId", member.getUserId());
-                            session.setAttribute("userName", member.getUserName());
+                            session.setAttribute(SessionConst.USER_ID, member.getUserId());
+                            session.setAttribute(SessionConst.USER_NAME, member.getUserName());
                             return LoginResponseDto.success();
                         }
                 ).orElseGet(LoginResponseDto::fail);
