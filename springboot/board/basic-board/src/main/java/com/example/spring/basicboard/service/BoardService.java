@@ -32,4 +32,8 @@ public class BoardService {
         return boardRepository.findAll(pageable).getContent();
     }
 
+    public int getTotalBoards() {
+        return (int) boardRepository.count();
+    }
+
 }
