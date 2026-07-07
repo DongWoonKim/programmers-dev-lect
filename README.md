@@ -16,6 +16,12 @@
 <summary><b>📅 26.07</b></summary>
 <blockquote>
   <details open>
+  <summary><b>07.07</b></summary>
+  
+  1. [springboot: basic-board(login, board-list)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
+
+  </details>
+  <details>
   <summary><b>07.06</b></summary>
   
   1. [springboot: basic-board(join, login)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
