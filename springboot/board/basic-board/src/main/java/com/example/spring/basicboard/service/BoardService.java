@@ -3,12 +3,12 @@ package com.example.spring.basicboard.service;
 import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.domain.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,6 +34,11 @@ public class BoardService {
 
     public int getTotalBoards() {
         return (int) boardRepository.count();
+    }
+
+    public void saveBoard( String userId, String title, String content, MultipartFile file ) {
+
+
     }
 
 }
