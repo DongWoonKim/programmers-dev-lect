@@ -6,9 +6,10 @@ import com.example.spring.basicboard.dto.BoardListResponseDto;
 import com.example.spring.basicboard.dto.BoardWriteRequestDto;
 import com.example.spring.basicboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -57,6 +58,16 @@ public class BoardApiController {
                 .created(boardDetail.getCreated())
                 .userId(boardDetail.getUserId())
                 .build();
+    }
+
+    // ResponseEntity는 HTTP응답의 3가지를 직접 제어하게 해주는 상자다
+    // [상태코드] + [헤더] + [본문(body)]
+    // 그냥 Resource만 리턴하면 파일 내용은 내려가지만,
+    // Content-Disposition: attachment 헤더를 붙일 방법이 없다.
+    // -> 그러면 다운로드가 아니라 브라우저가 파일을 그냥 열어버리고, 저장 파일명도 못 정한다.
+    @GetMapping("/file/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+        return null;
     }
 
 
