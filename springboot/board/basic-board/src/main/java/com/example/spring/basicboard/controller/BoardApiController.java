@@ -99,6 +99,11 @@ public class BoardApiController {
                 .body(resource);
     }
 
+    @PutMapping("/{id}")
+    public void updateBoard(@PathVariable long id, @RequestBody ) {
+
+    }
+
     @DeleteMapping("/{id}")
     public void deleteBoard(@PathVariable long id, @RequestBody BoardDeleteRequestDto dto) {
         boardService.deleteBoard(id, dto);
