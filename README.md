@@ -18,10 +18,10 @@
   <details open>
   <summary><b>07.08</b></summary>
   
-  1. [springboot: basic-board(board-list. write, update, delete)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
+  1. [springboot: basic-board(detail. write, update, delete)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
 
   </details>
-  <details open>
+  <details>
   <summary><b>07.07</b></summary>
   
   1. [springboot: basic-board(login, board-list)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
