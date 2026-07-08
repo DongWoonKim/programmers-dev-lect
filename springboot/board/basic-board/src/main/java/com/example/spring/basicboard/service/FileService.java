@@ -64,4 +64,15 @@ public class FileService {
 
     }
 
+    public void deleteFile(String filePath) {
+
+        if ( filePath == null || filePath.isBlank() ) return;
+
+        File file = new File(filePath);
+        if ( !file.exists() ) return;
+
+        file.delete();
+
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.spring.basicboard.controller;
 
 import com.example.spring.basicboard.domain.entity.Board;
+import com.example.spring.basicboard.dto.BoardDeleteRequestDto;
 import com.example.spring.basicboard.dto.BoardDetailResponseDto;
 import com.example.spring.basicboard.dto.BoardListResponseDto;
 import com.example.spring.basicboard.dto.BoardWriteRequestDto;
@@ -98,5 +99,9 @@ public class BoardApiController {
                 .body(resource);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteBoard(@PathVariable long id, @RequestBody BoardDeleteRequestDto dto) {
+        boardService.deleteBoard(id, dto);
+    }
 
 }
