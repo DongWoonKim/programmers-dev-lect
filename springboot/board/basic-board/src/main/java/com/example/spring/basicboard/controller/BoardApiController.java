@@ -1,10 +1,7 @@
 package com.example.spring.basicboard.controller;
 
 import com.example.spring.basicboard.domain.entity.Board;
-import com.example.spring.basicboard.dto.BoardDeleteRequestDto;
-import com.example.spring.basicboard.dto.BoardDetailResponseDto;
-import com.example.spring.basicboard.dto.BoardListResponseDto;
-import com.example.spring.basicboard.dto.BoardWriteRequestDto;
+import com.example.spring.basicboard.dto.*;
 import com.example.spring.basicboard.service.BoardService;
 import com.example.spring.basicboard.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -100,8 +97,8 @@ public class BoardApiController {
     }
 
     @PutMapping("/{id}")
-    public void updateBoard(@PathVariable long id, @RequestBody ) {
-
+    public void updateBoard(@PathVariable long id, @RequestBody BoardUpdateRequestDto dto) {
+        boardService.updateBoard(id, dto);
     }
 
     @DeleteMapping("/{id}")
