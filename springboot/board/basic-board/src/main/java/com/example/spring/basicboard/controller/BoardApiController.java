@@ -77,10 +77,11 @@ public class BoardApiController {
         // HTTP 헤더 값에는 원칙적으로 ASCII만 안전하게 담을 수 있다.
         // -> "이력서.pdf"같은 한글/공백을 그대로 넣으면 깨지거나 잘린다.
         // 그래서 파일명을 URL 인코딩해서 넣는다.
+        //   - URLEncoder 는 공백을 '+' 로 바꾸는데, 파일명에선 '+' 가 그대로 보이면 곤란하므로 %20 으로 치환한다
         String encodedFileName = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20");
 
-        
+
 
         return null;
     }
