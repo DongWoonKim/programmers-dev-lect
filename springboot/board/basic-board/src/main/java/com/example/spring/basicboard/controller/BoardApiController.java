@@ -8,6 +8,7 @@ import com.example.spring.basicboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,7 +49,14 @@ public class BoardApiController {
 
     @GetMapping("/{id}")
     public BoardDetailResponseDto getBoardDetail(@PathVariable long id) {
-        return null;
+        Board boardDetail = boardService.getBoardDetail(id);
+        return BoardDetailResponseDto.builder()
+                .title(boardDetail.getTitle())
+                .content(boardDetail.getContent())
+                .filePath(boardDetail.getFilePath())
+                .created(boardDetail.getCreated())
+                .userId(boardDetail.getUserId())
+                .build();
     }
 
 
