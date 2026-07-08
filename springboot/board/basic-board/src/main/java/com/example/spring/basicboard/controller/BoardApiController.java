@@ -8,6 +8,8 @@ import com.example.spring.basicboard.service.BoardService;
 import com.example.spring.basicboard.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,9 +83,10 @@ public class BoardApiController {
         String encodedFileName = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20");
 
-
-
-        return null;
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + encodedFileName)
+                .body(resource);
     }
 
 
