@@ -1,6 +1,7 @@
 package com.example.spring.basicboard.controller;
 
 import com.example.spring.basicboard.domain.entity.Board;
+import com.example.spring.basicboard.dto.BoardDetailResponseDto;
 import com.example.spring.basicboard.dto.BoardListResponseDto;
 import com.example.spring.basicboard.dto.BoardWriteRequestDto;
 import com.example.spring.basicboard.service.BoardService;
@@ -44,5 +45,11 @@ public class BoardApiController {
     public void saveBoard(@ModelAttribute BoardWriteRequestDto dto) {
         boardService.saveBoard(dto.getUserId(), dto.getTitle(), dto.getContent(), dto.getFile());
     }
+
+    @GetMapping("/{id}")
+    public BoardDetailResponseDto getBoardDetail(@PathVariable long id) {
+        return null;
+    }
+
 
 }
