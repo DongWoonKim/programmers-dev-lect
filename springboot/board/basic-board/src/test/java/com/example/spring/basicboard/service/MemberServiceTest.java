@@ -5,6 +5,7 @@ import com.example.spring.basicboard.domain.entity.Member;
 import com.example.spring.basicboard.domain.repository.MemberRepository;
 import com.example.spring.basicboard.dto.LoginRequestDto;
 import com.example.spring.basicboard.dto.MemberJoinRequestDto;
+import com.example.spring.basicboard.exception.DuplicateUserIdException;
 import com.example.spring.basicboard.mapper.MemberMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 
@@ -158,6 +162,24 @@ class MemberServiceTest {
 
         // then
         verify(memberRepository).save( member );
+    }
+
+    @Test
+    @DisplayName("회원가입 - 아이디가 이미 있으면 DuplicateUserIdException을 던지고 저장하지 않는다.")
+    void join_중복이면_예외() {
+        // given
+        MemberJoinRequestDto requestDto = new MemberJoinRequestDto();
+        requestDto.setUserId("test");
+        requestDto.setPassword("1234");
+        requestDto.setUserName("홍길동");
+
+        given( memberRepository.existsByUserId("test") ).willReturn( true );
+
+        // when & then
+        assertThatThrownBy(() -> memberService.join(requestDto))
+                .isInstanceOf(DuplicateUserIdException.class)
+                .hasMessageContaining("[회원가입] 이미 존재하는 아이디입니다.");
+        verify(memberRepository, never()).save( any() );
     }
 
 }
