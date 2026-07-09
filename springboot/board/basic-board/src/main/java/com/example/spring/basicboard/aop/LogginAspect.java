@@ -6,7 +6,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -29,7 +28,7 @@ public class LogginAspect {
     // - * : 그 안의 모든 클래스의 모든 메서드
     // - (..) : 메서드 파라미터는 개수/타입 상관없이 모두
     // -> "controller 패키지 아래 모든 메서드"를 대상으로 삼겠다는 뜻
-    @Pointcut("execution(* com.example.spring.basicboard.controller..*.*(..))")
+    @Pointcut("execution(* com.example.spring.basicboard.controller..*(..))")
     public void controllerLog() {
         // 메서드 본문(body)은 비워둔다. 실제 로직이 아니라, "대상을 가르키는 이름표"역할만 하기 때문
     }
@@ -41,12 +40,18 @@ public class LogginAspect {
     // - @AfterThrowing   : 대상 메서드가 "예외를 던졌을 때" 실행
     // - @After           : 정상/예외 상관없이 "끝나면 항상" 실행
     // - @Around          : 대상 메서드 실행을 "통째로 감싼다". 전/후/예외를 모두 한 메서드에서 제어 가능
+
+    // * @Around("controllerLog()") : 정의한 포인트컷(별명)을 대상으로 이 어드바이스를 적용한다.
     @Around("controllerLog()")
     public Object logRequest(ProceedingJoinPoint joinPoint) throws Throwable {
-
+        // * ProceedingJoinPoint
+        // - 지금 가로챈 "그 지점(메서드 호출)"에 대한 정보를 담은 객체이다.
+        // - 어떤 메서드가 호출됐는지(getSignature), 넘어온 인자는 무엇인지(getArgs) 등을 꺼낼 수 있다.
+        // - @Around 에서만 쓰는 특별한 타입이며, proceed() 로 "진짜 대상 메서드를 실행"시킬 수 있다.
         String method = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
 
         String httpInfo = "";
+        // - RequestContextHolder : 스프링이 "지금 이 요청"의 정보를 담아두는 보관소. 어디서든 꺼낼 수 있다
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if ( attributes != null ) {
             HttpServletRequest request = attributes.getRequest();
@@ -61,6 +66,7 @@ public class LogginAspect {
         long start = System.currentTimeMillis();
 
         try {
+            // 이 한 줄을 기준으로 요청받은 메서드 실행 전, 실행 후 로 나뉜다.
             Object result = joinPoint.proceed();
 
             // === 대상 메서드가 "정상 종료"된 후 로깅 ===
