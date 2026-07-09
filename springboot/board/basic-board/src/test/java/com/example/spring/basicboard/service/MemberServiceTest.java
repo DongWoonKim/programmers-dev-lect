@@ -54,6 +54,11 @@ import static org.mockito.Mockito.verify;
 // - eq("hong")     : 정확히 "hong" 인 인자
 // - 주의: 한 메서드의 인자 중 하나라도 매처(any 등)를 쓰면, 나머지 인자도 전부 매처로 써야 한다
 // 예) verify(repo).method(eq("hong"), any());   // "hong" 은 그냥 값이 아니라 eq() 로 감싼다
+
+// # 핵심 아이디어: MemberService 만 진짜 객체로 쓰고, 그것이 의존하는 것들(리포지토리/매퍼)은 "가짜(Mock)"로 바꾼다
+//   - 진짜 DB 리포지토리를 쓰면 DB 가 떠 있어야 하고 느리다. 우리는 "서비스 로직" 만 보고 싶다
+//   - 그래서 리포지토리를 Mock 으로 두고 "이 메서드는 이런 값을 돌려준다고 치자" 라고 우리가 지정한다
+//   - 스프링을 아예 띄우지 않으므로 매우 빠르다 (@SpringBootTest 없음에 주목)
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
