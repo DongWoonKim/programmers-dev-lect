@@ -4,6 +4,7 @@ package com.example.spring.basicboard.service;
 import com.example.spring.basicboard.domain.entity.Member;
 import com.example.spring.basicboard.domain.repository.MemberRepository;
 import com.example.spring.basicboard.dto.LoginRequestDto;
+import com.example.spring.basicboard.dto.MemberJoinRequestDto;
 import com.example.spring.basicboard.mapper.MemberMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 
 // * 순수 단위 테스트 - 서비스 로직만 검증한다.
@@ -40,6 +42,18 @@ import static org.mockito.BDDMockito.given;
 // - given( repo.existsByUserId("newbie") ).willReturn(false); // 특정인자 -> false 반환하도록
 // - given( repo.findByUserId("test") ).willReturn( Optional.of(member) ); // 회원을 담아 반환
 // - given( repo.count() ).willThrow(new RuntimeException()); // 호출되면 예외를 던지게
+
+// * 검증 - "그 메서드가 호출됐는지" (verify)  : 주로 반환값 없는 void 로직 확인에 쓴다
+// - verify(repo).save(entity);              // save 가 "그 엔티티로" 정확히 1번 호출됐어야 한다 (기본=1번)
+// - verify(repo, times(2)).save(any());     // 정확히 2번
+// - verify(repo, never()).save(any());      // 한 번도 호출되면 안 된다
+
+// * 인자 매처 - "구체값 대신 '아무거나' 로 느슨하게" (any, eq ...)
+// - any()          : 아무 값이나 (타입 무관)         예) verify(repo).save(any());
+// - anyString()    : 아무 문자열이나
+// - eq("hong")     : 정확히 "hong" 인 인자
+// - 주의: 한 메서드의 인자 중 하나라도 매처(any 등)를 쓰면, 나머지 인자도 전부 매처로 써야 한다
+// 예) verify(repo).method(eq("hong"), any());   // "hong" 은 그냥 값이 아니라 eq() 로 감싼다
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
@@ -114,7 +128,29 @@ class MemberServiceTest {
         assertThat(result).isEmpty();
     }
 
+    @Test
+    @DisplayName("회원가입 - 아이디가 중복이 아니면 회원을 지정한다.")
+    void join_중복이_아니면_저장한다() {
+        // given
+        MemberJoinRequestDto requestDto = new MemberJoinRequestDto();
+        requestDto.setUserId("test");
+        requestDto.setPassword("1234");
+        requestDto.setUserName("홍길동");
 
+        Member member = Member.builder()
+                .userId("test")
+                .password("1234")
+                .userName("홍길동")
+                .build();
+        given( memberRepository.existsByUserId("test") ).willReturn( false );
+        given( memberMapper.toEntity(requestDto) ).willReturn( member );
+
+        // when
+        memberService.join(requestDto);
+
+        // then
+        verify(memberRepository).save( member );
+    }
 
 }
 
