@@ -157,8 +157,13 @@ public class BoardApiController {
                 .body(resource);
     }
 
-    @PutMapping("/{id}")
-    public void updateBoard(@PathVariable long id, @RequestBody BoardUpdateRequestDto dto) {
+    @Operation(summary = "게시글 수정",
+            description = "경로의 id 게시글을 수정한다. 파일 교체가 가능하도록 multipart/form-data 로 받는다.")
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void updateBoard(
+            @Parameter(description = "수정할 게시글 id", example = "1")
+            @PathVariable long id,
+            @RequestBody BoardUpdateRequestDto dto) {
         boardService.updateBoard(id, dto);
     }
 
