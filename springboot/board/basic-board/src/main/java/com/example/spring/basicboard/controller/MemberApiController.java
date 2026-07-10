@@ -36,6 +36,8 @@ public class MemberApiController {
         return new MemberJoinReponseDto("/members/login");
     }
 
+    @Operation(summary = "로그인",
+            description = "아이디/비밀번호로 로그인한다. 성공 시 세션에 사용자 정보를 저장하고 loggedIn=true 를, 실패 시 loggedIn=false 와 안내 메시지를 돌려준다.")
     @PostMapping("/login")
     public LoginResponseDto login(@RequestBody LoginRequestDto dto, HttpSession session) {
         return memberService.login( dto )
