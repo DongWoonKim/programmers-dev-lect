@@ -2,10 +2,15 @@ package com.example.spring.basicboard.controller;
 
 import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.dto.*;
+import com.example.spring.basicboard.exception.BoardNotFoundException;
 import com.example.spring.basicboard.service.BoardService;
 import com.example.spring.basicboard.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -81,6 +86,12 @@ public class BoardApiController {
     }
 
     @Operation( summary = "게시글 상세 조회", description = "id로 게시글 한 건의 상세 내용을 조회한다." )
+    @ApiResponses({
+            @ApiResponse( responseCode = "200", description = "게시글 상세 조회 성공" ),
+            @ApiResponse( responseCode = "404", description = "게시글 상세 조회 실패 - 없음",
+                    content = @Content( schema = @Schema(implementation = ErrorResponseDto.class) )
+            )
+    })
     @GetMapping("/{id}")
     public BoardDetailResponseDto getBoardDetail(
             @Parameter( description = "조회할 게시글 id", example = "1" )
