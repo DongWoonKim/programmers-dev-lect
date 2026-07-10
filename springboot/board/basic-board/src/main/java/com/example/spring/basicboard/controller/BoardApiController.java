@@ -80,8 +80,12 @@ public class BoardApiController {
         boardService.saveBoard(dto.getUserId(), dto.getTitle(), dto.getContent(), dto.getFile());
     }
 
+    @Operation( summary = "게시글 상세 조회", description = "id로 게시글 한 건의 상세 내용을 조회한다." )
     @GetMapping("/{id}")
-    public BoardDetailResponseDto getBoardDetail(@PathVariable long id) {
+    public BoardDetailResponseDto getBoardDetail(
+            @Parameter( description = "조회할 게시글 id", example = "1" )
+            @PathVariable long id
+    ) {
         Board boardDetail = boardService.getBoardDetail(id);
         return BoardDetailResponseDto.builder()
                 .title(boardDetail.getTitle())
