@@ -53,6 +53,21 @@ class MemberApiControllerTest {
         );
 
         // when & then
+        // mockMvc.perform( ... ) - "가짜 HTTP 요청 한 번"을 만들어 컨트롤러에 넣는다.
+        // mockMvc.perform( 요청만들기 ).andExpect( 기대검증 ).andExpect( 기대검증 )...
+        // - perform( 요청만들기 ) : 요청을 "실행"한다. 실제 톰캣 없이 스프링MVC 내부로 요청을 흘려보낸다
+        // - andExpect( 기대검증 ) : 그 결과(상태코드/헤더/본문)가 기대에 맞는지 검증한다.
+
+        // perform 안의 요청 만들기 (RequestBuilder)
+        // - post("/api/members/join") : POST 메서드 + 이 URL 로 요청. (get/put/delete/multipart 등도 있다)
+        // - .contentType(APPLICATION_JSON) : 요청 헤더 Content-Type 지정 = "본문은 JSON 이다"
+        // - .content(requestJson)          : 요청 본문(body). 컨트롤러의 @RequestBody 가 이걸 받아 파싱한다
+        //   (폼 전송을 흉내 낼 땐 .param("key","value"), 파일은 multipart(...).file(...) 를 쓴다)
+
+        // 결과 검증 (ResultMatcher)
+        // - status().isOk()            : 응답 상태코드가 200 인가 (isConflict()=409, isNotFound()=404 ...)
+        // - jsonPath("$.url").value(..): 응답 JSON 본문에서 $.url 값이 기대와 같은가
+        //   ($ 는 JSON 루트. $.url 은 최상위 url 필드, $.list[0].name 처럼 깊이 파고들 수도 있다)
         mockMvc.perform(
                 post("/api/members/join")
                         .contentType( MediaType.APPLICATION_JSON )
