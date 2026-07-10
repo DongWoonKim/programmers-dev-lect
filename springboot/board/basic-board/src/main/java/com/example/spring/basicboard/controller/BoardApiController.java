@@ -115,8 +115,23 @@ public class BoardApiController {
     // 그냥 Resource만 리턴하면 파일 내용은 내려가지만,
     // Content-Disposition: attachment 헤더를 붙일 방법이 없다.
     // -> 그러면 다운로드가 아니라 브라우저가 파일을 그냥 열어버리고, 저장 파일명도 못 정한다.
+    // 응답이 "파일(바이너리)" 임을 문서에 알려주기
+    //   - 이 API 는 JSON 이 아니라 파일 그 자체를 내려준다
+    //   - 응답 형태를 octet-stream + Schema(format="binary") 로 지정하면, 문서에 "다운로드되는 바이너리" 로 표시된다
+    @Operation(summary = "첨부파일 다운로드",
+            description = "저장된 파일 이름으로 첨부파일을 내려받는다. Content-Disposition: attachment 로 브라우저가 다운로드하게 한다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "파일 다운로드",
+                    content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE,
+                            schema = @Schema(type = "string", format = "binary"))),
+            @ApiResponse(responseCode = "404", description = "해당 이름의 파일이 없음",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     @GetMapping("/file/download/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+    public ResponseEntity<Resource> downloadFile(
+            @Parameter(description = "서버에 저장된 파일 이름(UUID 포함)", example = "3f2a1b_이력서.pdf")
+            @PathVariable String fileName
+    ) {
         Resource resource = fileService.downloadFile(fileName);
 
         // * 한글 파일명 인코딩
