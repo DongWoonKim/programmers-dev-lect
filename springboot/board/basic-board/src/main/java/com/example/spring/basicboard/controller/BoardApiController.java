@@ -4,6 +4,9 @@ import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.dto.*;
 import com.example.spring.basicboard.service.BoardService;
 import com.example.spring.basicboard.service.FileService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +18,14 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+// * Swagger 어노테이션들
+// - @Tag                 : 컨트롤러(그룹) 단위의 설명 - 화면에서 API를 묶는 큰 제목이 된다.
+// - @Operation           : 메서드(API 한 개) 단위의 설명 - 요약(summary)/상세(description)
+// - @Parameter           : 파라미터 하나에 대한 설명
+// - @ApiResponse(s)      : 이 API가 낼 수 있는 응답(상태코드별)을 문서에 명시
+// - @Content / @Schema   : 응답/요청 본문의 "형태(어떤 DTO인지)"를 지정
+
+@Tag( name = "게시글 API", description = "게시글 목록/상세 조회, 작성, 수정, 삭제, 첨부파일 다운로드" )
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/boards")
@@ -23,9 +34,15 @@ public class BoardApiController {
     private final BoardService boardService;
     private final FileService fileService;
 
+    @Operation(
+            summary = "게시글 목록 조회",
+            description = "페이지 단위로 게시글 목록을 조회한다. 목록(boards)과 마지막 페이지 여부(last), 전체 페이지 수(totalPages)를 함께 돌려준다."
+    )
     @GetMapping
     public BoardListResponseDto getBoardList(
+            @Parameter( description = "조회할 페이지 번호 (1부터 시작)", example = "1" )
             @RequestParam(defaultValue = "1") int page,
+            @Parameter( description = "한 페이지에 담을 게시글 수", example = "10" )
             @RequestParam(defaultValue = "10") int size
     ) {
         // 게시글 목록
