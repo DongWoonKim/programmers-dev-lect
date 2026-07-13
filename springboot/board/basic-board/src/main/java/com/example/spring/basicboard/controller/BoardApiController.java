@@ -14,6 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -185,18 +188,19 @@ public class BoardApiController {
     // ========== [QueryDSL] ==========
 
     @Operation(
-            summary = "게시글 검색",
+            summary = "게시글 검색(QueryDSL)",
             description = "제목/작성자/작성기간으로 동적 검색한다. 작성자 이름(member)과 댓글 수(comment)를 함께 내려준다."
     )
     @GetMapping("/search")
-    public void searchBoards(
+    public Page<BoardListItemResponseDto> searchBoards(
             @ModelAttribute BoardSearchRequestDto dto,
             @Parameter( description = "조회할 페이지 번호 (1부터 시작)", example = "1" )
             @RequestParam(defaultValue = "1") int page,
             @Parameter( description = "한 페이지에 담을 게시글 수", example = "10" )
             @RequestParam(defaultValue = "10") int size
     ) {
-
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return boardService.searchBoards(dto, pageable);
     }
 
 
