@@ -91,7 +91,7 @@ public class BoardService {
     }
 
     public void searchBoards(BoardSearchRequestDto dto, Pageable pageable) {
-        
+
     }
 
 }
