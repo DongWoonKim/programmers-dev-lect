@@ -19,7 +19,7 @@
 
 </details>
 
-<details open>
+<details>
 <summary><b>7-5 (2026.07.10)</b></summary>
 
 - **과제1 — 복습**
