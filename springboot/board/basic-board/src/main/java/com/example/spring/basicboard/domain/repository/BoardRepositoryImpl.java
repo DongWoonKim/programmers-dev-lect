@@ -32,6 +32,11 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
     private static final QComment comment = QComment.comment;
     private static final QMember member = QMember.member;
 
+    // * Projections.constructor
+    // - "이 클래스의 생성자를 리플렉션으로 찾아서 끼워 맞춰라" 라는 뜻이다.
+    // - 클래스 이름과 인자를 "나중에(실행 때)"끼워 맞추므로, 컴파일러는 검사를 못한다.
+    // -> 인자 순서/타입이 생성자와 어긋나면 컴파일은 통과하고 "실행 시" 터진다(런타임 오류)
+    // - 대신 Dto는 QueryDSL을 전혀 모른다. (순수한 Dto 상태 유지)
     @Override
     public Page<BoardListItemResponseDto> searchBoards(BoardSearchRequestDto condition, Pageable pageable) {
 
