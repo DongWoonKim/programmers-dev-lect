@@ -9,15 +9,18 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.function.LongFunction;
 
 @Repository
 @RequiredArgsConstructor
@@ -56,7 +59,38 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        return null;
+        // 전체 개수 쿼리
+        JPAQuery<Long> countQuery = queryFactory
+                .select(board.count())
+                .from(board)
+                .where(
+                        titleContains(dto.getTitle()),
+                        userIdEquals(dto.getUserId()),
+                        createdGoe(dto.getFrom()),
+                        createdLoe(dto.getTo())
+                );
+
+        // * PageableExecutionUtils.getPage : 개수 쿼리를 "필요할 때만" 실행하는 최적화까지 해준다.
+        // - 예) 마지막 페이지가 아니고 결과가 페이지 크기보다 작으면 굳이 count쿼리를 안 날린다.
+        // - countQuery::fetchOne 을 "지금 실행"이 아니라 "필요하면 실행할 함수"로 넘긴다.
+
+        // - countQuery::fetchOne
+        /*
+        1) 익명 클래스
+        PageableExecutionUtils.getPage(content, pageable, new LongFunction<Long>() {
+            @Override
+            public Long apply(long value) {
+                return countQuery.fetchOne();
+            }
+        });
+         */
+        /*
+        2) 람다
+        PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchOne());
+         */
+
+        // 3) 메서드 참조
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
 
     // 제목 부분 일치 (Like %title%). 빈 값이면 조건 없음(null)
@@ -84,8 +118,8 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
     }
 
     // * JPAQueryFactory 와 JPAExpressions
-    // - JPAQueryFactory :
-    // - JPAExpressions : 
+    // - JPAQueryFactory : EntityManager를 품은 "본 쿼리" 생성기. fetch()/fetchOne()으로 SQL을 "실행"할 수 있다.
+    // - JPAExpressions : static 유틸. "서브쿼리 표현식(조각)"만 만들고, 실행 능력이 없다.
     private Expression<Long> commentCountOf(QBoard board) {
         return JPAExpressions
                 .select(comment.count())
