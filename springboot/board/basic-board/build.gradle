@@ -29,6 +29,12 @@ dependencies {
     //     (WebFlux 를 쓴다면 '-webflux-ui' 를 골랐을 것이다)
     //   - 접미사 '-ui' 는 명세(JSON)뿐 아니라 Swagger UI 화면까지 함께 포함한다는 뜻이다
     //     (화면 없이 JSON 명세만 필요하면 '-webmvc-api' 를 쓴다)
+
+    // # 왜 QueryDSL인가?
+    // - Spring Data의 메서드 이름 퀄리는 조건이 늘어날수록 이름이 감당이 안 된다.
+    // - JPQL 문자열 ("selct b from Board b where ...")은 오타를 컴파일 때 못 잡고, 동적 조건 조립이 지저분하다.
+    // - QueryDSL은 엔티티로부터 Q타입을 생성해, 자바 코드로 쿼리를 짠다.
+    // -> 컴파일 시점에 오타/타입 오류를 잡고, 조건을 if 로 자유롭게 붙이는 "동적 쿼리"가 깔끔해진다.
     implementation 'io.github.openfeign.querydsl:querydsl-jpa:7.4.0'
     annotationProcessor 'io.github.openfeign.querydsl:querydsl-apt:7.4.0:jpa'
     annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
