@@ -33,7 +33,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
     private static final QMember member = QMember.member;
 
     @Override
-    public Page<BoardListItemResponseDto> searchBoards(BoardSearchRequestDto dto, Pageable pageable) {
+    public Page<BoardListItemResponseDto> searchBoards(BoardSearchRequestDto condition, Pageable pageable) {
 
         List<BoardListItemResponseDto> content = queryFactory.select(
                         Projections.constructor(
@@ -49,10 +49,10 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                 .from(board)
                 .leftJoin(member).on(board.userId.eq(member.userId))
                 .where(
-                        titleContains(dto.getTitle()),
-                        userIdEquals(dto.getUserId()),
-                        createdGoe(dto.getFrom()),
-                        createdLoe(dto.getTo())
+                        titleContains(condition.getTitle()),
+                        userIdEquals(condition.getUserId()),
+                        createdGoe(condition.getFrom()),
+                        createdLoe(condition.getTo())
                 )
                 .orderBy(board.id.desc())
                 .offset(pageable.getOffset())
@@ -64,10 +64,10 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                 .select(board.count())
                 .from(board)
                 .where(
-                        titleContains(dto.getTitle()),
-                        userIdEquals(dto.getUserId()),
-                        createdGoe(dto.getFrom()),
-                        createdLoe(dto.getTo())
+                        titleContains(condition.getTitle()),
+                        userIdEquals(condition.getUserId()),
+                        createdGoe(condition.getFrom()),
+                        createdLoe(condition.getTo())
                 );
 
         // * PageableExecutionUtils.getPage : 개수 쿼리를 "필요할 때만" 실행하는 최적화까지 해준다.

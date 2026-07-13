@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface BoardRepositoryCustom {
 
-    Page<BoardListItemResponseDto> searchBoards(BoardSearchRequestDto dto, Pageable pageable);
+    Page<BoardListItemResponseDto> searchBoards(BoardSearchRequestDto condition, Pageable pageable);
 
 }
