@@ -16,6 +16,12 @@
 <summary><b>📅 26.07</b></summary>
 <blockquote>
   <details open>
+  <summary><b>07.13</b></summary>
+  
+  1. [springboot: basic-board(query dsl)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
+
+  </details>
+  <details>
   <summary><b>07.10</b></summary>
   
   1. [springboot: basic-board(test code-controller, swagger ui)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)

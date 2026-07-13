@@ -8,6 +8,18 @@
 
 ---
 <details open>
+<summary><b>8-1 (2026.07.13)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습
+- **과제2 — 실습**
+  - (필수)pbl : Stage 3 mission-07-todo-api
+  - (필수)개인 프로젝트
+- **과제3 — 알고리즘**
+
+</details>
+
+<details open>
 <summary><b>7-5 (2026.07.10)</b></summary>
 
 - **과제1 — 복습**
