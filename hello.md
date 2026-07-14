@@ -8,6 +8,20 @@
 
 ---
 <details open>
+<summary><b>8-2 (2026.07.14)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습
+- **과제2 — 실습**
+  - (필수)pbl : Stage 3 mission-08-todo-api
+  - (필수)pbl : Stage 3 mission-09-dto-mapping-boundary
+  - (선택)pbl : spring boot - basic board : 댓글 수정/삭제
+  - (필수)개인 프로젝트
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>8-1 (2026.07.13)</b></summary>
 
 - **과제1 — 복습**
