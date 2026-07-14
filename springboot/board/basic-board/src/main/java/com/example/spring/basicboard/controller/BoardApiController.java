@@ -2,7 +2,7 @@ package com.example.spring.basicboard.controller;
 
 import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.dto.*;
-import com.example.spring.basicboard.exception.BoardNotFoundException;
+import com.example.spring.basicboard.mapper.BoardMapper;
 import com.example.spring.basicboard.service.BoardService;
 import com.example.spring.basicboard.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,6 +45,7 @@ public class BoardApiController {
 
     private final BoardService boardService;
     private final FileService fileService;
+    private final BoardMapper boardMapper;
 
     @Operation(
             summary = "게시글 목록 조회",
@@ -221,7 +222,7 @@ public class BoardApiController {
             @PathVariable long id
     ) {
         Board board = boardService.getBoardWithComments(id);
-        return null;
+        return boardMapper.toBoardWithCommentsResponseDto(board);
     }
 
 }
