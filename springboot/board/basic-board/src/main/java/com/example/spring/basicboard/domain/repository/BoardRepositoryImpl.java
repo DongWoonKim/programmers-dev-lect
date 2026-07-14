@@ -112,8 +112,8 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
     // for (Board board : boards) {
     //     board.getComments(); // 순회하며 LAZY 가 깨어날 때마다...
     // }
-    // select * from comments where board_id = 2;
     // select * from comments where board_id = 1;
+    // select * from comments where board_id = 2;
     // select * from comments where board_id = 3;
     // ...
     // select * from comments where board_id = 100;
