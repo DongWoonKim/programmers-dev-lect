@@ -216,11 +216,11 @@ public class BoardApiController {
                     content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
     })
     @GetMapping("/{id}/with-comments")
-    public void getBoardWithComments(
+    public BoardWithCommentsResponseDto getBoardWithComments(
             @Parameter(description = "조회할 게시글 id", example = "1")
             @PathVariable long id
     ) {
-
+        return null;
     }
 
 }
