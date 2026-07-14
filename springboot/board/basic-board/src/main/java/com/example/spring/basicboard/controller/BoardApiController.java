@@ -220,6 +220,7 @@ public class BoardApiController {
             @Parameter(description = "조회할 게시글 id", example = "1")
             @PathVariable long id
     ) {
+        Board board = boardService.getBoardWithComments(id);
         return null;
     }
 
