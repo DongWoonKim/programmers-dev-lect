@@ -2,6 +2,7 @@ package com.example.spring.basicboard.scheduler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 // * @Scheduled - 정해진 시각/주기에 메서드를 자동 실행하는 배치 작업
@@ -39,5 +40,10 @@ public class BoardBatchScheduler {
     //      │   │   └──────────── 시   (0~23) → 9시
     //      │   └──────────────── 분   (0~59) → 0분
     //      └──────────────────── 초   (0~59) → 0초
+
+    @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
+    public void dailyReport() {
+        
+    }
 
 }
