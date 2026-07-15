@@ -8,6 +8,19 @@
 
 ---
 <details open>
+<summary><b>8-3 (2026.07.15)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습
+- **과제2 — 실습**
+  - (필수)pbl : Stage 3 mission-10-member-api-basic-validation
+  - (필수)pbl : Stage 3 mission-11-error-response-standardization
+  - (필수)개인 프로젝트
+- **과제3 — 알고리즘**
+
+</details>
+
+<details>
 <summary><b>8-2 (2026.07.14)</b></summary>
 
 - **과제1 — 복습**
