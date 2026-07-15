@@ -4,6 +4,7 @@ import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.domain.entity.QBoard;
 import com.example.spring.basicboard.domain.entity.QComment;
 import com.example.spring.basicboard.domain.entity.QMember;
+import com.example.spring.basicboard.dto.BoardAuthorStatsResponseDto;
 import com.example.spring.basicboard.dto.BoardListItemResponseDto;
 import com.example.spring.basicboard.dto.BoardSearchRequestDto;
 import com.querydsl.core.types.Expression;
@@ -135,6 +136,11 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                 .fetchOne();
 
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<BoardAuthorStatsResponseDto> countBoardsByAuthor(long minCount) {
+        return List.of();
     }
 
     // 제목 부분 일치 (Like %title%). 빈 값이면 조건 없음(null)
