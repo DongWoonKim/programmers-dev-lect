@@ -1,5 +1,6 @@
 package com.example.spring.basicboard.scheduler;
 
+import com.example.spring.basicboard.domain.entity.Board;
 import com.example.spring.basicboard.domain.repository.BoardRepository;
 import com.example.spring.basicboard.domain.repository.CommentRepository;
 import com.example.spring.basicboard.domain.repository.MemberRepository;
@@ -10,6 +11,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 // * @Scheduled - 정해진 시각/주기에 메서드를 자동 실행하는 배치 작업
 // # 전제 조건 2가지
@@ -103,7 +109,13 @@ public class BoardBatchScheduler {
 
         // DB 가 참조 중인 파일 이름 집합을 만든다 (경로 형태가 제각각일 수 있어 "파일 이름"으로 비교)
         // List 가 아니라 Set 인 이유: contains 검사가 목록 크기와 무관하게 빠르다 (파일 수 × 글 수 반복을 피함)
-        
+        Set<String> refrenced = boardRepository.findAll().stream()
+                .map(Board::getFilePath)
+                .filter(Objects::nonNull)
+                .map(path -> new File(path).getName())
+                .collect(Collectors.toSet());
+
+
 
     }
 
