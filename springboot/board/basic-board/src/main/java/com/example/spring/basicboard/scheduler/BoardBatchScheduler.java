@@ -5,6 +5,7 @@ import com.example.spring.basicboard.domain.repository.CommentRepository;
 import com.example.spring.basicboard.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,9 @@ public class BoardBatchScheduler {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
     private final CommentRepository commentRepository;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     // (1) 일일 현황 리포트 - cron 방식
     // cron 표현식 읽는 법 - "0 0 9 * * *" = 매일 09:00:00
@@ -70,9 +74,19 @@ public class BoardBatchScheduler {
         log.info("[일일 리포트] 회원 {}명, 게시글 {}건, 댓글 {}건", members, boards, comments);
     }
 
+    // * 고아 첨부파일 점검 - fixedDelay방식
+    // 고아 파일이란? - 디스크에는 있는데 어느 게시글도 참조하지 않는 파일
+    //   - 생기는 경로: FileService.deleteFile 이 실패했을 때(warn 로그 남기던 그 경우),
+    //     또는 파일 저장 후 게시글 저장(트랜잭션)이 실패해 롤백됐을 때 등
+    //   - 파일은 트랜잭션 롤백 대상이 아니라서(DB 가 아니니까) 이런 불일치가 조금씩 쌓일 수 있다
+    //   → 그래서 주기적으로 "DB 와 디스크를 대조"하는 배치를 두는 것이다 (실무의 전형적인 정리 배치 패턴)
+
+    // 왜 삭제하지 않고 warn 로그만 남기나?
+    //   - "지금 업로드 중"인 파일은 디스크에 먼저 생기고 게시글 저장은 그 다음이다
+    //     → 그 찰나에 배치가 돌면 정상 파일을 고아로 오판해 지워버릴 수 있다 (배치 삭제의 고전적 사고)
     @Scheduled(initialDelay = 10_000, fixedDelay = 3_600_000)
     public void reportOrphanFiles() {
-        
+
     }
 
 }
