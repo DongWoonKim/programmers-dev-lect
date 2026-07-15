@@ -7,6 +7,7 @@ import com.example.spring.basicboard.domain.entity.QMember;
 import com.example.spring.basicboard.dto.BoardAuthorStatsResponseDto;
 import com.example.spring.basicboard.dto.BoardListItemResponseDto;
 import com.example.spring.basicboard.dto.BoardSearchRequestDto;
+import com.example.spring.basicboard.dto.QBoardAuthorStatsResponseDto;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -140,7 +141,18 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
 
     @Override
     public List<BoardAuthorStatsResponseDto> countBoardsByAuthor(long minCount) {
-        return List.of();
+        return queryFactory
+                .select(new QBoardAuthorStatsResponseDto(
+                        board.userId,
+                        member.userName,
+                        board.count()
+                ))
+                .from(board)
+                .leftJoin(member).on(board.userId.eq(member.userId))
+                .groupBy(board.userId, member.userName)
+                .having(board.count().goe(minCount))
+                .orderBy(board.count().desc())
+                .fetch();
     }
 
     // 제목 부분 일치 (Like %title%). 빈 값이면 조건 없음(null)
