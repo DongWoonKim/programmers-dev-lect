@@ -115,8 +115,15 @@ public class BoardBatchScheduler {
                 .map(path -> new File(path).getName())
                 .collect(Collectors.toSet());
 
+        int orphanCount = 0;
+        for ( File file : files ) {
+            if ( !refrenced.contains(file.getName()) ) {
+                orphanCount++;
+                log.warn("[고아 파일 발견] 어느 게시글도 참조하지 않음 : {}", file.getName());
+            }
+        }
 
-
+        log.info("[고아 파일 점검 완료] 전체 {}개 중 고아 {}개", files.length, orphanCount);
     }
 
 }
