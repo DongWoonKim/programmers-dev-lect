@@ -11,11 +11,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // * @Scheduled - 정해진 시각/주기에 메서드를 자동 실행하는 배치 작업
 // # 전제 조건 2가지
