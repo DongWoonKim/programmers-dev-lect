@@ -122,10 +122,18 @@ public class MemberService {
         //     return Optional.empty();          // 실패: 빈 Optional 반환
         //
         //   => 위 if 분기(널 체크 + 비밀번호 비교)를 .filter(람다) 한 줄로 압축한 것이 아래 코드다
-        return memberRepository.findByUserId(dto.getUsername())
+        Optional<Member> result = memberRepository.findByUserId(dto.getUsername())
                 .filter(
-                     member -> member.getPassword().equals(dto.getPassword())
+                        member -> member.getPassword().equals(dto.getPassword())
                 );
+
+        if ( result.isEmpty() ) {
+            log.warn("로그인 실패 : username={}", dto.getUsername());
+        } else {
+            log.info("로그인 성공 : username={}", dto.getUsername());
+        }
+
+        return result;
     }
 
 }
