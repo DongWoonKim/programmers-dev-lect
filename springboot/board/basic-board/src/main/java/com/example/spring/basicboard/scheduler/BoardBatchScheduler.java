@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 // * @Scheduled - 정해진 시각/주기에 메서드를 자동 실행하는 배치 작업
 // # 전제 조건 2가지
 // - 메인 클래스에 @EnableScheduling 이 있어야한다.
@@ -84,8 +86,22 @@ public class BoardBatchScheduler {
     // 왜 삭제하지 않고 warn 로그만 남기나?
     //   - "지금 업로드 중"인 파일은 디스크에 먼저 생기고 게시글 저장은 그 다음이다
     //     → 그 찰나에 배치가 돌면 정상 파일을 고아로 오판해 지워버릴 수 있다 (배치 삭제의 고전적 사고)
+
+    // initialDelay / fixedDelay (단위 : ms)
+    // - initialDelay = 10초 : 앱이 뜨고 10초 뒤 "첫 실행"
+    // - fixedDelay = 1시간 : 그 뒤로는 "이전 실행이 끝난 시점"부터 1시간 간격으로 반복
     @Scheduled(initialDelay = 10_000, fixedDelay = 3_600_000)
     public void reportOrphanFiles() {
+        log.info("[고아 파일 점검 배치 시작]");
+
+        File dir = new File(uploadDir).getAbsoluteFile();
+        File[] files = dir.listFiles();
+        if ( files == null || files.length == 0 ) {
+            log.info("[고아 파일 점검] 업로드 디렉토리가 비어 있음");
+            return;
+        }
+
+        
 
     }
 
