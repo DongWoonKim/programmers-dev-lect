@@ -70,4 +70,9 @@ public class BoardBatchScheduler {
         log.info("[일일 리포트] 회원 {}명, 게시글 {}건, 댓글 {}건", members, boards, comments);
     }
 
+    @Scheduled(initialDelay = 10_000, fixedDelay = 3_600_000)
+    public void reportOrphanFiles() {
+        
+    }
+
 }
