@@ -42,7 +42,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 // - Spring Security에서의 동작원리 - BasicAuthenticationFilter가 담당
 // 위 프로토콜을 필터 체인 안에서 실제로 처리하는 흐름
-// 1. 요청이 들어오면
+// 1. 요청이 들어오면 BasicAuthenticationFilter가 "Authorization: Basic ZHVzZXI6cGFzc3dvcmQ=" 헤더가 있는지 확인한다.
+// 2. 헤더가 있으면 Base64를 디코딩해 아이디/비밀번호를 꺼내고, UsernamePasswordAuthenticationToken을 만든다.
+// 3. 이 토큰을 AuthenticationManager에게 넘겨 인증을 검증한다. (내부적으로 UserDetailService로 사용자 조회 -> PasswordEncoder로 비밀번호 대조)
+// 4. 성공하면 SecurityContext에 인증 정보를 저장하고 다음 필터로 넘어간다.
+
 
 
 
