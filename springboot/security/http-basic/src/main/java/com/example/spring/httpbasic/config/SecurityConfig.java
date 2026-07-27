@@ -38,6 +38,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // 1. 클라이언트가 보호된 자원에 그냥 접근하면, 서버가 401 Unauthorized와 함께 헤더를 응답한다. -> WWW-Authenticate: Basic realm="..."
 // 2. 브라우저는 이걸 받으면 아이디/비밀번호를 입력하는 작은 팝업 창을 띄운다.
 // 3. 사용자가 입력하면, 클라이언트는 username:password를 Base64로 인코딩해서 헤더에 담아 다시 요청한다. -> Authorization: Basic ZHVzZXI6cGFzc3dvcmQ=
+// 4. 서버는 이 헤더를 디코딩해서 인증을 검증한다.
+
+// - Spring Security에서의 동작원리 - BasicAuthenticationFilter가 담당
+// 위 프로토콜을 필터 체인 안에서 실제로 처리하는 흐름
+// 1. 요청이 들어오면
+
 
 
 @Configuration
