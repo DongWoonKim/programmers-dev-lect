@@ -16,6 +16,12 @@
 <summary><b>📅 26.07</b></summary>
 <blockquote>
   <details open>
+  <summary><b>07.27</b></summary>
+  
+  1. [springsecurity: http-basic, form-login(sign up)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
+
+  </details>
+  <details>
   <summary><b>07.15</b></summary>
   
   1. [springboot: basic-board(query dsl : 게시글 통계(group by, having), Slf4j, Scheduling)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/board)
