@@ -22,6 +22,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // 그런데 우리가 쓰고 싶은 실제 보안 필터들(FilterChainProxy와 그 안의 인증/인가 필터)은 스프링 Bean이다.
 // DI, 라이프사이클 관리 등 스프링 기능을 다 써야 하기때문이다.
 
+// 필터는 톰캣에 등록돼야 하는데, 정작 실행하고 싶은 로직은 스프링 Bean이다. - 톰캣에 직접 스프링 Bean을 필터로 꽂을 수는 없다.
+// 그래서 DelegatingFilterProxy 클래스갈 중간에서 다리를 놓는다.
+
+// DelegatingFilterProxy 자신은 평범한 서블릿 필터라서 톰캣에 정상적으로 등록될 수 있다.(톰캣 입장에선 그냥 일반 필터중 하나)
+// 하지만 실제로 요청이 들어오면, 스스로 처리하지 않고 스프링 컨테이너(ApplicationContext)에서 특정 이름의 Bean을 찾아 그 Bean에게 일을 넘긴다.
+// Spring Security의 경우, 찾는 Bean 이름은 springSecurityFilterChain이고, 이 Bean의 정차게 바로 FilterChainProxy이다.
+
 
 @Configuration
 @EnableWebSecurity
