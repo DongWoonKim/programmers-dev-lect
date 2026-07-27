@@ -46,9 +46,20 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // 2. 헤더가 있으면 Base64를 디코딩해 아이디/비밀번호를 꺼내고, UsernamePasswordAuthenticationToken을 만든다.
 // 3. 이 토큰을 AuthenticationManager에게 넘겨 인증을 검증한다. (내부적으로 UserDetailService로 사용자 조회 -> PasswordEncoder로 비밀번호 대조)
 // 4. 성공하면 SecurityContext에 인증 정보를 저장하고 다음 필터로 넘어간다.
+// 5. 헤더가 없거나 인증에 실패하면, BasicAuthenticationEntiryPoint가 401 Unauthorized와 WWW-Authenticate: Basic 헤더를 응답한다. (다시 1번 상황으로)
 
+// * 특징
+// Base64는 암호화가 아니라 단순 인코딩이다. 누구나 즉시 디코딩해서 원래 아이디/비밀번호를 볼 수 있다.
+// - HTTP Basic은 반드시 HTTPS(TLS)와 함께 써야 한다. 평문 HTTP에서 쓰면 비밀번호가 그대로 노출된 것이나 마찬가지이다.
+// - 모든 요청마다 Authorization 헤더를 계속 보내야 한다. 서버가 상태(세션)를 기억하지 않는 stateless 방식이기 때문.
+// 그래서 REST API나 서버 간 통신에서 간단하게 쓰기 좋다.
+// - 로그아웃 개념이 애매해다. 브라우저가 자격증명을 캐싱해두기 때문에 명시적인 로그아웃 처리가 어렵다.
 
+// * realm 은 HTTP 인증에서 "보호 영역의 이름"을 뜻한다. 쉽게 말해 "지금 어느 구현에 로그인하려는 건지"를 나타내는 라벨이다.
+// 실제로 어떤 역할을 하나
+// 1. 사용자에게 보여주는 안내 문구
 
+// 2. 보호 영역을 구부하는 식별자
 
 @Configuration
 @EnableWebSecurity
