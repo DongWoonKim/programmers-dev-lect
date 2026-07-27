@@ -12,6 +12,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // 즉 "톰캣 필터 -> 스프링 빈으로 관리되는 보안 필터들"로 다리를 놓아주는 구조이다.
 // - 요청 -> DelegatingFilterProxy -> FilterChainProxy -> [보안 필터 체인] -> DispatcherServlet -> Controller
 
+// * DelegatingFilterProxy : "서블릿 컨테이너(톰캣)의 세계와 스프링의 세계를 이어주는 다리 역할을 하는 필터"이다.
+// - Delegating(위임) +  Filter + Proxy(대리인) : 실제 일은 다른 녀석에게 위임하는 껍데기 필터
+// 왜 이런 게 필요한가
+// 핵심은 톰캣과 스프링이 서로 다른 세계라는 점이다.
+
+// 서블릿 컨테이너는 Filter를 자기 규칙대로 등록하고 생성/관리한다.
+//하지만 톰캣은 스프링 Bean을 전혀 모른다. 스프링 컨테이너 안에 뭐가 있는지 전혀 모른다.
+// 그런데 우리가 쓰고 싶은 실제 보안 필터들(FilterChainProxy와 그 안의 인증/인가 필터)은 스프링 Bean이다.
+// DI, 라이프사이클 관리 등 스프링 기능을 다 써야 하기때문이다.
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
