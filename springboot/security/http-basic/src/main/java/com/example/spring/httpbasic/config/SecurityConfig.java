@@ -96,6 +96,14 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // BasicAuthenticationFilter
+    //   → AuthenticationManager (ProviderManager)
+    //        → DaoAuthenticationProvider   ← 지금 이 부분
+    //             ├─ UserDetailsService  (사용자 조회)
+    //             └─ PasswordEncoder     (비밀번호 대조)
+
+    // 이 Bean의 역할은 "인증할 때 사용자 정보를 어디서 가져올지"를 정의한다.
+    // AuthenticationManager가 아이디로 사용자를 조회할 때 바로 이 UserDetailService를 호출한다.
     @Bean
     public UserDetailsService userDetailsService() {
 
@@ -111,6 +119,8 @@ public class SecurityConfig {
         return manager;
     }
 
+    // 이 Bean의 역할은 "비밀번호를 어떻게 비교/암호활지"를 정의한다.
+    // 인증 흐름에서 DaoAuthenticationProvider가 "사용자가 입력한 비밀번호"와 "저장된 비밀번호"를 비교할 때 이 인코더를 사용
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
