@@ -29,6 +29,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // 하지만 실제로 요청이 들어오면, 스스로 처리하지 않고 스프링 컨테이너(ApplicationContext)에서 특정 이름의 Bean을 찾아 그 Bean에게 일을 넘긴다.
 // Spring Security의 경우, 찾는 Bean 이름은 springSecurityFilterChain이고, 이 Bean의 정차게 바로 FilterChainProxy이다.
 
+// * HTTP BASIC이란?
+// HTTP 표준(RFC 7617)에 정의된 가장 기본적인 인증 방식이다.
+// 별도의 로그인 페이지나 폼이 없이, HTTP 요청 헤더에 아이디/비밀번호를 실어 보내는 방식.
+
+// * HTTP BASIC 인증 (Spring Security)
+// - 프로토콜 관점의 동작 원리
+// 1. 클라이언트가 보호된 자원에 그냥 접근하면, 서버가 401 Unauthorized와 함께 헤더를 응답한다. -> WWW-Authenticate: Basic realm="..."
+
 
 @Configuration
 @EnableWebSecurity
