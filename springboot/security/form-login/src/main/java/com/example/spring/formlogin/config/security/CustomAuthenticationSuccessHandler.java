@@ -39,6 +39,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
+
+        // objectMapper.writeValueAsString()으로 DTO를 JSON 문자열로 "직접" 변환해야하는 이유:
+        // 이 핸들러는 시큐리티 필터 안에서 실행된다. 즉 DispatcherServlet에 도달하기 전 단계란서,
+        // 컨트롤러에서 쓰던 @ResponseBody + HttpMessageConverter의 자동 직렬화(객체 -> JSON)가 여기서는 동작하지 않는다.
+        // Jackson(ObjecMapper)으로 직렬화를 직접 수행한 뒤 응답 본문에 써준다.
         response.getWriter().write(
                 objectMapper.writeValueAsString(build)
         );
