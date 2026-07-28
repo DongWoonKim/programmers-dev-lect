@@ -1,5 +1,8 @@
 package com.example.spring.formlogin.config;
 
+import com.example.spring.formlogin.config.security.CustomAuthenticationFailureHandler;
+import com.example.spring.formlogin.config.security.CustomAuthenticationSuccessHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -58,7 +61,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -81,7 +88,9 @@ public class SecurityConfig {
                                 .usernameParameter("userId")
                                 .passwordParameter("password")
                                 // 인증 성공
+                                .successHandler( customAuthenticationSuccessHandler )
                                 // 인증 실패
+                                .failureHandler( customAuthenticationFailureHandler )
                                 .permitAll()
                 );
 
