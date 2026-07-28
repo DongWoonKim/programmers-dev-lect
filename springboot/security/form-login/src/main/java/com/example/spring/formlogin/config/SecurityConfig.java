@@ -99,6 +99,18 @@ public class SecurityConfig {
                                 // 인증 실패
                                 .failureHandler( customAuthenticationFailureHandler )
                                 .permitAll()
+                )
+                // 로그아웃 설정 - LogoutFilter가 처리. 역시 컨트롤러가 필요없다.
+                .logout(
+                        logout -> logout
+                                // 이 URL로 오는 요청을 LogoutFilter가 가로챈다.
+                                .logoutUrl("/users/logout")
+                                // 로그아웃 완료된 후 이동될 곳.
+                                .logoutSuccessUrl("/users/login")
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID")
+                                // 로그아웃 URL도 인증 여부와 무관하게 접근 허용
+                                .permitAll()
                 );
 
         return http.build();
