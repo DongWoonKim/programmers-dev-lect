@@ -71,6 +71,20 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
+                // CSRF(Cross-Site Request Forgery, 사이트 간 요청 위조)
+                // 로그인된 사용자의 브라우저를 속요, 사용자가 의도하지 않은 요청을 우리 서버로 보내게 만드는 공격
+                // 공격이 성립하는 이유 — 브라우저는 요청이 "어느 사이트에서 시작됐든" 대상 서버의 쿠키(JSESSIONID)를 자동으로 붙인다.
+                //   1. 사용자가 우리 사이트에 로그인한 상태 (JSESSIONID 쿠키 보유)
+                //   2. 공격자 페이지(evil.com) 방문 → 숨겨진 form이 우리 서버로 POST 자동 제출 (비밀번호 변경, 송금 등 상태 변경 요청)
+                //   3. 브라우저가 JSESSIONID를 자동으로 실어 보냄 → 서버는 정상 사용자의 요청과 구분 불가
+
+                // Spring Security의 방어 (기본 켜짐): 세션마다 예측 불가능한 CSRF 토큰을 발급하고,
+                // POST/PUT/DELETE 요청은 이 토큰을 함께 보내야만 허용. 공격자 사이트는 Same-Origin Policy 때문에
+                // 우리 페이지에 심어진 토큰을 읽을 수 없어 요청이 403으로 거부된다.
+                // (로그아웃도 POST + 토큰을 요구하는 이유 = 강제 로그아웃 공격 방지)
+
+                // 여기서 끈 이유: 켜면 signUp.js/signIn.js AJAX에 토큰을 실어야 해서(X-CSRF-TOKEN 헤더 등)
+                // 인증 흐름 학습에 집중하기 위해 비활성화. 실서비스(세션 방식)라면 켜고 토큰을 내려주는 방식 권장.
                 .csrf( AbstractHttpConfigurer::disable )
                 .authorizeHttpRequests( auth -> auth
                         .requestMatchers(
