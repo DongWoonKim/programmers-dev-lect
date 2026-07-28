@@ -8,13 +8,13 @@
 
 ---
 <details open>
-<summary><b>9-1 (2026.07.27)</b></summary>
+<summary><b>9-2 (2026.07.28)</b></summary>
 
 - **과제1 — 복습**
   - 필수 : 수업내용 복습
 - **과제2 — 실습**
   - (필수)스프링시큐리티 - http basic : 1.http-basic.md
-  - (필수)pbl : Stage 4 mission-13-todo-jpa
+  - (필수)스프링시큐리티 - form login : 2.form-login.md
   - (선택)개인 프로젝트
 - **과제3 — 알고리즘**
 

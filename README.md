@@ -16,6 +16,12 @@
 <summary><b>📅 26.07</b></summary>
 <blockquote>
   <details open>
+  <summary><b>07.28</b></summary>
+  
+  1. [springsecurity: form-login(login, logout)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
+
+  </details>
+  <details>
   <summary><b>07.27</b></summary>
   
   1. [springsecurity: http-basic, form-login(sign up)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
