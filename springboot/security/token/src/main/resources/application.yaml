@@ -19,4 +19,6 @@ spring:
 # openssl rand -base64 64 | tr -d '\n'
 jwt:
   issuer: test@naver.com
-  secret_key: EgWBwB5RMopv0QLvNH1HkLNvrg9qiItk4m+xIu2Hl5I2AoEXXK/71BYfc2vkRAxCmNviL2b361cFve+F8TsQdg==%
+  secret_key: 4ukvJcQYxNY1X/9Ep4VsnXWhjkV/QzN/plJa24NcOf1pnLB+78OKrBG4LyAVGOHzzdo5sorkBA73Yo0/4urXIg==
+  access-token-validity: 2h
+  refresh-token-validity: 7d
