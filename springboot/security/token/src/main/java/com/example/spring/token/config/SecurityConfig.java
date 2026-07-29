@@ -86,10 +86,11 @@ public class SecurityConfig {
                 .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests( authorize -> authorize
                         .requestMatchers(
+                                "/users/join",
+
                                 "/css/**",
                                 "/js/**"
-                        )
-                        .permitAll()
+                        ).permitAll()
                         .anyRequest().authenticated()
                 );
 
