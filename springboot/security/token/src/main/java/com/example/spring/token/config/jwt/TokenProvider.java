@@ -1,8 +1,15 @@
 package com.example.spring.token.config.jwt;
 
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import java.util.Base64;
 
 // * 토큰 생성/검증/해석을 전담하는 컴포넌트
 // - generateToken : User 정보를 클레임에 담아 서명된 JWT 문자열 생성
@@ -17,4 +24,33 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TokenProvider {
+
+    private static final String CLAIM_ID = "id";
+    private static final String CLAIM_NAME = "name";
+    private static final String CLAIM_ROLE = "role";
+
+    private final JwtProperties jwtProperties;
+
+    private SecretKey secretKey;
+    private JwtParser jwtParser;
+
+    @PostConstruct
+    private void init() {
+        // 키와 파서는 불변이므로 요청마다 새로 만들지 않고 한 번만 생성해 재사용한다.
+        this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtProperties.getSecretKey()));
+        this.jwtParser = Jwts.parser().verifyWith(secretKey).build();
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
