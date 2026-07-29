@@ -258,11 +258,6 @@
 
 ## 📌 관련 링크
 
-### 학습 자료
-- [자바 튜토리얼 - 프로그래머스 자바 입문](https://school.programmers.co.kr/learn/courses/5/5-무료-자바-입문)
-- [자바 튜토리얼 - 프로그래머스 자바 중급](https://school.programmers.co.kr/learn/courses/9/9-자바-중급)
-- [Git 튜토리얼 - Learn Git Branching](https://learngitbranching.js.org/?locale=ko)
-
 ### 코딩테스트
 - [기본 - 알고리즘 기초 트레이닝](https://school.programmers.co.kr/learn/challenges/training?order=acceptance_desc)
 - [기본 - 코딩테스트 입문](https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc)
