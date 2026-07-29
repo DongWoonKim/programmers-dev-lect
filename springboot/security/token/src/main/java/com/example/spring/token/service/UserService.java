@@ -15,6 +15,10 @@ public class UserService {
 
     public void signUp(SignUpRequestDto requestDto) {
 
+        if ( userRepository.existsByUserId(requestDto.getUserId()) ) {
+
+        }
+
     }
 
 
