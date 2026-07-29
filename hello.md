@@ -8,7 +8,7 @@
 
 ---
 <details open>
-<summary><b>9-2 (2026.07.28)</b></summary>
+<summary><b>9-3 (2026.07.29)</b></summary>
 
 - **과제1 — 복습**
   - 필수 : 수업내용 복습
