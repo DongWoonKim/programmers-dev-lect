@@ -16,8 +16,10 @@ public class CookieUtil {
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true); // JS접근불가
         cookie.setSecure(false); // 로컬(HTTP) 개발용. 운영 배포시(HTTPS) 시 true
-        // Path : 브라우저가
+        // Path : 브라우저가 이 쿠키를 어떤 URL 경로의 요청에 붙일지 결정한다.
         cookie.setPath("/");
+        cookie.setMaxAge(maxAge);
+        response.addCookie(cookie);
     }
 
     public static void deleteCookie() {
