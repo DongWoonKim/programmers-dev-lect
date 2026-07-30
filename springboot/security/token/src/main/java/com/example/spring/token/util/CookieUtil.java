@@ -1,0 +1,27 @@
+package com.example.spring.token.util;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class CookieUtil {
+
+    public static final String REFRESH_TOKEN_COOKIE = "refreshToken";
+
+    public static void addCookie(
+            HttpServletResponse response,
+            String name,
+            String value,
+            int maxAge
+    ) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setHttpOnly(true); // JS접근불가
+        cookie.setSecure(false); // 로컬(HTTP) 개발용. 운영 배포시(HTTPS) 시 true
+        // Path : 브라우저가
+        cookie.setPath("/");
+    }
+
+    public static void deleteCookie() {
+
+    }
+
+}
