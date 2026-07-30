@@ -1,6 +1,7 @@
 package com.example.spring.token.util;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class CookieUtil {
@@ -22,8 +23,23 @@ public class CookieUtil {
         response.addCookie(cookie);
     }
 
-    public static void deleteCookie() {
+    public static void deleteCookie(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            String name
+    ) {
+        Cookie[] cookies = request.getCookies();
 
+        if ( cookies == null ) return;
+
+        for ( Cookie cookie : cookies ) {
+            if ( name.equals(cookie.getName()) ) {
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                cookie.setValue("");
+                response.addCookie(cookie);
+            }
+        }
     }
 
 }
