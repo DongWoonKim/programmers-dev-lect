@@ -8,6 +8,7 @@ import com.example.spring.token.service.UserService;
 import com.example.spring.token.util.CookieUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,23 @@ public class UserApiController {
                 .userId(user.getUserId())
                 .userName(user.getName())
                 .role(user.getRole())
+                .build();
+    }
+
+    // "hasRole('USER')"는 내부적으로 "ROLE_USER"권한을 찾는다 (접두사 자동 부착)
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user")
+    public AuthorityResponseDto authority() {
+        return AuthorityResponseDto.builder()
+                .message("일반 사용자만 볼 수 있는 권합니다.")
+                .build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin")
+    public AuthorityResponseDto authorityAdmin() {
+        return AuthorityResponseDto.builder()
+                .message("관리자만 볼 수 있는 권합니다.")
                 .build();
     }
 
