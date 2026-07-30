@@ -24,4 +24,9 @@ public class UserApiController {
                 .build();
     }
 
+    @PostMapping("/login")
+    public void login() {
+
+    }
+
 }
