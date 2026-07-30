@@ -1,19 +1,15 @@
 package com.example.spring.token.controller;
 
 import com.example.spring.token.config.jwt.JwtProperties;
-import com.example.spring.token.dto.SignInRequestDto;
-import com.example.spring.token.dto.SignInResponseDto;
-import com.example.spring.token.dto.SignUpRequestDto;
-import com.example.spring.token.dto.SignUpResponseDto;
+import com.example.spring.token.config.security.CustomUserDetails;
+import com.example.spring.token.domain.entity.User;
+import com.example.spring.token.dto.*;
 import com.example.spring.token.service.UserService;
 import com.example.spring.token.util.CookieUtil;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,6 +44,17 @@ public class UserApiController {
         signInResponseDto.setAccessToken(null);
 
         return signInResponseDto;
+    }
+
+    @GetMapping("/info")
+    public UserInfoResponseDto getUserInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        User user = userDetails.getUser();
+        return UserInfoResponseDto.builder()
+                .id(user.getId())
+                .userId(user.getUserId())
+                .userName(user.getName())
+                .role(user.getRole())
+                .build();
     }
 
 }
