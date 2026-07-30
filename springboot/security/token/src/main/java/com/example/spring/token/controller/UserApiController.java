@@ -1,10 +1,13 @@
 package com.example.spring.token.controller;
 
+import com.example.spring.token.config.jwt.JwtProperties;
 import com.example.spring.token.dto.SignInRequestDto;
 import com.example.spring.token.dto.SignInResponseDto;
 import com.example.spring.token.dto.SignUpRequestDto;
 import com.example.spring.token.dto.SignUpResponseDto;
 import com.example.spring.token.service.UserService;
+import com.example.spring.token.util.CookieUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserApiController {
 
     private final UserService userService;
+    private final JwtProperties jwtProperties;
 
     @PostMapping("/join")
     public SignUpResponseDto join(@RequestBody SignUpRequestDto requestDto ) {
@@ -34,9 +38,16 @@ public class UserApiController {
     ) {
         SignInResponseDto signInResponseDto = userService.login(requestDto);
 
+        CookieUtil.addCookie(
+                response,
+                CookieUtil.REFRESH_TOKEN_COOKIE,
+                signInResponseDto.getRefreshToken(),
+                (int) jwtProperties.getRefreshTokenValidity().toSeconds()
+        );
 
+        signInResponseDto.setAccessToken(null);
 
-        return null;
+        return signInResponseDto;
     }
 
 }
