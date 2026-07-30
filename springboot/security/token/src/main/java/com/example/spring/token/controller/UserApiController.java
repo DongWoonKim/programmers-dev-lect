@@ -41,7 +41,7 @@ public class UserApiController {
                 (int) jwtProperties.getRefreshTokenValidity().toSeconds()
         );
 
-        signInResponseDto.setAccessToken(null);
+        signInResponseDto.setRefreshToken(null);
 
         return signInResponseDto;
     }
