@@ -100,6 +100,7 @@ public class SecurityConfig {
                                 "/", // 페이지(HTML)는 공개, 데이터는 보호 - 브라우저 페이지 이동은 Bearer 헤더를 못 실으므로 페이지 인가는 API가 담당
                                 "/api/users/login",
                                 "/api/users/join",
+                                "/api/tokens/refresh",
 
                                 "/css/**",
                                 "/js/**"
