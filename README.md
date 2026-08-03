@@ -13,9 +13,20 @@
 
 ## 📌 수업
 <details open>
+<summary><b>📅 26.08</b></summary>
+<blockquote open>
+  <details open>
+  <summary><b>08.03</b></summary>
+  
+  1. [springsecurity: oauth2(prj set up, OAuth2UserInfo)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
+
+</details>
+</blockquote>
+</details>
+<details>
 <summary><b>📅 26.07</b></summary>
 <blockquote>
-  <details open>
+  <details>
   <summary><b>07.30</b></summary>
   
   1. [springsecurity: token(log in/out, authorization, exceptionhandling)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
