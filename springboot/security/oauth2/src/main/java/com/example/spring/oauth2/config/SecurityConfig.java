@@ -1,5 +1,25 @@
 package com.example.spring.oauth2.config;
 
+import com.example.spring.oauth2.config.filter.TokenAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 // * OAuth2 (Open Authorization 2.0)
 // OAuth2는 "비밀번호를 넘겨주지 안고 권한을 위임"하기 위한 표준 프레임워크
 // OAuth2 사용 방법:
@@ -25,10 +45,21 @@ package com.example.spring.oauth2.config;
 // Spring Security에서의 동작 흐름 - oauth2Login()
 // 위 표준 흐름을 필터 두 개가 나눠서 대신 처리한다.
 // 1) OAuth2AuthorizationRequestRedirectFilter
+// -> /oauth2/authorization/{registrationId} 요청을 가로채 인가 페이지로 리다이렉트
 // 2) OAuth2LoginAuthenticationFilter
+// -> /login/oauth2/code/{registrationId}로 돌아온 code를 받아
+// "state 검증 -> 토큰 교환 -> 사용자 정보 조회까지 수행"
 // 3) 조회된 사용자 정보를 OAuth2UserService.loadUser()에 넘긴다.
+// -> 여기서 "제공자의 회원"을 "우리 DB의 회원"으로 연결(없으면 가입)하는 것이 개발자의 몫
 // 4) 반환된 OAuth2User로 Athentication을 만들어 SecurityContext에 저장 -> 로그인완료
 // 5) 마지막으로 SuccessHandler 호출 -> 로그인 후처리(JWT 발급)도 개발자의 몫
+
+// 정리하면 개발자가 구현하는 것은 파이프라인의 양 끝 훅(hook) 두 개뿐이다.
+// - OAuth2UserService : 제공자 응답 -> 우리 회원 매핑
+// - SuccessHandler : 로그인 성공 -> 후처리(토큰 발급, 리다이렉트 등)
+// 나머지는(리다이렉트, state, 코드-토큰 교환, 정보 조회)는 전부 프레임워크가 처리하고,
+// 제공자별 차이(엔드포인트 URL, scope 등)는 코드가 아닌 설정 파일의 registration, provider 항목으로 흡수된다.
+// 그래서 네이버 같은 새 공급자를 추가해도 Java 코드는 거의 안 바뀐다.
 
 // * kakao developers 절차 - https://developers.kakao.com/
 // 1.kakao developers 접속 -> 로그인
@@ -60,25 +91,8 @@ package com.example.spring.oauth2.config;
 // 앱 > 제품 설정 > 카카오 로그인
 // 닉네임, 이메일 설정 변경(상태 : 필수동의)
 
-import com.example.spring.oauth2.config.filter.TokenAuthenticationFilter;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+// ** 프로젝트에서의 OAuth2 로그인 흐름 **
 
 import java.io.IOException;
 
