@@ -4,6 +4,7 @@ import com.example.spring.oauth2.domain.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
@@ -39,19 +40,34 @@ public class CustomOAuth2User implements OAuth2User {
     // application.yaml provider의 user-name-attribute 값이 여기까지 흘러들어온다.
     private final String nameAttributeKey;
 
+    // 우리 DB에 이미 가입된 회원이지. SuccessHandler가 "로그인 완료 vs 가입 안내" 분기에 사용한다.
+    public boolean isRegistered() {
+        return user != null;
+    }
 
     @Override
     public Map<String, Object> getAttributes() {
-        return Map.of();
+        return attributes;
     }
 
+    // 인간판단의 재료
+    // 빈 리스트를 반환하면 "로그인은 됐지만 아무 권한 없는 사용자"가 되어
+    // hasRole 검사를 전부 통과하지 못하므로 반드시 채워야 한다.
+    // 미가입(user == null) 상태는 아직 우리 회원이 아니므로 임시 권한 "ROLE_GUEST"만 가진다.
+    // - 가입 안내 페이지까지만 갈 수 있고, hasRole('USER')가 걸린 자원에는 접근할 수 없다.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+
+        if ( user == null ) {
+            return List.of(new SimpleGrantedAuthority("ROLE_GUEST"));
+        }
+
+        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
+    // OAuth2User 계약 : "이 principal의 이름"을 반환한다. UserDetails.getUsername()에 대응
     @Override
     public String getName() {
-        return "";
+        return String.valueOf(attributes.get(nameAttributeKey));
     }
 }
