@@ -1,16 +1,17 @@
 package com.example.spring.oauth2.controller;
 
 import com.example.spring.oauth2.config.jwt.JwtProperties;
+import com.example.spring.oauth2.config.security.CustomUserDetails;
+import com.example.spring.oauth2.domain.entity.User;
 import com.example.spring.oauth2.dto.*;
 import com.example.spring.oauth2.service.UserService;
 import com.example.spring.oauth2.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,4 +60,31 @@ public class UserApiController {
                 .build();
     }
 
+    @GetMapping("/info")
+    public UserInfoResponseDto getUserInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        User user = userDetails.getUser();
+        return UserInfoResponseDto.builder()
+                .id(user.getId())
+                .userId(user.getUserId())
+                .userName(user.getName())
+                .role(user.getRole())
+                .build();
+    }
+
+    // "hasRole('USER')"는 내부적으로 "ROLE_USER"권한을 찾는다 (접두사 자동 부착)
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user")
+    public AuthorityResponseDto authority() {
+        return AuthorityResponseDto.builder()
+                .message("일반 사용자만 볼 수 있는 권한입니다.")
+                .build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin")
+    public AuthorityResponseDto authorityAdmin() {
+        return AuthorityResponseDto.builder()
+                .message("관리자만 볼 수 있는 권한입니다.")
+                .build();
+    }
 }
