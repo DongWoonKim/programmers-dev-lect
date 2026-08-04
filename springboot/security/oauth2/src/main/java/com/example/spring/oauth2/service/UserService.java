@@ -3,6 +3,7 @@ package com.example.spring.oauth2.service;
 import com.example.spring.oauth2.config.security.CustomUserDetails;
 import com.example.spring.oauth2.domain.entity.User;
 import com.example.spring.oauth2.domain.repository.UserRepository;
+import com.example.spring.oauth2.dto.OAuthSignUpRequestDto;
 import com.example.spring.oauth2.dto.SignInRequestDto;
 import com.example.spring.oauth2.dto.SignInResponseDto;
 import com.example.spring.oauth2.dto.SignUpRequestDto;
@@ -60,4 +61,23 @@ public class UserService {
                 .build();
     }
 
+    public SignInResponseDto oauthSignUp(OAuthSignUpRequestDto requestDto) {
+
+
+
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

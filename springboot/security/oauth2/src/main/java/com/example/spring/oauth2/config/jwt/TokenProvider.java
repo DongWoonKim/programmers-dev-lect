@@ -5,6 +5,7 @@ import com.example.spring.oauth2.config.oauth2.OAuth2UserInfo;
 import com.example.spring.oauth2.config.security.CustomUserDetails;
 import com.example.spring.oauth2.domain.entity.Role;
 import com.example.spring.oauth2.domain.entity.User;
+import com.example.spring.oauth2.dto.SignupPayloadDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParser;
@@ -135,6 +136,27 @@ public class TokenProvider {
                 .claim(CLAIM_EMAIL, userInfo.email())
                 .signWith(secretKey, Jwts.SIG.HS512)
                 .compact();
+    }
+
+    // 가입 토큰 검증 + 클레임 복원
+    public SignupPayloadDto getSignupPayload(String token) {
+        Claims claims;
+        try {
+            claims = getClaims(token);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("유효하지 않거나 만료된 가입 토큰입니다.");
+        }
+
+        if ( !TOKEN_TYPE_SIGNUP.equals(claims.get(CLAIM_TYPE, String.class)) ) {
+            throw new IllegalArgumentException("가입 토큰이 아닙니다.");
+        }
+
+        return new SignupPayloadDto(
+                AuthProvider.valueOf( claims.get(CLAIM_PROVIDER, String.class) ),
+                claims.getSubject(),
+                claims.get(CLAIM_EMAIL, String.class),
+                claims.get(CLAIM_NAME, String.class)
+        );
     }
 
 }

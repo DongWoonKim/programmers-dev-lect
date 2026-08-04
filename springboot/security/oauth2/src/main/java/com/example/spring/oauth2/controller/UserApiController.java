@@ -29,6 +29,16 @@ public class UserApiController {
                 .build();
     }
 
+    @PostMapping("/oauth-join")
+    public SignInResponseDto oauthJoin(
+            @RequestBody OAuthSignUpRequestDto requestDto,
+            HttpServletResponse response
+    ) {
+
+        SignInResponseDto signInResponseDto = userService.oauthSignUp(requestDto);
+
+    }
+
     @PostMapping("/login")
     public SignInResponseDto login(
             @RequestBody SignInRequestDto requestDto,
