@@ -37,6 +37,15 @@ public class UserApiController {
 
         SignInResponseDto signInResponseDto = userService.oauthSignUp(requestDto);
 
+        CookieUtil.addCookie(
+                response,
+                CookieUtil.REFRESH_TOKEN_COOKIE,
+                signInResponseDto.getRefreshToken(),
+                (int) jwtProperties.getRefreshTokenValidity().toSeconds()
+        );
+        signInResponseDto.setRefreshToken(null);
+
+        return signInResponseDto;
     }
 
     @PostMapping("/login")
