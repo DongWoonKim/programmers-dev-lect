@@ -1,9 +1,15 @@
 package com.example.spring.oauth2.service;
 
+import com.example.spring.oauth2.config.oauth2.AuthProvider;
+import com.example.spring.oauth2.config.oauth2.CustomOAuth2User;
+import com.example.spring.oauth2.config.oauth2.OAuth2UserInfo;
+import com.example.spring.oauth2.config.oauth2.OAuth2UserInfoFactory;
+import com.example.spring.oauth2.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +32,74 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
+    private final UserRepository userRepository;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        return super.loadUser(userRequest);
+
+        // access token으로 제공자 user-info를 호출해 원시 속성 맵을 받아온다.
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+
+        // 어떤 제공자로 로그인했는지 : application.yaml의 registration 키
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+
+        // 제공자 응답에서 "사용자 식별자"가 들어있는 속성 키 이름
+        // CustomOAuth2User.getName() 이 이키로 식별자를 꺼낼 때 사용된다.
+        String nameAttributeKey = userRequest.getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUserNameAttributeName();
+
+        // 문자열 registrationId -> 우리 enum으로, 원시 속성 맵 -> 제공자별 파서로 감싼다.
+        AuthProvider provider = AuthProvider.from(registrationId);
+        OAuth2UserInfo userInfo = OAuth2UserInfoFactory.of(provider, oAuth2User.getAttributes());
+
+
+        if ( userInfo.email() == null ) {
+            throw new OAuth2AuthenticationException(
+                    new OAuth2Error("Email is required"),
+                    "SNS 계정에서 이메일을 가져오지 못했습니다. 이메일 제공 동의가 필요합니다."
+            );
+        }
+
+        return userRepository.findByProviderIdAndProvider(userInfo.id(), provider)
+                .map(
+                        exsting -> {
+
+                            // -> 탈퇴 기능이 있다면(소프트 딜리트) 이분기에서
+                            // 탈퇴 계정 여부를 검사해 로그인을 거부하는 코드가 추가된다.
+
+                            // save불필요.
+                            exsting.updateProfile(userInfo.name());
+
+                            return new CustomOAuth2User(
+                                    exsting,
+                                    provider,
+                                    userInfo,
+                                    oAuth2User.getAttributes(),
+                                    nameAttributeKey
+                                );
+                        }
+                ).orElseGet(
+                        () -> CustomOAuth2User.unregistered(
+                                provider,
+                                userInfo,
+                                oAuth2User.getAttributes(),
+                                nameAttributeKey
+                        )
+                );
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
