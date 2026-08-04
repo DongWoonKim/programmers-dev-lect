@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
@@ -52,8 +53,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             targetUrl = "/";
         } else {
             // 미가입
+            // 10분짜리 "가입 토큰"을 발급해 가입 동의 페이지로 보낸다.
+            String signupToken = tokenProvider.createSignupToken(principal.getProvider(), principal.getUserInfo());
 
-            targetUrl = "/users/oauth-join";
+            targetUrl = UriComponentsBuilder.fromUriString("/users/oauth-join")
+                    .queryParam("signupToken", signupToken)
+                    .build()
+                    .toUriString();
         }
 
         // 이미 응답이 커밋되었다면 리다이렉트가 불가능하므로 방어적으로 빠져나간다.
