@@ -15,10 +15,16 @@
 <details open>
 <summary><b>📅 26.08</b></summary>
 <blockquote open>
-  <details open>
-  <summary><b>08.03</b></summary>
-  
-  1. [springsecurity: oauth2(prj set up, OAuth2UserInfo)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
+<details open>
+<summary><b>08.04</b></summary>
+
+1. [springsecurity: oauth2(login, success/failure, signup)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
+
+</details>
+<details>
+<summary><b>08.03</b></summary>
+
+1. [springsecurity: oauth2(prj set up, OAuth2UserInfo)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
 
 </details>
 </blockquote>
