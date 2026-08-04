@@ -36,6 +36,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public SignInResponseDto login(SignInRequestDto requestDto) {
 
         // form-login에서는 필터가 하던 아이디/비밀번호 검증을 직접 호출한다.
