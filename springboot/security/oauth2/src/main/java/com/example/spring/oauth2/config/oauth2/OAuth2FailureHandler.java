@@ -12,6 +12,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+// OAuth2 로그인의 실패 경로 처리기
+// loadUser() 사이에서 문제가 생긴 경우
+// - 사용자가 카카오 동의 화면에서 "취소" 또는 권한 거부
+// - state 불일치/인가코드 만료/토큰 교환 실패
+// - CustomOAuth2UserService 가 던진 OAuth2AuthenticationException
+
 @Component
 @RequiredArgsConstructor
 public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler {
