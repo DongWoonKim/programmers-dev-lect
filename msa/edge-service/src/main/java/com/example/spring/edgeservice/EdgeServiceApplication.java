@@ -17,11 +17,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // 1. 독립 배포 : 게시판 검색 로직을 고치는 데 인증 서버를 재배포할 이유가 없다.
 // 배포 단위가 작아지면 배포 빈도는 오르고 실패 반경은 준다.
 // 2. 독립 확장 : 조회 폭주는 board만 스케일 아웃하면 된다. 모놀리스는 전체를 복제해야 한다.
+// 3. 장애 격리(전파 방지) : 한 서비스의 죽음이 "전체의 죽음"이 아니라 "부분 기능 저하"가 되게 한다.
 // 단, 공짜가 아니다. - 프로세스를 갈랐다고 저절로 격리되지 않는다.
 // 동기 호출은 장애를 그대로 전파하므로, 격리는 설계해야 한다..
 // - 폴백 : auth가 죽어도 board 목록은 뜬다 - 작성자 이름만 비운 상태로
 // - 보상 : board가 죽어도 탈퇴는 안전하게 실패한다. - 계정 상태 원복 후 503 (탈퇴 Saga)
-// 3. 장애 격리(전파 방지) :
+
+// Database per Service - 데이터도 서비스 경계를 따른다.
+
+
 
 @SpringBootApplication
 public class EdgeServiceApplication {
