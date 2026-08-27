@@ -44,7 +44,15 @@ public class Board {
     // * 이 필드를 왜 두나? -> fetch join
     // - 이게 있어야 "게시글 하나 + 그 댓글들"을 한 번의 fetch join으로 가져오는 쿼리를 만들 수 있다.
     // - 반대로 이게 없으면 board.getComments()로 댓글을 순회할 수 없다.
+    // * @Builder.Default를 붙이는 이유
+    // - @Builder는 빌더로 객체를 만들 때 필드 초기화식(= new ArrayList<>())을 무시한다.
+    //   빌더는 내부적으로 "빌더에 설정된 값"만으로 생성자를 호출하기 때문에,
+    //   comments를 지정하지 않고 Board.builder().build()로 만들면 comments가 null이 된다.
+    // - 그러면 board.getComments()를 순회하는 순간 NullPointerException이 터질 수 있다.
+    // - @Builder.Default를 붙이면 "빌더에서 값을 안 넣었을 때 이 초기화식을 기본값으로 써라"는
+    //   뜻이 되어, 빌더로 생성해도 빈 리스트로 안전하게 초기화된다.
     @OneToMany(mappedBy = "board")
+    @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
     // * 게시글 수정

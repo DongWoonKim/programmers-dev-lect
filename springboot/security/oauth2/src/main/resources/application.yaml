@@ -15,7 +15,7 @@ spring:
         registration:
           kakao:
             client-id: fb44fad539553103bcb93d798526b34a
-            client-secret: j9u1rFmlIpnNLhGz5e0t0ciZsJGSGcvc
+            client-secret: D9fPyIeIdrpT2ShB5Vaksm0V0nPBmX1u
             redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
             # OAuth2에는 토큰을 얻는 방식(grant type)이 여러가지 있다.
             #   authorization_code(인가 코드), client_credentials(서버끼리, 사용자 없음),
