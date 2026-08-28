@@ -1,16 +1,19 @@
 package com.example.spring.authservice.config.jwt;
 
+import com.example.spring.authservice.domain.entity.User;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.Duration;
 import java.util.Base64;
+import java.util.Date;
 
 @Slf4j
 @Service
@@ -36,6 +39,28 @@ public class TokenProvider {
     public void init() {
         this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtProperties.getSecretKey()));
         this.jwtParser = Jwts.parser().verifyWith(secretKey).build();
+    }
+
+    public String generateToken( User user, Duration expiredAt ) {
+        Date now = new Date();
+        return makeToken(
+                user,
+                new Date( now.getTime() + expiredAt.toMillis() )
+        );
+    }
+
+    private String makeToken( User user, Date expire) {
+        return Jwts.builder()
+                .header().type("JWT").and()
+                .issuer(jwtProperties.getIssuer())
+                .issuedAt(new Date())
+                .expiration(expire)
+                .subject(user.getUserId())
+                .claim(CLAIM_ID, user.getId())
+                .claim(CLAIM_NAME, user.getName())
+                .claim(CLAIM_ROLE, user.getRole())
+                .signWith(secretKey, Jwts.SIG.HS512)
+                .compact();
     }
 
 }
