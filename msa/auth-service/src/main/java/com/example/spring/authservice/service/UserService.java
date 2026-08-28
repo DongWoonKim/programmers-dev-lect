@@ -2,10 +2,15 @@ package com.example.spring.authservice.service;
 
 import com.example.spring.authservice.domain.entity.User;
 import com.example.spring.authservice.domain.repository.UserRepository;
+import com.example.spring.authservice.dto.SignInRequestDto;
+import com.example.spring.authservice.dto.SignInResponseDto;
 import com.example.spring.authservice.dto.SignUpRequestDto;
 import com.example.spring.authservice.exception.DuplicateUserIdException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {
@@ -31,5 +37,14 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public SignInResponseDto login(SignInRequestDto signInRequestDto) {
+
+        Authentication authenticate = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(signInRequestDto.getUserId(), signInRequestDto.getPassword())
+        );
+
+        return null;
+    }
 
 }
