@@ -3,6 +3,7 @@ package com.example.spring.authservice.service;
 import com.example.spring.authservice.domain.entity.User;
 import com.example.spring.authservice.domain.repository.UserRepository;
 import com.example.spring.authservice.dto.SignUpRequestDto;
+import com.example.spring.authservice.exception.DuplicateUserIdException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,10 @@ public class UserService {
 
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {
+
+        if ( userRepository.existsByUserId( signUpRequestDto.getUserId() ) ) {
+            throw new DuplicateUserIdException("[회원가입] 이미 사용중인 아이디입니다.");
+        }
 
         User user = signUpRequestDto.toUser(passwordEncoder.encode(signUpRequestDto.getPassword()));
 

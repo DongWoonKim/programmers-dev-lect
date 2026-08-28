@@ -3,8 +3,10 @@ package com.example.spring.authservice.dto;
 import com.example.spring.authservice.domain.entity.Role;
 import com.example.spring.authservice.domain.entity.User;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class SignUpRequestDto {
 
     private String userId;
