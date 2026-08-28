@@ -23,7 +23,7 @@ public record KakaoUserInfo(
     }
 
     @Override
-    public String emai() {
+    public String email() {
         Map<String, Object> kakaoAccount = kakaoAccount();
         return kakaoAccount == null ? null : String.valueOf( kakaoAccount.get("email") );
     }
