@@ -1,12 +1,16 @@
 package com.example.spring.authservice.config.jwt;
 
 import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.Duration;
+import java.util.Base64;
 
 @Slf4j
 @Service
@@ -28,6 +32,10 @@ public class TokenProvider {
     private SecretKey secretKey;
     private JwtParser jwtParser;
 
-    
+    @PostConstruct
+    public void init() {
+        this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtProperties.getSecretKey()));
+        this.jwtParser = Jwts.parser().verifyWith(secretKey).build();
+    }
 
 }
