@@ -19,7 +19,7 @@ public class UserApiController {
     @PostMapping("/join")
     public SignUpResponseDto join(@RequestBody SignUpRequestDto signUpRequestDto) {
 
-        System.out.println("signUpRequestDto = " + signUpRequestDto);
+        userService.signUp(signUpRequestDto);
 
         return SignUpResponseDto.builder()
                 .url("/users/login")
