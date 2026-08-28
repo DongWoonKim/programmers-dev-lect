@@ -8,6 +8,19 @@
 
 ---
 <details open>
+<summary><b>11-5 (2026.08.28)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습
+- **과제2 — 실습**
+  - (필수) searchboard api 완성하기(board-service)
+- **과제3 - 선택 : 과제2까지 끝난경우 아래 항목중 하나를 택하여 진행해주세요**
+  - 개인 복습
+  - 개인 프로젝트
+  - 알고리즘
+
+</details>
+<details open>
 <summary><b>10-2 (2026.08.04)</b></summary>
 
 - **과제1 — 복습**

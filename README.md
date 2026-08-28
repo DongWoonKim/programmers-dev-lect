@@ -16,6 +16,18 @@
 <summary><b>📅 26.08</b></summary>
 <blockquote open>
 <details open>
+<summary><b>08.28</b></summary>
+
+1. [springsecurity: msa(signup, login)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details>
+<summary><b>08.27</b></summary>
+
+1. [springsecurity: msa(web-service, edge-service, auth-service, board-service, config-service setup)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details>
 <summary><b>08.04</b></summary>
 
 1. [springsecurity: oauth2(login, success/failure, signup)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/springboot/security)
