@@ -1,5 +1,6 @@
 package com.example.spring.authservice.service;
 
+import com.example.spring.authservice.config.security.CustomUserDetails;
 import com.example.spring.authservice.domain.entity.User;
 import com.example.spring.authservice.domain.repository.UserRepository;
 import com.example.spring.authservice.dto.SignInRequestDto;
@@ -24,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {
@@ -44,7 +46,19 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(signInRequestDto.getUserId(), signInRequestDto.getPassword())
         );
 
-        return null;
+        User user = ((CustomUserDetails) authenticate.getPrincipal()).getUser();
+
+        TokenService.TokenPair tokenPair = tokenService.issueToken(user);
+
+        return SignInResponseDto.builder()
+                .loggedIn(true)
+                .message("로그인 성공")
+                .url("/")
+                .accessToken(tokenPair.accessToken())
+                .refreshToken(tokenPair.refreshToken())
+                .userId(user.getUserId())
+                .userName(user.getName())
+                .build();
     }
 
 }
