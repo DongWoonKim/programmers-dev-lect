@@ -1,10 +1,13 @@
 package com.example.spring.webservice.client;
 
+import com.example.spring.webservice.dto.BoardPageResponseDto;
+import com.example.spring.webservice.dto.BoardSearchRequestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // 헤더를 파라미터로 받는 이유
 // Feign은 서블릿 요청과 무관한 새 HTTP 요청을 만들기 때문에,
@@ -14,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(value = "board-service", url = "${edge-service.url:http://localhost:8000}")
 public interface BoardClient {
 
+    // @SpringQueryMap
+    // DTO필드를 ?title=...&userId=... 쿼리스트링으로 펼쳐준다.(null 필드는 생략)
     @GetMapping("/api/boards/search")
-    void searchBoards(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
-//            @SpringQueryMap()
+    BoardPageResponseDto searchBoards(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @SpringQueryMap BoardSearchRequestDto condition,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size
     );
 
 }
