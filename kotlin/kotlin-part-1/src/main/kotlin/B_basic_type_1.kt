@@ -75,7 +75,24 @@ fun main(){
     // 컴파일러가 'userAge살'이라는 변수를 찾다가 컴파일 에러를 낸다.
     // 변수 바로 뒤에 한글이 붙을 때는 반드시 ${변수명}처럼 중괄호로 끊어줘야 한다.
 
-    // 6-1.
+    // 6-1. ${ } - 표현식(연산, 함수 호출, 프로퍼티 접근)을 넣을 때는 중괄호로 감싼다.
+    println("내년 나이 : ${userAge + 1}살") // 연산
+    println("이름 길이 : ${userName.length}글자") // 프로퍼티 접근
+    println("대문자 : ${"kotlin".uppercase()}") // 함수 호출
+    println("성인인가? ${userAge >= 19}") // 비교 결과
+
+    // 6-2. $ 기호 자체를 출력하고 싶을 때는 역슬래시로 한다.
+    val price = 1000
+    println("가격은 \$$price 입니다.")
+
+    // 6-3. 여러줄 문자열 안에서도 똑같이 동작한다.
+    val profile = """
+        === 회원 정보 ===
+        이름 : $userName
+        나이 : $userAge
+        내년 : ${userAge + 1}
+    """.trimIndent() // 앞쪽 공통 들여쓰기 제거
+    println(profile)
 
 }
 
