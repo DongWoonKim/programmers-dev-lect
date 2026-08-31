@@ -33,10 +33,15 @@ public class SecurityConfig {
                                 "/api/users/join",
                                 "/api/users/login",
                                 "/api/tokens/refresh",
-                                "/api/users/oauth-join"
+                                "/api/users/oauth-join",
+                                "/api/users/name",
+                                "/error"
                         ).permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+//                .addFilterBefore()
+//                .exceptionHandling()
+                ;
 
         return http.build();
     }
