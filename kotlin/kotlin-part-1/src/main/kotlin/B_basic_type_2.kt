@@ -43,6 +43,55 @@ fun main() {
     println("안녕하세요, ${input1 ?: "익명"}님!")
     println("안녕하세요, ${input2 ?: "익명"}님!")
 
+    // 4. !! : non null 단언 - null이 아님을 보장
+    // 실제로 null이면 그 자리에서 NPE가 발생.
+    // -> 꼭 필요한 경우가 아니면 ?. 와 ?: 를 사용할 것
+    val sure: String = "확실히 값이 있다."
+    println(sure!!.length)
 
+    // 5. 자료형 비교하기 - == (값 비교), === (참조 비교)
+    val s1: String = "hello"
+    val s2: String = "hello"
+    val s3: String = StringBuilder("hel").append("lo").toString()
+
+    println(s1 == s2)
+    println(s1 === s2)
+    println(s1 == s3)
+    println(s1 === s3)
+
+    // 자바에서는 equals()를 써야 했지만, 코틀린은 == 가 곧 euqals()가 된다.
+    // 자바의 == (주소비교)에 해당하는 것이 코틀린의 === 이다.
+
+    // 6. 자료형 검사하기 - is / !is - is는 해당 값의 자료형을 묻고 결과로 true/false를 반환한다.
+    val obj: Any = "나는 문자열이다." // Any는 모든 자료형의 최상위 (자바의 Object)
+    println("== 6 ==")
+    println(obj is String)
+    println(obj is Int)
+    println(obj !is Int)
+
+    // 결과가 Boolean이므로 변수에 담아둘 수도 있다.
+    val isString: Boolean = obj is String
+    println("문자열인가? $isString")
+
+    val num: Any = 100
+    println(num is Int)
+    println(num is String)
+
+    // is로 검사한 뒤에는 코틀린이 그 값을 해당 자료형으로 알아서 취급해준다.
+    // 이것을 '스마트 캐스트'라고 한다.
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
