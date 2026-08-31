@@ -111,6 +111,14 @@ fun main() {
     println(intVal.toString())  // "100"  문자열로
     println("123".toInt() + 1)  // 124    문자열을 숫자로
 
+    // 변환할 수 없는 문자열이면 예외가 난다. toIntOrNull() 은 null을 돌려준다.
+//    println("abc".toInt()) // NumberFormatException
+    println("abc".toIntOrNull())
+    println("abc".toIntOrNull() ?: 0)
+
+    // 단, 서로 다른 숫자 자료형끼리의 '연산'은 가능하다. 결과는 더 큰 자료형이 된다.
+    val sum = intVal + longVal
+    println("$sum / ${sum::class.simpleName}")
 
 }
 
