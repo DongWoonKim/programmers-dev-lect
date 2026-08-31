@@ -8,6 +8,17 @@
 
 ---
 <details open>
+<summary><b>12-1 (2026.08.31)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(코틀린, MSA)
+- **과제2 - 선택**
+  - 개인 복습
+  - 개인 프로젝트(목표 : 서비스하기 -> ai워크플로우(클로드 코드, 코덱스) : PM에이전트 기획 분석 -> fronend, backend, QA,... : n8n)
+  - 알고리즘
+
+</details>
+<details>
 <summary><b>11-5 (2026.08.28)</b></summary>
 
 - **과제1 — 복습**
@@ -20,7 +31,7 @@
   - 알고리즘
 
 </details>
-<details open>
+<details>
 <summary><b>10-2 (2026.08.04)</b></summary>
 
 - **과제1 — 복습**

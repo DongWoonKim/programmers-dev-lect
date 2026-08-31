@@ -16,15 +16,22 @@
 <summary><b>📅 26.08</b></summary>
 <blockquote open>
 <details open>
+<summary><b>08.31</b></summary>
+
+1. [kotlin-part-1: A, B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
+2. [msa:  getUserInfo, searchBoards)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details open>
 <summary><b>08.28</b></summary>
 
-1. [springsecurity: msa(signup, login)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+1. [msa: signup, login](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
 <details>
 <summary><b>08.27</b></summary>
 
-1. [springsecurity: msa(web-service, edge-service, auth-service, board-service, config-service setup)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+1. [msa: web-service, edge-service, auth-service, board-service, config-service setup](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
 <details>
