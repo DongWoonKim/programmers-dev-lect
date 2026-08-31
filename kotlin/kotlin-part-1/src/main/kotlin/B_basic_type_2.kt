@@ -80,6 +80,22 @@ fun main() {
     // is로 검사한 뒤에는 코틀린이 그 값을 해당 자료형으로 알아서 취급해준다.
     // 이것을 '스마트 캐스트'라고 한다.
 
+    // 7. 자료형 변환하기 - as / as?
+    val any: Any = "문자열입니다"
+    val casted: String = any as String
+    println(casted.length)
+
+    // 변환할 수 없는 자료형이면 as는 예외를 던진다.
+//    val fail: Int = any as Int // ClassCastException
+
+    // as? 를 쓰면 실패했을 때 예외 대신 null을 돌려준다. (안전한 형 변환)
+    val safe: Int? = any as? Int
+    println(safe)
+
+    val number: Int = any as? Int ?: -1
+    println(number)
+
+
 }
 
 
