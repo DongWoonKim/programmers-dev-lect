@@ -30,6 +30,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         log.debug("requestURI: {}", requestURI);
 
         String token = resolveToken(request);
+        log.debug("token: {}", token);
 
         if ( token != null ) {
 
