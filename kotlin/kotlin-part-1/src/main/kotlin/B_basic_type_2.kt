@@ -11,4 +11,38 @@
 
 fun main() {
 
+    // 1. null을 허용하지 않는 변수 vs 허용하는 변수
+    // 기본 자료형(String, Int,..)에는 null을 넣을 수 없다.
+    val name: String = "홍길동"
+//    val name: String = null // 컴파일 에러
+
+    // 자료형 뒤에 물음표(?)를 붙이면 그때부터 null을 넣을 수 있다.
+    val nickName: String? = null
+    println("이름 : $name, 별명 : $nickName")
+
+    // 2. 세이프 콜(?.) - null이면 실행하지 않고 그냥 null을 반환한다.
+    val str1: String? = "Kotlin"
+    val str2: String? = null
+
+    println(str1?.length)
+    println(str2?.length) // null이니 실행을 건너뛰고 null을 반환
+
+    // 세이프 콜은 이어서 붙일 수도 있다. 중간에 하나라도 null이면 전체가 null
+    println(str2?.uppercase()?.length)
+
+    // 3. 엘비스 연산자(?:) - null이면 이 기본값을 대신 사용
+    val length1 = str1?.length ?: 0
+    val length2 = str2?.length ?: 0
+    println("length1: $length1, length2: $length2")
+
+    val display = nickName ?: "별명 없음"
+    println(display)
+
+    val input1: String? = "홍길동"
+    val input2: String? = null
+    println("안녕하세요, ${input1 ?: "익명"}님!")
+    println("안녕하세요, ${input2 ?: "익명"}님!")
+
+
+
 }
