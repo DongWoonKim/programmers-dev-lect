@@ -14,4 +14,55 @@
 
 fun main(){
 
+    // 1. val - 읽기 전용 (재할당 불가)
+    val name = "홍길동"
+    println(name)
+
+    // 2. var - 변경 가능 (재할당 가능)
+    var age = 20
+    age = 21
+    println(age)
+
+    // 3. 자료형 추론 - 자료형을 안 써도 값을 보고 컴파일러가 결정한다.
+    val a = 10
+    val b = 10L
+    val c = 10.5
+    val d = 10.5f
+    val e = 'A'
+    val f = "A"
+    val g = true
+
+    // 추론된 자료형은 이렇게 알 수 있다.
+    println(a::class.simpleName)
+    println(b::class.simpleName)
+    println(c::class.simpleName)
+    println(d::class.simpleName)
+    println(e::class.simpleName)
+    println(f::class.simpleName)
+    println(g::class.simpleName)
+
+    // 4. 자료형 직접 지정 - 변수명 뒤에 콜론(:)을 붙여 명시한다.
+    val score: Int = 100
+    val height: Double = 100.3
+    val message: String = "Hello World!"
+    val isStudent: Boolean = true
+
+    println("$score / $height / $message / $isStudent")
+
+    val bigScore: Long = 100
+    println(bigScore)
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
