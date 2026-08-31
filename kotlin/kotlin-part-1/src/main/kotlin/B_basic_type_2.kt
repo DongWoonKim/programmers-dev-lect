@@ -95,6 +95,22 @@ fun main() {
     val number: Int = any as? Int ?: -1
     println(number)
 
+    // 8. 숫자 자료형 변환 - 코틀린은 자동으로 바꿔주지 않는다.
+    val intVal: Int = 100
+//    val longVal: Long = intVal // 컴파일 에러. Int를 Long에 그냥 못 넣는다.
+    val longVal: Long = intVal.toLong()
+    println(longVal)
+
+    // 자바는 작은 타입 -> 큰 타입을 알아서 바꿔줬지만(암묵적 형 변환)
+    // 코틀린은 실수를 막기 위해 개발자가 명시적으로 변환하도록 강제한다.
+
+    val d: Double = 3.99
+    println(d.toInt())          // 3   - 소수점 이하는 버림(반올림 아님!)
+    println(d.toFloat())        // 3.99
+    println(intVal.toDouble())  // 100.0
+    println(intVal.toString())  // "100"  문자열로
+    println("123".toInt() + 1)  // 124    문자열을 숫자로
+
 
 }
 
