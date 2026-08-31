@@ -35,10 +35,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests( authorize -> authorize
                         .requestMatchers(
                                 "/api/boards/file/download/**",
+                                // 서버 간 내부 API
                                 "/api/boards/internal/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/error"
+                                "/error" // 에러 포워딩 경로. 막으면 401응답이 다시 401을 만드는 루프가 발생.
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
