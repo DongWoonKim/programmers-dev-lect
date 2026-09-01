@@ -56,21 +56,156 @@ fun sumFun(a: Int, b: Int): Int = a + b
 fun minusFun(a: Int, b: Int): Int = a - b
 
 // 값에 의한 호출, 이름에 의한 호출
+// 값에 의한 호출 : Boolean '값'을 받는다 -> 넘기기 전에 이미 계산이 끝나 있다.
+fun callByValue(b: Boolean): Boolean {
+    println("  callByValue 함수 시작")
+    return b
+}
 
+// 이름에 의한 호출 : () -> Boolean, 즉 '함수'를 받는다 -> 안에서 b() 를 부를 때 비로소 계산된다.
+fun callByName(b: () -> Boolean): Boolean {
+    println("  callByName 함수 시작")
+    return b()
+}
+
+// ------------------------------------------------------------
+// 예제 1. 순수 함수 vs 순수하지 않은 함수
+// ------------------------------------------------------------
+fun e_exam1() {
+    // 순수 함수는 몇 번을 불러도 결과가 같다.
+    println(pureAdd(2, 3))      // 5
+    println(pureAdd(2, 3))      // 5
+    println(pureAdd(2, 3))      // 5
+
+    // 순수하지 않은 함수는 같은 인자를 넣어도 결과가 계속 달라진다.
+    println(impureAdd(2))       // 2
+    println(impureAdd(2))       // 4
+    println(impureAdd(2))       // 6
+    println("바깥 변수 total 이 바뀌었다: $total")   // 6
+
+    // 함수형 프로그래밍은 이런 부작용을 줄여서 결과를 예측 가능하게 만드는 것이 목표다.
+}
+
+// ------------------------------------------------------------
+// 예제 2. 람다식 - 이름 없는 함수를 변수에 담기
+// ------------------------------------------------------------
+fun e_exam2() {
+    // 함수를 값처럼 변수에 담을 수 있다. 이것이 '함수가 일급 객체'라는 말의 뜻이다.
+    val square: (Int) -> Int = { x -> x * x }
+    println(square(5))          // 25
+
+    // 변수 자료형을 생략하면 람다식 안에 매개변수 자료형을 적어야 한다.
+    val sumLambda = { a: Int, b: Int -> a + b }
+    println(sumLambda(10, 20))  // 30
+
+    // 반대로 변수 자료형을 적으면 람다식 쪽에서 자료형을 생략할 수 있다.
+    val sumLambda2: (Int, Int) -> Int = { a, b -> a + b }
+    println(sumLambda2(10, 20)) // 30
+
+    // 매개변수가 하나뿐이면 이름 대신 it 을 쓸 수 있다.
+    val double: (Int) -> Int = { it * 2 }
+    println(double(7))          // 14
+
+    // 매개변수가 없는 람다식
+    val hello: () -> Unit = { println("안녕하세요, 람다식입니다.") }
+    hello()
+
+    // 여러 줄짜리 람다식 - 마지막 줄이 곧 반환값이다. (return 을 쓰지 않는다)
+    val calcArea: (Int, Int) -> Int = { w, h ->
+        println("  가로 $w, 세로 $h 넓이를 구합니다.")
+        w * h                   // 이 줄의 값이 반환된다
+    }
+    println(calcArea(3, 4))     // 12
+}
+
+// ------------------------------------------------------------
+// 예제 3. 고차 함수 - 함수를 '인자'로 넘기기
+// ------------------------------------------------------------
+fun e_exam3() {
+    // calculate 는 계산 방법 자체를 밖에서 받는다. 함수 하나로 여러 계산을 할 수 있다.
+    println(calculate(10, 5, { a, b -> a + b }))    // 15  더하기
+    println(calculate(10, 5, { a, b -> a - b }))    // 5   빼기
+    println(calculate(10, 5, { a, b -> a * b }))    // 50  곱하기
+
+    // 3-1. 후행 람다(Trailing Lambda)
+    // 람다식이 '마지막 인자'라면 괄호 밖으로 뺄 수 있다. 코틀린에서 아주 흔한 표기법이다.
+    println(calculate(10, 5) { a, b -> a + b })     // 15
+    println(calculate(10, 5) { a, b -> a % b })     // 0
+
+    // 3-2. 참조에 의한 호출 - 이미 만들어 둔 함수를 :: 로 넘기기
+    println(calculate(10, 5, ::sumFun))             // 15
+    println(calculate(10, 5, ::minusFun))           // 5
+
+    // 함수 참조도 변수에 담을 수 있다.
+    val op: (Int, Int) -> Int = ::sumFun
+    println(op(100, 200))                           // 300
+}
+
+// ------------------------------------------------------------
+// 예제 4. 고차 함수 - 함수를 '반환'하기
+// ------------------------------------------------------------
+fun e_exam4() {
+    val add10 = makeAdder(10)       // "10을 더하는 함수"를 만들어 받는다
+    val add100 = makeAdder(100)     // "100을 더하는 함수"를 만들어 받는다
+
+    println(add10(5))               // 15
+    println(add10(20))              // 30
+    println(add100(5))              // 105
+
+    // 만들자마자 바로 호출할 수도 있다.
+    println(makeAdder(3)(4))        // 7
+}
+
+// ------------------------------------------------------------
+// 예제 5. 값에 의한 호출 vs 이름에 의한 호출
+// ------------------------------------------------------------
+fun e_exam5() {
+    // 아래 람다식은 실행되는 순간 "람다식 실행!" 을 출력한다.
+    // 이 출력이 '언제' 나오는지를 보면 두 방식의 차이를 알 수 있다.
+    val lambda: () -> Boolean = {
+        println("  람다식 실행!")
+        true
+    }
+
+    println("[값에 의한 호출]")
+    println(callByValue(lambda()))
+    // 출력 순서: 람다식 실행! -> callByValue 함수 시작 -> true
+    // 인자 자리에서 lambda() 를 먼저 계산해 true 를 만든 뒤에 함수로 들어간다.
+
+    println("[이름에 의한 호출]")
+    println(callByName(lambda))
+    // 출력 순서: callByName 함수 시작 -> 람다식 실행! -> true
+    // 계산하지 않은 함수를 그대로 넘기고, 함수 안에서 b() 를 부를 때 비로소 계산된다.
+
+    // 즉 이름에 의한 호출은 '계산을 미룰 수 있다'는 것이 핵심이다.
+}
+
+// ------------------------------------------------------------
+// 예제 6. 람다식의 매개변수 다루기
+// ------------------------------------------------------------
+fun e_exam6() {
+    // 매개변수가 두 개 이상이면 it 을 쓸 수 없다. 이름을 직접 지어야 한다.
+    val multiply: (Int, Int) -> Int = { a, b -> a * b }
+    println(multiply(3, 4))         // 12
+
+    // 쓰지 않는 매개변수는 밑줄(_)로 표시할 수 있다.
+    val onlyFirst: (Int, Int) -> Int = { a, _ -> a }
+    println(onlyFirst(10, 20))      // 10   두 번째 값은 무시된다
+
+    // 람다식을 인자로 넘길 때도 it 을 쓸 수 있다.
+    val nums = listOf(1, 2, 3, 4, 5)
+    println(nums.map { it * 2 })            // [2, 4, 6, 8, 10]
+    println(nums.filter { it % 2 == 0 })    // [2, 4]
+    println(nums.sumOf { it })              // 15
+    // map, filter 같은 코틀린 표준 함수들이 모두 고차 함수다.
+    // 우리가 '무엇을 할지'만 람다식으로 넘기면 '어떻게 반복할지'는 알아서 처리해 준다.
+}
 
 fun main() {
-
-    println( calculate(3, 4, {a, b -> a + b}) )
-    println( calculate(3, 4, {a, b -> a - b}) )
-    println( calculate(3, 4, {a, b -> a * b}) )
-
-    val add10 = makeAdder(10)   // 10을 더하는 함수를 만들어 받는다.
-    val add100 = makeAdder(100) // 100을 더하는 함수를 만들어 받는다.
-
-    println( add10(5) )
-    println( add100(5) )
-
-    println( calculate (3, 4, ::sumFun) )
-    println( calculate (3, 4, ::minusFun) )
-
+    e_exam1()     // 순수 함수 vs 순수하지 않은 함수
+    e_exam2()     // 람다식
+    e_exam3()     // 고차 함수 - 함수를 인자로 넘기기
+    e_exam4()     // 고차 함수 - 함수를 반환하기
+    e_exam5()     // 값에 의한 호출 vs 이름에 의한 호출
+    e_exam6()     // 람다식의 매개변수 다루기
 }
