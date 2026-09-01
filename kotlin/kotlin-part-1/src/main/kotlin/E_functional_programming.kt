@@ -55,6 +55,8 @@ fun makeAdder(n: Int): (Int) -> Int {
 fun sumFun(a: Int, b: Int): Int = a + b
 fun minusFun(a: Int, b: Int): Int = a - b
 
+// 값에 의한 호출, 이름에 의한 호출
+
 
 fun main() {
 
@@ -67,5 +69,8 @@ fun main() {
 
     println( add10(5) )
     println( add100(5) )
+
+    println( calculate (3, 4, ::sumFun) )
+    println( calculate (3, 4, ::minusFun) )
 
 }
