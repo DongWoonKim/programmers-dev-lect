@@ -33,7 +33,14 @@ public class BoardService {
                 page.getContent().stream().map(BoardListItemResponseDto::getUserId).distinct().toList()
         );
 
-        return null;
+        return page.map( item -> new BoardListItemResponseDto(
+                item.getId(),
+                item.getTitle(),
+                item.getUserId(),
+                userNameOf(userNameResponseDtos, item.getUserId()),
+                item.getCommentCount(),
+                item.getCreated()
+        ));
     }
 
     // auth가 죽어도 게시판 조회 자체는 살아야 하므로(부분 실패 허용)
@@ -53,7 +60,7 @@ public class BoardService {
 
     }
 
-    // 
+    // DTO 목록에서 해당 userId의 이름을 찾는다. 없으면 null
     private String userNameOf(List<UserNameResponseDto> userNames, String userId) {
         return userNames.stream()
                 .filter( userName -> userName.getUserId().equals(userId) )
