@@ -5,6 +5,7 @@ import com.example.spring.boardservice.dto.BoardSearchRequestDto;
 import com.example.spring.boardservice.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +22,8 @@ public class BoardApiController {
             @RequestParam(defaultValue = "10") int size
             ) {
         System.out.println("dto " + dto);
-        return null;
+
+        return boardService.searchBoards(dto, PageRequest.of(page - 1, size));
     }
 
 
