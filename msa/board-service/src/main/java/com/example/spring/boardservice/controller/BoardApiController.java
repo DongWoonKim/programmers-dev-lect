@@ -21,8 +21,6 @@ public class BoardApiController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
             ) {
-        System.out.println("dto " + dto);
-
         return boardService.searchBoards(dto, PageRequest.of(page - 1, size));
     }
 
