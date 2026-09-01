@@ -29,11 +29,15 @@ public class BoardService {
         Page<BoardListItemResponseDto> page = boardRepository.searchBoards(dto, pageable);
 
         // boardRepository에서 가져온 ID추려서 auth-service로 요청해서 userName들 받아오기
-
+        List<UserNameResponseDto> userNameResponseDtos = fetchNames(
+                page.getContent().stream().map(BoardListItemResponseDto::getUserId).distinct().toList()
+        );
 
         return null;
     }
 
+    // auth가 죽어도 게시판 조회 자체는 살아야 하므로(부분 실패 허용)
+    // 실패 시 빈 목록을 돌려 이름 없이 응답한다. -> 장애 전파를 끊는다.
     private List<UserNameResponseDto> fetchNames(List<String> userIds) {
 
         if ( userIds == null || userIds.isEmpty() ) {
