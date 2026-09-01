@@ -53,5 +53,12 @@ public class BoardService {
 
     }
 
-
+    // 
+    private String userNameOf(List<UserNameResponseDto> userNames, String userId) {
+        return userNames.stream()
+                .filter( userName -> userName.getUserId().equals(userId) )
+                .map(UserNameResponseDto::getUserName)
+                .findFirst()
+                .orElse(null);
+    }
 }

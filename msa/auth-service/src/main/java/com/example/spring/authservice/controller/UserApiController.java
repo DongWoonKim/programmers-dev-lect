@@ -64,7 +64,7 @@ public class UserApiController {
 
     @GetMapping("/names")
     public List<UserNameResponseDto> getUserNames(@RequestParam List<String> userIds) {
-        return null;
+        return userService.getUserNames(userIds);
     }
 
 }

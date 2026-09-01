@@ -26,7 +26,7 @@ public class ServiceTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if ( INTERNAL_API_PREFIX.startsWith(request.getRequestURI()) ) {
+        if ( request.getRequestURI().startsWith(INTERNAL_API_PREFIX) ) {
 
             String token = request.getHeader(SERVICE_TOKEN_HEADER);
 
