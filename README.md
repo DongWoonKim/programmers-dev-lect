@@ -13,16 +13,29 @@
 
 ## 📌 수업
 <details open>
-<summary><b>📅 26.08</b></summary>
+<summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.01</b></summary>
+
+1. [kotlin-part-1: C, D, E, F(1,2)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
+2. [msa: X-Service-Token, searchBoards)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+</bockquote>
+</details>
+
+<details>
+<summary><b>📅 26.08</b></summary>
+<blockquote>
+<details>
 <summary><b>08.31</b></summary>
 
 1. [kotlin-part-1: A, B](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
 2. [msa:  getUserInfo, searchBoards)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
-<details open>
+<details>
 <summary><b>08.28</b></summary>
 
 1. [msa: signup, login](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
