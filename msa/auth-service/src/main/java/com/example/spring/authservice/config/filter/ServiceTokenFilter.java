@@ -30,8 +30,17 @@ public class ServiceTokenFilter extends OncePerRequestFilter {
 
         if ( INTERNAL_API_PATHS.contains(request.getRequestURI()) ) {
 
+            String token = request.getHeader(SERVICE_TOKEN_HEADER);
 
+            if ( !serviceToken.equals(token) ) {
+                log.warn("[내부 API 차단] 서비스 토큰 불일치 : {}", request.getRequestURI());
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write("status code : 401, message : 서비스 간 인증이 필요합니다.");
+                return;
+            }
         }
 
+        filterChain.doFilter(request, response);
     }
 }
