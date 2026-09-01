@@ -32,14 +32,40 @@
 // 순수 함수 : 인자만 가지고 계산하고, 바깥에 아무런 영향을 주지 않는다.
 fun pureAdd(a: Int, b: Int): Int = a + b
 
-// 순숨 함수가 아닌 함수 : 바깥 변수 total을 바꾼다.
+// 순수 함수가 아닌 함수 : 바깥 변수 total을 바꾼다.
 var total = 0
 fun impureAdd(a: Int): Int {
     total += a
     return total
 }
 
+// 고차 함수 - 함수를 인자로 받는 함수
+// operator: (Int, Int) -> Int : Int 두 개를 받아서 Int를 돌려주는 함수
+fun calculate(a: Int, b: Int, operator: (Int, Int) -> Int): Int {
+   return operator(a, b) // 넘겨받은 함수를 여기서 실행한다.
+}
+
+// 고차 함수 - 함수를 반환하는 함수
+// 반환 자료형이 "(Int) -> Int". 즉 함수를 돌려준다.
+fun makeAdder(n: Int): (Int) -> Int {
+    return { x -> x + n } // n을 기억하는 새 함수를 만들어 돌려준다.
+}
+
+// 참조로 넘기기 위한 보통 함수(재료)
+fun sumFun(a: Int, b: Int): Int = a + b
+fun minusFun(a: Int, b: Int): Int = a - b
+
 
 fun main() {
+
+    println( calculate(3, 4, {a, b -> a + b}) )
+    println( calculate(3, 4, {a, b -> a - b}) )
+    println( calculate(3, 4, {a, b -> a * b}) )
+
+    val add10 = makeAdder(10)   // 10을 더하는 함수를 만들어 받는다.
+    val add100 = makeAdder(100) // 100을 더하는 함수를 만들어 받는다.
+
+    println( add10(5) )
+    println( add100(5) )
 
 }
