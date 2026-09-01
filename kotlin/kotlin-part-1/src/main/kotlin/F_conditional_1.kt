@@ -26,9 +26,27 @@
 // * 스마트 캐스트(Smart Cast)
 //   if (값 is 자료형) 으로 검사하고 나면, 그 안에서는 코틀린이 알아서 그 자료형으로 취급해 준다.
 
+// 두 수 중 큰 값을 돌려주는 함수 - if 가 값을 만들어 내므로 = 로 바로 연결할 수 있다.
+fun maxOfTwo(a: Int, b: Int): Int = if (a > b) a else b
 
+// 점수를 학점으로 바꾸는 함수 - else if 로 여러 갈래를 만든다.
+fun getGrade(score: Int): String {
+    if (score >= 90) {
+        return "A"
+    } else if (score >= 80) {
+        return "B"
+    } else if (score >= 70) {
+        return "C"
+    } else {
+        return "F"
+    }
+}
 
-
+// 위 함수를 if 표현식으로 다시 쓰면 return 을 한 번만 써도 된다.
+fun getGrade2(score: Int): String = if (score >= 90) "A"
+                                    else if (score >= 80) "B"
+                                    else if (score >= 70) "C"
+                                    else "F"
 
 
 
