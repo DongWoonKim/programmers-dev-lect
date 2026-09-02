@@ -7,7 +7,9 @@ import com.example.spring.webservice.dto.CommentWriteRequestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 // 헤더를 파라미터로 받는 이유
 // Feign은 서블릿 요청과 무관한 새 HTTP 요청을 만들기 때문에,
@@ -38,5 +40,14 @@ public interface BoardClient {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @PathVariable long boardId,
             @RequestBody CommentWriteRequestDto requestDto
-        );
+    );
+
+    @PostMapping(value = "/api/boards", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void saveBoard(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestPart("title") String title,
+            @RequestPart("content") String content,
+            @RequestPart("userId") String userId,
+            @RequestPart(value = "file", required = false) MultipartFile file
+    );
 }
