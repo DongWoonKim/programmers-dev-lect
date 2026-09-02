@@ -42,6 +42,6 @@ public class BoardApiController {
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
             @ModelAttribute BoardWriteRequestDto dto
     ) {
-
+        boardService.saveBoard(authorization, dto);
     }
 }
