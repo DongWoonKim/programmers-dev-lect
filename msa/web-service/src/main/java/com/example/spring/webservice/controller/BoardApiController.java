@@ -27,7 +27,10 @@ public class BoardApiController {
     }
 
     @GetMapping("/{id}/with-comments")
-    public void getBoardWithComments() {
+    public void getBoardWithComments(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @PathVariable long id
+    ) {
 
     }
 
