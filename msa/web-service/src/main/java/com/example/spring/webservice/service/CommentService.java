@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CommentService {
 
-    private BoardClient boardClient;
+    private final BoardClient boardClient;
 
     public void addComment(
             String authorization,
