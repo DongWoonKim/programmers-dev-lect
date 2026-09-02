@@ -19,6 +19,19 @@ fun getChoice(): Int {
     return readln().toInt()
 }
 
+fun getMoney(): Int {
+    println("돈을 넣으시오.")
+    return readln().toInt()
+}
+
+fun calcMoney(totalMoney: Int, price: Int): Int {
+    return totalMoney - price
+}
+
+fun calcMoneyException() {
+    println("잔돈이 부족합니다.")
+}
+
 fun main() {
 
     var totalMoney = 0
@@ -28,8 +41,50 @@ fun main() {
         printMenu(totalMoney)
 
         val choice = getChoice()
+        var result = -1
 
         when (choice) {
+            1 -> {
+                result = calcMoney(totalMoney, COKE);
+                if ( result < 0 ) {
+                    calcMoneyException()
+                } else {
+                    totalMoney = result
+                    println("콜라가 나왔습니다.")
+                }
+
+            }
+            2 -> {
+                result = calcMoney(totalMoney, CIDER);
+                if ( result < 0 ) {
+                    calcMoneyException()
+                } else {
+                    totalMoney = result
+                    println("사이다가 나왔습니다.")
+                }
+
+            }
+            3 -> {
+                result = calcMoney(totalMoney, FANTA);
+                if ( result < 0 ) {
+                    calcMoneyException()
+                } else {
+                    totalMoney = result
+                    println("환타가 나왔습니다.")
+                }
+
+            }
+            4 -> {
+                result = calcMoney(totalMoney, WATER);
+                if ( result < 0 ) {
+                    calcMoneyException()
+                } else {
+                    totalMoney = result
+                    println("물이 나왔습니다.")
+                }
+
+            }
+            5 -> totalMoney += getMoney()
             6 -> {
                 println("\n잔돈 ${totalMoney}원이 반환되었습니다.")
                 return
