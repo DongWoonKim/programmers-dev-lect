@@ -16,6 +16,13 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.02</b></summary>
+
+1. [kotlin-part-1, 2: 1- G, H, I, 2-A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
+2. [msa: detail, comment, write)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details>
 <summary><b>09.01</b></summary>
 
 1. [kotlin-part-1: C, D, E, F(1,2)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
