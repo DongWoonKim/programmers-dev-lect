@@ -24,5 +24,10 @@ public class BoardApiController {
         return boardService.searchBoards(dto, PageRequest.of(page - 1, size));
     }
 
+    @GetMapping("/{id}/with-comments")
+    public void getBoardWithComments( @PathVariable("id") long id ) {
+
+    }
+
 
 }
