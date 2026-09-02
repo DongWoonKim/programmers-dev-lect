@@ -16,10 +16,10 @@ public class CommentApiController {
     @PostMapping
     public void addComment(
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
-            @PathVariable("boardId") long boardId,
+            @PathVariable long boardId,
             @RequestBody CommentWriteRequestDto dto
             ) {
-
+        commentService.addComment(authorization, boardId, dto);
     }
 
 }

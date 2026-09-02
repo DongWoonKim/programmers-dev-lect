@@ -1,6 +1,7 @@
 package com.example.spring.webservice.service;
 
 import com.example.spring.webservice.client.BoardClient;
+import com.example.spring.webservice.dto.CommentWriteRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,5 +10,13 @@ import org.springframework.stereotype.Service;
 public class CommentService {
 
     private BoardClient boardClient;
+
+    public void addComment(
+            String authorization,
+            long boardId,
+            CommentWriteRequestDto requestDto
+    ){
+        boardClient.addComment(authorization, boardId, requestDto);
+    }
 
 }
