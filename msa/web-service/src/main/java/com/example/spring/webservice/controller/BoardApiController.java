@@ -26,4 +26,9 @@ public class BoardApiController {
         return boardService.searchBoard(authorization, boardSearchRequestDto, page, size);
     }
 
+    @GetMapping("/{id}/with-comments")
+    public void getBoardWithComments() {
+
+    }
+
 }
