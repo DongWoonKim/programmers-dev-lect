@@ -1,6 +1,7 @@
 package com.example.spring.webservice.controller;
 
 import com.example.spring.webservice.dto.CommentWriteRequestDto;
+import com.example.spring.webservice.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/boards/{boardId}/comments")
 public class CommentApiController {
 
+    private final CommentService commentService;
 
     @PostMapping
     public void addComment(
