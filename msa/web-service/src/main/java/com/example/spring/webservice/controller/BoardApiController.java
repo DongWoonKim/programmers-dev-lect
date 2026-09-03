@@ -1,9 +1,6 @@
 package com.example.spring.webservice.controller;
 
-import com.example.spring.webservice.dto.BoardPageResponseDto;
-import com.example.spring.webservice.dto.BoardSearchRequestDto;
-import com.example.spring.webservice.dto.BoardWithCommentsResponseDto;
-import com.example.spring.webservice.dto.BoardWriteRequestDto;
+import com.example.spring.webservice.dto.*;
 import com.example.spring.webservice.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -43,5 +40,13 @@ public class BoardApiController {
             @ModelAttribute BoardWriteRequestDto dto
     ) {
         boardService.saveBoard(authorization, dto);
+    }
+
+    @GetMapping("/{id}")
+    public BoardDetailResponseDto getBoardDetail(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @PathVariable long id
+    ) {
+        return null;
     }
 }
