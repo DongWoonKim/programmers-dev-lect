@@ -37,4 +37,15 @@ public class BoardService {
     public BoardDetailResponseDto getBoardDetail(String authorization, long id) {
         return boardClient.getBoardDetail(authorization, id);
     }
+
+    public void updateBoard(String authorization, long id, BoardUpdateRequestDto dto) {
+        boardClient.updateBoard(
+                authorization,
+                id,
+                dto.getTitle(),
+                dto.getContent(),
+                emptyToNull(dto.getFile()),
+                String.valueOf(dto.isFileFlag())
+        );
+    }
 }

@@ -54,4 +54,13 @@ public interface BoardClient {
             @PathVariable long id
     );
 
+    @PutMapping(value = "/api/boards/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void updateBoard(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @PathVariable long id,
+            @RequestPart("title") String title,
+            @RequestPart("content") String content,
+            @RequestPart(value = "file", required = false) MultipartFile file,
+            @RequestPart("fileFlag") String fileFlag
+    );
 }

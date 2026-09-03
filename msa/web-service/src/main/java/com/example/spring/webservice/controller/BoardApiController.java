@@ -49,4 +49,14 @@ public class BoardApiController {
     ) {
         return boardService.getBoardDetail(authorization, id);
     }
+
+    @PutMapping("/{id}")
+    public void updateBoard(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @PathVariable long id,
+            @ModelAttribute BoardUpdateRequestDto dto
+    ) {
+        boardService.updateBoard(authorization, id, dto);
+    }
+
 }
