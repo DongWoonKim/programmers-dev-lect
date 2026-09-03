@@ -19,6 +19,45 @@ fun printMenu(): Int {
     return readln().toInt()
 }
 
+// 회원 추가
+fun addMember( members: Array<Array<String>> ) {
+
+    if ( memberCnt == totalCnt ) {
+        println("회원이 꽉 찼습니다.")
+        return
+    }
+
+    println("이름을 입력하세요.")
+    val name = readln()
+    println("이메일을 입력하세요.")
+    val email = readln()
+    println("연락처를 입력하세요.")
+    val phone = readln()
+
+    if ( findIndex(members, 1, email) != -1 ) {
+        println("이미 존재하는 회원입니다.")
+        return
+    }
+
+    members[memberCnt][0] = name
+    members[memberCnt][1] = email
+    members[memberCnt][2] = phone
+
+    memberCnt++
+    println("회원이 등록되었습니다.")
+}
+
+fun findIndex(members: Array<Array<String>>, col: Int, value: String): Int {
+
+    for ( idx in 0 until memberCnt ) {
+        if ( value == members[idx][col] ) {
+            return idx
+        }
+    }
+
+    return -1
+}
+
 fun main() {
 
     val num = printPricePlan()
