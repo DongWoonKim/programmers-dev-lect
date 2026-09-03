@@ -60,6 +60,19 @@ fun selectEmail(members: Array<Array<String>>) {
     printMember( members[idx] )
 }
 
+fun selectName(members: Array<Array<String>>) {
+    println("이름을 입력하세요.")
+    val name = readln()
+
+    val idx = findIndex(members, 0, name)
+    if ( idx == -1 ) {
+        println("찾으시는 정보가 없습니다.")
+        return
+    }
+
+    printMember( members[idx] )
+}
+
 fun printMember(member: Array<String>) {
     println("[이름] ${member[0]}, [이메일] ${member[1]}, [연락처] ${member[3]}")
 }
@@ -87,6 +100,7 @@ fun main() {
         when (printMenu()) {
             1 -> addMember(members)
             2 -> selectEmail(members)
+            3 -> selectName(members)
             7 -> {
                 println("이용해주셔서 감사합니다.")
                 return
