@@ -52,5 +52,13 @@ public class BoardApiController {
                 .build();
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void updateBoard(
+            @PathVariable long id,
+            @RequestBody BoardUpdateRequestDto dto
+    ) {
+        boardService.updateBoard(id, dto);
+    }
+
 
 }
