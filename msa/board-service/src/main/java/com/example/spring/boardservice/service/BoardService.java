@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +26,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final AuthClient authClient;
+    private final FileService fileService;
 
     // repository는 userId까지만 채워서 돌려준다.
     // 페이지에 등장한 userId를 "모아서 한 번" auth에 요청(벌크)
@@ -82,7 +84,20 @@ public class BoardService {
                 .orElse(null);
     }
 
+    @Transactional
     public void saveBoard(String userId, String title, String content, MultipartFile file) {
+
+        String filePath = fileService.storeFile(file);
+
+        boardRepository.save(
+                Board.builder()
+                        .userId(userId)
+                        .title(title)
+                        .content(content)
+                        .filePath(filePath)
+                        .created(LocalDateTime.now())
+                        .build()
+        );
 
     }
 }
