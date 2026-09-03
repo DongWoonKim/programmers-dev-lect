@@ -85,6 +85,33 @@ fun selectAll(members: Array<Array<String>>) {
     }
 }
 
+fun updateMember(members: Array<Array<String>>) {
+    println("수정할 회원의 이메일을 입력하세요.")
+    val email = readln()
+
+    val idx = findIndex(members, 1, email)
+    if ( idx == -1 ) {
+        println("찾으시는 정보가 없습니다.")
+        return
+    }
+
+    println("현재 정보 -> ")
+    printMember( members[idx] )
+
+    println("새 이름을 입력하세요.")
+    members[idx][0] = readln()
+    println("새 이메일을 입력하세요.")
+    members[idx][1] = readln()
+    println("새 연락처를 입력하세요.")
+    members[idx][2] = readln()
+
+    println("수정이 완료되었습니다.")
+}
+
+fun deleteMember(members: Array<Array<String>>) {
+
+}
+
 fun printMember(member: Array<String>) {
     println("[이름] ${member[0]}, [이메일] ${member[1]}, [연락처] ${member[3]}")
 }
@@ -114,6 +141,7 @@ fun main() {
             2 -> selectEmail(members)
             3 -> selectName(members)
             4 -> selectAll(members)
+            5 -> updateMember(members)
             7 -> {
                 println("이용해주셔서 감사합니다.")
                 return
