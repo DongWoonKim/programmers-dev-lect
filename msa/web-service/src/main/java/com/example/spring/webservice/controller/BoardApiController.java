@@ -59,4 +59,13 @@ public class BoardApiController {
         boardService.updateBoard(authorization, id, dto);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteBoard(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @PathVariable long id,
+            @RequestBody BoardDeleteRequestDto dto
+    ) {
+        boardService.deleteBoard(authorization, id, dto);
+    }
+
 }

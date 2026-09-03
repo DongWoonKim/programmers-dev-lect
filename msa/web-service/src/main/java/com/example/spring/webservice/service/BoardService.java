@@ -48,4 +48,8 @@ public class BoardService {
                 String.valueOf(dto.isFileFlag())
         );
     }
+
+    public void deleteBoard(String authorization, long id, BoardDeleteRequestDto dto) {
+        boardClient.deleteBoard(authorization, id, dto);
+    }
 }

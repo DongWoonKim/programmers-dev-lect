@@ -63,4 +63,11 @@ public interface BoardClient {
             @RequestPart(value = "file", required = false) MultipartFile file,
             @RequestPart("fileFlag") String fileFlag
     );
+
+    @DeleteMapping("/api/boards/{id}")
+    void deleteBoard(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @PathVariable long id,
+            @RequestBody BoardDeleteRequestDto dto
+    );
 }
