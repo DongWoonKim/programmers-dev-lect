@@ -32,6 +32,104 @@
 // toString(), equals(), hashCode()
 
 
+open class Animal(val name: String) {
+
+    open fun sound() {
+        println("$name ...")
+    }
+
+    fun sleep() {
+        println("$name sleep")
+    }
+
+    open val legs: Int = 4
+
+    override fun toString(): String {
+        return "Animal(name=$name)"
+    }
+}
+
+class Dog(name: String) : Animal(name) {
+    override fun sound() {
+        println("$name : 멍멍~")
+    }
+}
+
+class Cat(name: String) : Animal(name) {
+    override fun sound() {
+        super.sound()
+        println("$name : 야옹~")
+    }
+}
+
+class Bird(name: String) : Animal(name) {
+
+    override val legs: Int = 2
+
+    override fun sound() {
+        println("$name : 짹짹~")
+    }
+}
+
+// ------------------------------------------------------------
+// 예제 1. 상속 기본 - 물려받은 것 사용하기
+// ------------------------------------------------------------
+fun c_exam1() {
+    val dog = Dog("바둑이")
+
+    // 부모에서 물려받은 프로퍼티
+    println(dog.name)               // 바둑이
+    println(dog.legs)               // 4  (부모의 값 그대로)
+
+    // 부모에서 물려받은 메서드. Dog 에는 sleep() 이 없지만 쓸 수 있다.
+    dog.sleep()                     // 바둑이 이(가) 잠을 잡니다.
+
+    // 자식에서 재정의한 메서드
+    dog.sound()                     // 바둑이 : 멍멍!
+}
+
+// ------------------------------------------------------------
+// 예제 2. 오버라이딩과 super
+// ------------------------------------------------------------
+fun c_exam2() {
+    val animal = Animal("동물")
+    val dog = Dog("바둑이")
+    val cat = Cat("나비")
+
+    // 같은 이름의 메서드지만 클래스마다 동작이 다르다.
+    animal.sound()                  // 동물 : ...
+    dog.sound()                     // 바둑이 : 멍멍!
+
+    // Cat 은 super.sound() 로 부모 것을 먼저 부른다. 두 줄이 출력된다.
+    cat.sound()                     // 나비 : ...  /  나비 : 야옹!
+
+    // open 이 없는 sleep() 은 재정의할 수 없으므로 어느 클래스든 동작이 같다.
+    dog.sleep()
+    cat.sleep()
+}
+
+// ------------------------------------------------------------
+// 예제 3. 프로퍼티 오버라이드와 toString
+// ------------------------------------------------------------
+fun c_exam3() {
+    val dog = Dog("바둑이")
+    val bird = Bird("짹짹이")
+
+    println("${dog.name} 다리: ${dog.legs}개")      // 4개 (부모 값)
+    println("${bird.name} 다리: ${bird.legs}개")    // 2개 (재정의한 값)
+    bird.sound()                                   // 짹짹이 : 짹짹!
+
+    // Animal 에서 toString() 을 재정의했으므로, 자식들도 그것을 물려받는다.
+    println(dog)                                   // Animal(name=바둑이)
+    println(bird)                                  // Animal(name=짹짹이)
+    // 재정의하지 않았다면 Dog@1b6d3586 같은 알아보기 힘든 값이 나온다.
+}
+
+fun main() {
+    c_exam1()     // 상속 기본
+    c_exam2()     // 오버라이딩과 super
+    c_exam3()     // 프로퍼티 오버라이드와 toString
+}
 
 
 
