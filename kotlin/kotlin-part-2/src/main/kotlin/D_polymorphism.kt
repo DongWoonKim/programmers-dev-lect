@@ -27,3 +27,24 @@
 
 
 // 4. 다시 자식 타입으로 - is 와 as
+//   if (shape is Circle) { shape.radius }     // is 로 검사하면 스마트 캐스트가 된다
+//   val c = shape as Circle                   // 실패하면 예외
+//   val c = shape as? Circle                  // 실패하면 null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
