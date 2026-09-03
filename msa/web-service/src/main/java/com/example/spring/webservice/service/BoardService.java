@@ -1,10 +1,7 @@
 package com.example.spring.webservice.service;
 
 import com.example.spring.webservice.client.BoardClient;
-import com.example.spring.webservice.dto.BoardPageResponseDto;
-import com.example.spring.webservice.dto.BoardSearchRequestDto;
-import com.example.spring.webservice.dto.BoardWithCommentsResponseDto;
-import com.example.spring.webservice.dto.BoardWriteRequestDto;
+import com.example.spring.webservice.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,4 +34,7 @@ public class BoardService {
         return (file == null || file.isEmpty()) ? null : file;
     }
 
+    public BoardDetailResponseDto getBoardDetail(String authorization, long id) {
+        return boardClient.getBoardDetail(authorization, id);
+    }
 }

@@ -47,6 +47,6 @@ public class BoardApiController {
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
             @PathVariable long id
     ) {
-        return null;
+        return boardService.getBoardDetail(authorization, id);
     }
 }
