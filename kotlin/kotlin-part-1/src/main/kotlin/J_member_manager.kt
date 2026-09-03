@@ -47,6 +47,23 @@ fun addMember( members: Array<Array<String>> ) {
     println("회원이 등록되었습니다.")
 }
 
+fun selectEmail(members: Array<Array<String>>) {
+    println("이메일을 입력하세요.")
+    val email = readln()
+
+    val idx = findIndex(members, 1, email)
+    if ( idx == -1 ) {
+        println("찾으시는 정보가 없습니다.")
+        return
+    }
+
+    printMember( members[idx] )
+}
+
+fun printMember(member: Array<String>) {
+    println("[이름] ${member[0]}, [이메일] ${member[1]}, [연락처] ${member[3]}")
+}
+
 fun findIndex(members: Array<Array<String>>, col: Int, value: String): Int {
 
     for ( idx in 0 until memberCnt ) {
@@ -68,6 +85,8 @@ fun main() {
     while (true) {
 
         when (printMenu()) {
+            1 -> addMember(members)
+            2 -> selectEmail(members)
             7 -> {
                 println("이용해주셔서 감사합니다.")
                 return
