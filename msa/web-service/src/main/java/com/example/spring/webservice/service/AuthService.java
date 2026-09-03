@@ -3,10 +3,8 @@ package com.example.spring.webservice.service;
 import com.example.spring.webservice.client.AuthClient;
 import com.example.spring.webservice.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 @Service
 @RequiredArgsConstructor
