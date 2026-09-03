@@ -33,7 +33,7 @@
 <summary><b>09.01</b></summary>
 
 1. [kotlin-part-1: C, D, E, F(1,2)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
-2. [msa: X-Service-Token, searchBoards)](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+2. [msa: X-Service-Token, searchBoards](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
 </bockquote>
