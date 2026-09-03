@@ -73,6 +73,18 @@ fun selectName(members: Array<Array<String>>) {
     printMember( members[idx] )
 }
 
+fun selectAll(members: Array<Array<String>>) {
+    if ( memberCnt == 0 ) {
+        println("등록된 회원이 없습니다.")
+        return
+    }
+
+    for (i in 0 until memberCnt) {
+        print("${i + 1}. ")
+        printMember( members[i] )
+    }
+}
+
 fun printMember(member: Array<String>) {
     println("[이름] ${member[0]}, [이메일] ${member[1]}, [연락처] ${member[3]}")
 }
@@ -101,6 +113,7 @@ fun main() {
             1 -> addMember(members)
             2 -> selectEmail(members)
             3 -> selectName(members)
+            4 -> selectAll(members)
             7 -> {
                 println("이용해주셔서 감사합니다.")
                 return
