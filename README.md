@@ -18,15 +18,17 @@
 <details open>
 <summary><b>09.03</b></summary>
 
-1. [kotlin-part-1, 2: 1- J, 2-B, C, D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
-2. [msa: write, update, delete](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+1. [kotlin-part-1: 1-J](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
+2. [kotlin-part-2: 2-B, C, D](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
+3. [msa: write, update, delete](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
 <details>
 <summary><b>09.02</b></summary>
 
-1. [kotlin-part-1, 2: 1- G, H, I, 2-A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
-2. [msa: detail, comment, write](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+1. [kotlin-part-1: 1-G, H, I](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
+2. [kotlin-part-2: 2-A](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
+3. [msa: detail, comment, write](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
 <details>
