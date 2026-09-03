@@ -100,4 +100,12 @@ public class BoardService {
         );
 
     }
+
+    public Board getBoardDetail(long id) {
+        return boardRepository.findById(id)
+                .orElseThrow(
+                        () -> new BoardNotFoundException("[BOARD] 게시글을 찾을 수 없습니다. id = " + id)
+                );
+    }
+
 }
