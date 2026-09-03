@@ -109,7 +109,28 @@ fun updateMember(members: Array<Array<String>>) {
 }
 
 fun deleteMember(members: Array<Array<String>>) {
+    println("삭제할 회원의 이메일을 입력하세요.")
+    val email = readln()
 
+    val idx = findIndex(members, 1, email)
+    if ( idx == -1 ) {
+        println("찾으시는 정보가 없습니다.")
+        return
+    }
+
+    for (i in idx until memberCnt - 1) {
+        members[i][0] = members[idx + 1][0]
+        members[i][1] = members[idx + 1][1]
+        members[i][2] = members[idx + 1][2]
+    }
+
+    memberCnt--
+
+    members[memberCnt][0] = ""
+    members[memberCnt][1] = ""
+    members[memberCnt][2] = ""
+
+    println("삭제가 완료되었습니다.")
 }
 
 fun printMember(member: Array<String>) {
@@ -142,6 +163,7 @@ fun main() {
             3 -> selectName(members)
             4 -> selectAll(members)
             5 -> updateMember(members)
+            6 -> deleteMember(members)
             7 -> {
                 println("이용해주셔서 감사합니다.")
                 return
