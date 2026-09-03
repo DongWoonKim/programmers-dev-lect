@@ -23,5 +23,39 @@ class Person(val name: String) {
  */
 
 // 3. 매개변수 기본 값
+// 생성자에도 기본값을 줄 수 있다.
+//      class Book(val title: String, val price: Int = 1000)
 
 // 4. 부 생성자
+// constructor 키워드로 생성자를 추가한다. 여러 개 만들 수 있다.
+// constructor(title: String) : this(title, 1000)
+
+// 부 생성자는 반드시 this(...)로 주 생성자를 호출해야 한다.
+// 어떤 생성자로 만들어도 init블록은 항상 실행된다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
