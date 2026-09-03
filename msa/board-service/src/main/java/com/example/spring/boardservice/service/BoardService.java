@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -79,5 +80,9 @@ public class BoardService {
                 .map(UserNameResponseDto::getUserName)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void saveBoard(String userId, String title, String content, MultipartFile file) {
+
     }
 }
