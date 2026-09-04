@@ -22,4 +22,9 @@ public interface AuthClient {
     @GetMapping("/api/users/info")
     UserInfoResponseDto getUserInfo(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization);
 
+    @PostMapping("/api/users/logout")
+    ResponseEntity<LogoutResponseDto> logout(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestHeader(HttpHeaders.COOKIE) String cookie
+    );
 }
