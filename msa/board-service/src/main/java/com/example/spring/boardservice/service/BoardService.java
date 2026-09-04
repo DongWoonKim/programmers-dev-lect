@@ -138,4 +138,9 @@ public class BoardService {
         fileService.deleteFile(dto.getFilePath());
 
     }
+
+    public List<BoardAuthorStatsResponseDto> getAuthorStats(long minCount) {
+
+        return null;
+    }
 }

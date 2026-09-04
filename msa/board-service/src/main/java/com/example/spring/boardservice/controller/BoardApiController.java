@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -90,6 +91,11 @@ public class BoardApiController {
                 .body(resource);
     }
 
-
+    @GetMapping("/stats/authors")
+    public List<BoardAuthorStatsResponseDto> getAuthors(
+            @RequestParam long minCount
+    ) {
+        return boardService.getAuthorStats( minCount );
+    }
 
 }
