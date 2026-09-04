@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -56,5 +58,9 @@ public class BoardService {
 
     public ResponseEntity<byte[]> downloadFile(String authorization, String fileName) {
         return boardClient.downloadFile(authorization, fileName);
+    }
+
+    public List<BoardAuthorStatsResponseDto> getAuthorStats(String authorization, long minCount) {
+        return boardClient.getAuthorStats(authorization, minCount);
     }
 }

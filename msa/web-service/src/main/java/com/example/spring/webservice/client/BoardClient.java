@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 // 헤더를 파라미터로 받는 이유
 // Feign은 서블릿 요청과 무관한 새 HTTP 요청을 만들기 때문에,
 // 브라우저 web-service에 보낸 Authorization/Cookie 헤더가 자동으로 따라가지 않는다.
@@ -76,5 +78,11 @@ public interface BoardClient {
     ResponseEntity<byte[]> downloadFile(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @PathVariable String fileName
+    );
+
+    @GetMapping("/api/boards/stats/authors")
+    List<BoardAuthorStatsResponseDto> getAuthorStats(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestParam long minCount
     );
 }

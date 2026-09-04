@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/boards")
@@ -75,6 +77,14 @@ public class BoardApiController {
             @PathVariable String fileName
     ) {
         return boardService.downloadFile(authorization, fileName);
+    }
+
+    @GetMapping("/stats/authors")
+    public List<BoardAuthorStatsResponseDto> getAuthorStats(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @RequestParam(defaultValue = "1") long minCount
+    ) {
+        return boardService.getAuthorStats(authorization, minCount);
     }
 
 }
