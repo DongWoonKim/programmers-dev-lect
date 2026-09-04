@@ -25,3 +25,36 @@ abstract class Shape(val name: String) {
 */
 
 // 3. 객체를 만들 수 없다.
+// val v = Vehicle("무언가") // 컴파일에러!
+// 실체를 만들 수 없다.
+
+// 4. 추상 프로퍼티도 만들 수 있다.
+/*
+abstract class Vehicle {
+    abstract val wheels: Int // 값 없이 선언만
+}
+
+class Car() : Vehicle() {
+    override val wheels: Int = 4
+}
+ */
+
+// 5. 정리 : 일반 클래스 / open 클래스 / 추상 클래스
+//   class Vehicle          : 상속 불가. 객체 생성 가능.
+//   open class Vehicle     : 상속 가능. 객체 생성 가능. 재정의는 선택.
+//   abstract class Vehicle : 상속 가능. 객체 생성 불가. abstract 멤버는 재정의 필수.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
