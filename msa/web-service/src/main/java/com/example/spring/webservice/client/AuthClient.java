@@ -27,4 +27,9 @@ public interface AuthClient {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @RequestHeader(HttpHeaders.COOKIE) String cookie
     );
+
+    @PostMapping("/api/tokens/refresh")
+    ResponseEntity<RefreshTokenResponseDto> refreshToken(
+            @RequestHeader(HttpHeaders.COOKIE) String cookie
+    );
 }

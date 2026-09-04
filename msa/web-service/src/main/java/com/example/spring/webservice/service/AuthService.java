@@ -27,4 +27,8 @@ public class AuthService {
     public ResponseEntity<LogoutResponseDto> logout(String authorization, String cookie) {
         return authClient.logout(authorization, cookie);
     }
+
+    public ResponseEntity<RefreshTokenResponseDto> refreshToken(String cookie) {
+        return authClient.refreshToken(cookie);
+    }
 }
