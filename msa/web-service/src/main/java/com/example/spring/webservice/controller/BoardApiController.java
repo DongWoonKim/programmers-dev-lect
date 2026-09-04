@@ -5,6 +5,7 @@ import com.example.spring.webservice.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -68,5 +69,12 @@ public class BoardApiController {
         boardService.deleteBoard(authorization, id, dto);
     }
 
+    @GetMapping("/file/download/{fileName}")
+    ResponseEntity<byte[]> downloadFile(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @PathVariable String fileName
+    ) {
+        return boardService.downloadFile(authorization, fileName);
+    }
 
 }

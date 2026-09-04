@@ -3,6 +3,7 @@ package com.example.spring.webservice.service;
 import com.example.spring.webservice.client.BoardClient;
 import com.example.spring.webservice.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,5 +52,9 @@ public class BoardService {
 
     public void deleteBoard(String authorization, long id, BoardDeleteRequestDto dto) {
         boardClient.deleteBoard(authorization, id, dto);
+    }
+
+    public ResponseEntity<byte[]> downloadFile(String authorization, String fileName) {
+        return boardClient.downloadFile(authorization, fileName);
     }
 }

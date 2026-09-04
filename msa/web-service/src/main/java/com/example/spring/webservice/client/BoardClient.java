@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,5 +70,11 @@ public interface BoardClient {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @PathVariable long id,
             @RequestBody BoardDeleteRequestDto dto
+    );
+
+    @GetMapping("/api/boards/file/download/{fileName}")
+    ResponseEntity<byte[]> downloadFile(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @PathVariable String fileName
     );
 }
