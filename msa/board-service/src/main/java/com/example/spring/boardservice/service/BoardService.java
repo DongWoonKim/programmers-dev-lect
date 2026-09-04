@@ -141,6 +141,18 @@ public class BoardService {
 
     public List<BoardAuthorStatsResponseDto> getAuthorStats(long minCount) {
 
-        return null;
+        List<BoardAuthorStatsResponseDto> stats = boardRepository.countBoardsByAuthor(minCount);
+
+        List<UserNameResponseDto> userNames = fetchNames(
+                stats.stream().map(BoardAuthorStatsResponseDto::getUserId).distinct().toList()
+        );
+
+        return stats.stream()
+                .map( item -> new BoardAuthorStatsResponseDto(
+                        item.getUserId(),
+                        userNameOf(userNames, item.getUserId()),
+                        item.getBoardCount()
+                ))
+                .toList();
     }
 }
