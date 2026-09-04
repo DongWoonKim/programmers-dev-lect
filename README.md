@@ -16,6 +16,13 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.04</b></summary>
+
+1. [kotlin-part-2: D, E, F, G, member](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
+2. [msa: delete, logout, refreshToken](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details>
 <summary><b>09.03</b></summary>
 
 1. [kotlin-part-1: J](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-1/src/main/kotlin)
