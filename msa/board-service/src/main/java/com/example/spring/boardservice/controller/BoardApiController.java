@@ -60,5 +60,12 @@ public class BoardApiController {
         boardService.updateBoard(id, dto);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteBoard(
+            @PathVariable long id,
+            @RequestBody BoardDeleteRequestDto dto
+    ) {
+        boardService.deleteBoard(id, dto);
+    }
 
 }

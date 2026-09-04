@@ -68,4 +68,5 @@ public class BoardApiController {
         boardService.deleteBoard(authorization, id, dto);
     }
 
+
 }
