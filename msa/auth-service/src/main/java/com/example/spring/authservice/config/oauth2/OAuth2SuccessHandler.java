@@ -51,7 +51,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             String signupToken = tokenProvider.createSignupToken(principal.getProvider(), principal.getUserInfo());
 
             targetUrl = UriComponentsBuilder.fromUriString(webServiceUrl + "/users/oauth-join")
-                    .queryParam("signUpToken", signupToken)
+                    .queryParam("signupToken", signupToken)
                     .build()
                     .toUriString();
         }
