@@ -16,6 +16,12 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.07</b></summary>
+
+1. [msa: oauth2, withdraw](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
+
+</details>
+<details>
 <summary><b>09.04</b></summary>
 
 1. [kotlin-part-2: D, E, F, G, member](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
