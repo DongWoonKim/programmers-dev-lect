@@ -23,7 +23,7 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
-        String targetUrl = UriComponentsBuilder.fromUriString(webServiceUrl)
+        String targetUrl = UriComponentsBuilder.fromUriString(webServiceUrl + "/users/login")
                 .queryParam("error", exception.getLocalizedMessage())
                 .encode(StandardCharsets.UTF_8)
                 .build()
