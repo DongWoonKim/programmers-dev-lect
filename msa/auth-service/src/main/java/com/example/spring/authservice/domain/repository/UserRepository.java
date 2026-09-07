@@ -2,8 +2,10 @@ package com.example.spring.authservice.domain.repository;
 
 import com.example.spring.authservice.config.oauth2.AuthProvider;
 import com.example.spring.authservice.domain.entity.User;
+import com.example.spring.authservice.domain.entity.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUserId(String userId);
 
     Optional<User> findByProviderIdAndProvider(String providerId, AuthProvider authProvider);
+
+    List<User> findByStatusAndStatusUpdatedAtBefore(UserStatus status, LocalDateTime before);
 }

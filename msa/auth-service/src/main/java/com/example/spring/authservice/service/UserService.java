@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -115,6 +116,8 @@ public class UserService {
     // 호출 : board 글/댓글 삭제
     // 커밋 2 : WITHDRAWING -> WITHDRAWN
     // 보상 : board 실패 시 WITHDRAWING -> ACTIVE
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public WithDrawResponseDto withDraw(String userId) {
 
         User user = userRepository.findByUserId(userId)
