@@ -1,6 +1,7 @@
 package com.example.spring.authservice.service;
 
 import com.example.spring.authservice.config.oauth2.AuthProvider;
+import com.example.spring.authservice.config.oauth2.CustomOAuth2User;
 import com.example.spring.authservice.config.oauth2.OAuth2UserInfo;
 import com.example.spring.authservice.config.oauth2.OAuth2UserInfoFactory;
 import com.example.spring.authservice.domain.repository.UserRepository;
@@ -40,6 +41,27 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             );
         }
 
-        return null;
+        return userRepository.findByProviderIdAndProvider(userInfo.id(), provider)
+                .map(
+                    exsting -> {
+                        // save 불필요
+                        exsting.updateProfile(userInfo.name());
+
+                        return new CustomOAuth2User(
+                                exsting,
+                                provider,
+                                userInfo,
+                                oAuth2User.getAttributes(),
+                                nameAttributeKey
+                        );
+                    }
+                ).orElseGet(
+                        () -> CustomOAuth2User.unregistered(
+                                provider,
+                                userInfo,
+                                oAuth2User.getAttributes(),
+                                nameAttributeKey
+                        )
+                );
     }
 }

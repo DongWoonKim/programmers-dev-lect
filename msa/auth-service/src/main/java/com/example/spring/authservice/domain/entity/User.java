@@ -50,4 +50,9 @@ public class User {
     // saga
     private LocalDateTime statusUpdatedAt;
 
+    public User updateProfile(String name) {
+        this.name = name;
+        return this;
+    }
+
 }
