@@ -1,5 +1,10 @@
 server:
   port: 8082
+  #   none      → 무시 (기본값). 헤더가 와도 baseUrl은 그대로 8082
+  #   native    → 서블릿 컨테이너(톰캣의 RemoteIpValve)가 처리.
+  #               클라이언트 IP·프로토콜 복원이 중심이라 Host/포트 반영이 제한적
+  #   framework → 스프링의 ForwardedHeaderFilter가 처리
+  forward-headers-strategy: framework
 spring:
   application:
     name: auth-service
