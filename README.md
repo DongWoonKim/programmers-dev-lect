@@ -24,7 +24,7 @@
 <details>
 <summary><b>09.04</b></summary>
 
-1. [kotlin-part-2: D, E, F, G, member](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
+1. [kotlin-part-2: D, E, F, G, H, member](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
 2. [msa: delete, logout, refreshToken](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/msa)
 
 </details>
