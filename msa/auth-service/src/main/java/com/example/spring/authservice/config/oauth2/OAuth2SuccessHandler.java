@@ -56,6 +56,11 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                     .toUriString();
         }
 
+        if ( response.isCommitted() ) {
+            log.debug("Response has already been committed");
+            return;
+        }
+
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }
