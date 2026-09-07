@@ -35,4 +35,8 @@ public class AuthService {
     public ResponseEntity<SignInResponseDto> oauthSignUp(OAuthSignUpRequestDto dto) {
         return authClient.oauthSignUp(dto);
     }
+
+    public ResponseEntity<WithdrawResponseDto> withdraw(String authorization, String cookie) {
+        return authClient.withdraw(authorization, cookie);
+    }
 }

@@ -35,4 +35,7 @@ public interface AuthClient {
 
     @PostMapping("/api/users/oauth-join")
     ResponseEntity<SignInResponseDto> oauthSignUp(@RequestBody OAuthSignUpRequestDto dto);
+
+    @DeleteMapping("/api/users/me")
+    ResponseEntity<WithdrawResponseDto> withdraw(String authorization, String cookie);
 }
