@@ -101,4 +101,41 @@ public class UserService {
                 .userName(user.getName())
                 .build();
     }
+
+    // 회원탈퇴
+    // 탈퇴는 두 서비스의 커밋이 필요한 분산 작업이다.
+    // auth : 계정 상태 변경 / board : 그 사용자의 글/댓글 삭제
+    // 서로 다른 DB여서 @Transactional 하나로 묶을 수 없으므로,
+    // "로컬 커밋들의 연쇄 + 실패 시 보상"으로 전체를 원자적'처럼' 만든다 => Saga패턴
+
+    // 설계
+    // 커밋 1 : ACTIVE -> WITHDRAWING (보상 가능한 준비 단계 먼저)
+    // 호출 : board 글/댓글 삭제
+    // 커밋 2 : WITHDRAWING -> WITHDRAWN
+    // 보상 : board 실패 시 WITHDRAWING -> ACTIVE
+    public WithDrawResponseDto withDraw(String userId) {
+
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        // 커밋 1 : 탈퇴 진행중 마킹
+        userRepository.save(user.startWithdrawal());
+
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -99,4 +99,17 @@ public class UserApiController {
         return userService.getUserNames(userIds);
     }
 
+    @DeleteMapping("/me")
+    public WithDrawResponseDto withdraw(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        WithDrawResponseDto dto = userService.withDraw(userDetails.getUser().getUserId());
+
+        CookieUtil.deleteCookie(request, response, CookieUtil.REFRESH_TOKEN_COOKIE);
+
+        return dto;
+    }
+
 }
