@@ -1,12 +1,10 @@
 package com.example.spring.authservice.service;
 
 import com.example.spring.authservice.config.security.CustomUserDetails;
+import com.example.spring.authservice.domain.entity.Role;
 import com.example.spring.authservice.domain.entity.User;
 import com.example.spring.authservice.domain.repository.UserRepository;
-import com.example.spring.authservice.dto.SignInRequestDto;
-import com.example.spring.authservice.dto.SignInResponseDto;
-import com.example.spring.authservice.dto.SignUpRequestDto;
-import com.example.spring.authservice.dto.UserNameResponseDto;
+import com.example.spring.authservice.dto.*;
 import com.example.spring.authservice.exception.DuplicateUserIdException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,4 +71,34 @@ public class UserService {
                 .toList();
     }
 
+    public SignInResponseDto oauthSignUp(OAuthSignUpRequestDto requestDto) {
+        SignupPayloadDto payload = tokenService.getSignupPayload(requestDto.getSignupToken());
+        Role role = requestDto.getRole();
+
+        // 이미 가입돼 있으면 그대로 로그인 처리(멱등)
+        // 뒤로가기/새로고침으로 같은 토큰이 두 번 제출돼도 중복 가입이 생기지 않는다.
+        User user = userRepository.findByProviderIdAndProvider(payload.getProviderId(), payload.getProvider())
+                .orElseGet(() -> userRepository.save(
+                        User.builder()
+                                .userId(payload.getProvider().name().toLowerCase() + "_" + payload.getProviderId())
+                                .name(payload.getName())
+                                .email(payload.getEmail())
+                                .provider(payload.getProvider())
+                                .providerId(payload.getProviderId())
+                                .role(role != null ? role : Role.ROLE_USER)
+                                .build()
+                ));
+
+        TokenService.TokenPair tokenPair = tokenService.issueToken(user);
+
+        return SignInResponseDto.builder()
+                .loggedIn(true)
+                .message("가입이 완료되었습니다.")
+                .url("/")
+                .accessToken(tokenPair.accessToken())
+                .refreshToken(tokenPair.refreshToken())
+                .userId(user.getUserId())
+                .userName(user.getName())
+                .build();
+    }
 }
