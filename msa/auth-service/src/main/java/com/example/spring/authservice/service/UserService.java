@@ -121,6 +121,11 @@ public class UserService {
         // 커밋 1 : 탈퇴 진행중 마킹
         userRepository.save(user.startWithdrawal());
 
+        try {
+        } catch (Exception e) {
+
+        }
+
         return null;
     }
 }
