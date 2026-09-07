@@ -31,4 +31,8 @@ public class AuthService {
     public ResponseEntity<RefreshTokenResponseDto> refreshToken(String cookie) {
         return authClient.refreshToken(cookie);
     }
+
+    public ResponseEntity<SignInResponseDto> oauthSignUp(OAuthSignUpRequestDto dto) {
+        return authClient.oauthSignUp(dto);
+    }
 }

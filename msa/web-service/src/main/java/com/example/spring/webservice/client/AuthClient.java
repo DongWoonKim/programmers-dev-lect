@@ -32,4 +32,7 @@ public interface AuthClient {
     ResponseEntity<RefreshTokenResponseDto> refreshToken(
             @RequestHeader(HttpHeaders.COOKIE) String cookie
     );
+
+    @PostMapping("/api/users/oauth-join")
+    ResponseEntity<SignInResponseDto> oauthSignUp(@RequestBody OAuthSignUpRequestDto dto);
 }

@@ -20,6 +20,14 @@ public class AuthApiController {
         return authService.signUp(signUpRequestDto);
     }
 
+    @PostMapping("/oauth-join")
+    public SignInResponseDto oauthJoin(
+            @RequestBody OAuthSignUpRequestDto dto,
+            HttpServletResponse response
+    ) {
+        return HeaderRelayUtil.relaySetCookie(authService.oauthSignUp(dto), response);
+    }
+
     @PostMapping("/login")
     public SignInResponseDto login(
             @RequestBody SignInRequestDto signInRequestDto,
