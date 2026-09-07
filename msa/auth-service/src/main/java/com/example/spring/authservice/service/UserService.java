@@ -1,5 +1,6 @@
 package com.example.spring.authservice.service;
 
+import com.example.spring.authservice.config.client.BoardClient;
 import com.example.spring.authservice.config.security.CustomUserDetails;
 import com.example.spring.authservice.domain.entity.Role;
 import com.example.spring.authservice.domain.entity.User;
@@ -27,6 +28,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final BoardClient boardClient;
 
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {
@@ -102,7 +104,7 @@ public class UserService {
                 .build();
     }
 
-    // 회원탈퇴
+    // 회원탈퇴 - 오케스트레이션 Saga
     // 탈퇴는 두 서비스의 커밋이 필요한 분산 작업이다.
     // auth : 계정 상태 변경 / board : 그 사용자의 글/댓글 삭제
     // 서로 다른 DB여서 @Transactional 하나로 묶을 수 없으므로,
@@ -122,11 +124,23 @@ public class UserService {
         userRepository.save(user.startWithdrawal());
 
         try {
+            // 참여자 호출 : board가 자기 로컬트랜잭션으로 글/댓글을 지운다.
+            boardClient.deleteUserContents(userId);
         } catch (Exception e) {
-
+            // 보상 : 이미 커밋된 상태 변경을 반대 연산으로 되돌린다.
+            userRepository.save(user.cancelWithdrawal());
+            log.error("[탈퇴 saga 보상] board 정리 실패로 계정 상태 원복. userId : {}", userId, e);
+            throw new IllegalStateException("탈퇴 처리에 실패했습니다. 잠시 수 다시 시도해주세요.");
         }
 
-        return null;
+        // 커밋 2 : 탈퇴 확정
+        userRepository.save(user.completeWithdrawal());
+        log.info("[탈퇴 saga 완료] userId : {}", userId);
+
+        return WithDrawResponseDto.builder()
+                .message("탈퇴가 완료되었습니다.")
+                .url("/users/login")
+                .build();
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.spring.authservice.config.client;
+package com.example.spring.authservice.config.filter;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
