@@ -164,6 +164,52 @@ fun b_exam4() {
 
 }
 
+// 5. 본문에 선언한 프로퍼티는 빠진다.
+fun b_exam5() {
+
+    val b1 = BBook("코틀린 입문")
+    val b2 = BBook("코틀린 입문")
+
+    b1.price = 1000
+    b2.price = 2000
+
+    println(b1 == b2)
+    println(b1)
+    println(setOf(b1, b2).size)
+
+    // 비교에 넣고 싶다면 주 생성자로 올려야 한다.
+
+}
+
+// 6. var 프로퍼티를 키로 쓰면
+fun b_exam6() {
+    val member = BMember("김철수", "kim@a.com", 20)
+    val set = mutableSetOf(member)
+
+    println(set.contains(member))       // true    잘 찾는다
+
+    // 그런데 넣은 뒤에 값을 바꾸면?
+    member.age = 21                     // age 는 var 다
+
+    println(set.contains(member))       // false !!   방금 넣은 그 객체인데 못 찾는다
+    println(set)                        // [BMember(name=김철수, email=kim@a.com, age=21)]
+    println(set.size)                   // 1          들어는 있다
+
+    // 왜 이럴까
+    //   Set 은 넣을 때의 hashCode 로 칸을 정해 놓았다.
+    //   age 가 바뀌면서 hashCode 가 달라졌고, 이제는 엉뚱한 칸을 찾아보게 된다.
+    //   지우지도 못한다. 사실상 잃어버린 값이 된다. (자바 HashSet 에서도 똑같이 생기는 문제다)
+
+    // 해결
+    //   Set 이나 Map 키로 쓸 data class 는 프로퍼티를 전부 val 로 만든다.
+    //   값을 바꿔야 하면 copy 로 새 객체를 만들어 다시 넣는다.
+    val safe = BMember("이영희", "lee@a.com", 30)
+    val set2 = mutableSetOf(safe)
+    set2.remove(safe)
+    set2.add(safe.copy(age = 31))       // 뺐다가 새로 넣는다
+    println(set2)
+}
+
 
 
 fun main() {
@@ -171,6 +217,8 @@ fun main() {
     b_exam2()
     b_exam3()
     b_exam4()
+    b_exam5()
+    b_exam6()
 }
 
 
