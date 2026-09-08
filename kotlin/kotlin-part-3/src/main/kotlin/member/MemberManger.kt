@@ -42,25 +42,25 @@ class MemberManger(planNo: Int) {
 
     // removeAll을 사용하면 코드가 간소해진다.
     fun deleteMember( email: String ): Boolean = members.removeAll { it.email == email }
-
+    
     /*
-    // removeAt
-    fun deleteMember(email: String): Boolean {
+        // removeAt
+        fun deleteMember(email: String): Boolean {
 
-        val idx = members.indexOfFirst { it.email = email }
-        if (idx == -1) return false
-        members.removeAt(idx)
+            val idx = members.indexOfFirst { it.email == email }
+            if (idx == -1) return false
+            members.removeAt(idx)
 
-        return true
-    }
+            return true
+        }
 
-    // remove
-    fun deleteMember2(email: String): Boolean {
+            // remove
+            fun deleteMember2(email: String): Boolean {
 
-        val member = members.find{ it.email == email }?.let { return false }
-        return members.remove(member)
-    }
-     */
+                val member = members.find{ it.email == email }?.let { return false }
+                return members.remove(member)
+            }
+             */
 
     fun updateMember(email: String, newEmail: String, name: String, phone: String): Boolean {
 
