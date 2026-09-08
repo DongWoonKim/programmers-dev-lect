@@ -98,6 +98,32 @@ class Player(val name: String) {
 
 }
 
+// 4. 클래스 위임 - 인터페이스 구현을 다른 객체에 맡긴다.
+interface Speaker {
+    fun speak(message: String)
+    fun introduce()
+}
+
+class KoreanSpeaker(val speakerName: String) : Speaker {
+    override fun speak(message: String) {
+        println("$speakerName : $message")
+    }
+
+    override fun introduce() {
+        println("$speakerName 입니다.")
+    }
+
+}
+
+// Speaker를 구현해야 하지만, 실제 일은 speaker에게 맡긴다.
+// speak() 와 introduce() 를 직접 만들지 않아도 된다.
+class Robot(speaker: Speaker) : Speaker by speaker {
+
+    override fun introduce() {
+        println("저는 로봇입니다.")
+    }
+
+}
 
 
 // ------------------------------------------------------------
@@ -177,11 +203,36 @@ fun i_exam4() {
     // 위임을 쓰면 그 규칙을 여러 프로퍼티에 재사용할 수 있다.
 }
 
+// ------------------------------------------------------------
+// 예제 5. 클래스 위임
+// ------------------------------------------------------------
+fun i_exam5() {
+    val korean = KoreanSpeaker("홍길동")
+    korean.speak("안녕하세요")           // 홍길동: 안녕하세요
+    korean.introduce()                  // 홍길동 입니다.
+
+    println("---")
+
+    // Robot 은 Speaker 를 구현했지만 speak() 를 직접 만들지 않았다.
+    val robot = Robot(korean)
+    robot.speak("삐빅")                  // 홍길동: 삐빅   <- korean 이 대신 처리했다
+    robot.introduce()                   // 저는 로봇입니다. <- 재정의한 것은 자기 것이 실행된다
+
+    println("=========")
+
+    // Robot 도 Speaker 타입이므로 다형성이 그대로 적용된다.
+    val speakers: List<Speaker> = listOf(korean, robot)
+    for (s in speakers) {
+        s.introduce()
+    }
+}
+
 fun main() {
     i_exam1()
     i_exam2()
     i_exam3()
     i_exam4()
+    i_exam5()
 }
 
 
