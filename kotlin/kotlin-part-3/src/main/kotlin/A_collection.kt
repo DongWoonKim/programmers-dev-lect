@@ -70,6 +70,19 @@ fun a_exam1() {
     println( "포도" in list ) // contains
     println(list)
 
+    // == 가 내용을 비교한다. 자바의 equals에 해당
+    println( listOf(1, 2) == listOf(1, 2) ) // true
+    println( arrayOf(1, 2) == arrayOf(1, 2)) // false 배열은 여전히 주소를 비교한다.
+
+    println( arrayOf(1, 2) )
+    println( listOf(1, 2) )
+
+    // 만드는 방법들
+    println(emptyList<Int>())                   // []       비어 있으면 자료형을 적어 준다
+    println(listOfNotNull(1, null, 3))          // [1, 3]   null 을 걸러 내며 만들기
+    println(List(5) { it * it })                // [0, 1, 4, 9, 16]
+    println((1..5).toList())                    // [1, 2, 3, 4, 5]
+    println(arrayOf(1, 2, 2).toSet())           // [1, 2]   변환하며 중복 제거
 
 }
 
