@@ -42,6 +42,33 @@ data class BBook(val title: String) {
     var price: Int = 0
 }
 
+// 1. 보통 클래스와 data class
+fun b_exam1() {
+
+    val p1 = BPlainMember("김철수", "kim@a.com")
+    val p2 = BPlainMember("김철수", "kim@a.com")
+
+    println(p1 == p2)
+    println(p1)
+
+    val d1 = BMember("김철수", "kim@a.com")
+    val d2 = BMember("김철수", "kim@a.com")
+
+    println(d1 == d2)
+    println(d1)
+    println(d1.hashCode() == d2.hashCode())
+
+    println(d1 == d2)  // equals 값비교
+    println(d1 === d2) // 주소비교
+
+    val d3 = d2
+    println(d3 === d2) // true
+
+}
+
+fun main() {
+    b_exam1()
+}
 
 
 
