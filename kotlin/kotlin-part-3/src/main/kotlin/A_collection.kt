@@ -125,10 +125,138 @@ fun a_exam2() {
 
 }
 
+// 3. List
+fun a_exam3() {
+    val fruits = listOf("사과", "바나나", "포도", "딸기")
+
+    // 3-1. 꺼내기 - 없을 때 무엇을 할지 고른다
+    println(fruits[0])                          // 사과
+    // println(fruits[10])                      // IndexOutOfBoundsException
+    println(fruits.getOrNull(10))               // null
+    println(fruits.getOrElse(10) { "없음" })     // 없음
+    println(fruits.first())                     // 사과   비어 있으면 예외
+    println(fruits.firstOrNull())               // 사과   비어 있으면 null
+    println(fruits.lastIndex)                   // 3
+    println(fruits.subList(1, 3))               // [바나나, 포도]
+
+    // 3-2. 넣고 빼기
+    val list = mutableListOf("사과", "바나나", "포도")
+    list.add(0, "딸기")                          // 그 자리에 끼워 넣기
+    list.addAll(listOf("참외", "수박"))
+    println(list.remove("참외"))                 // true   '값'으로 지운다
+    println(list.removeAt(0))                   // 딸기   '자리'로 지운다
+    list.removeAll { it.length == 3 }           // 조건으로 한꺼번에 (자바의 removeIf)
+    println(list)                               // [사과, 포도, 수박]
+
+    // 주의) 숫자 리스트에서 remove(1) 은 "값 1"이지 "1번 칸"이 아니다.
+    val nums = mutableListOf(10, 20, 30)
+    println(nums.remove(1))                     // false  값 1은 없다
+    println(nums.removeAt(1))                   // 20     1번 칸
+
+    // 3-3. 순회 - 셋 다 같은 일을 한다
+    for (f in fruits) print("$f ")
+    println()
+    fruits.forEach { print("$it ") }
+    println()
+    fruits.forEachIndexed { i, f -> print("$i:$f ") }
+    println()
+
+    // 3-4. 출력
+    println(fruits.joinToString(", "))                  // 사과, 바나나, 포도, 딸기
+    println(fruits.joinToString(" | ", "<", ">"))       // <사과 | 바나나 | 포도 | 딸기>
+
+    // 3-5. 리스트 안의 리스트. 행마다 길이가 달라도 된다.
+    val table = listOf(listOf(1, 2, 3), listOf(4, 5))
+    println(table[0][2])                        // 3
+    println(table.flatten())                    // [1, 2, 3, 4, 5]
+}
+
+// 4. Set
+fun a_exam4() {
+    println(setOf(1, 2, 3, 2, 1))               // [1, 2, 3]   중복이 사라진다
+    // println(setOf(1, 2)[0])                  // 컴파일 에러! Set 은 인덱스가 없다
+
+    val set = mutableSetOf("사과", "바나나")
+
+    // add 는 실제로 들어갔는지를 돌려준다. "처음 보는 값인가"를 한 줄로 확인할 수 있다.
+    println(set.add("포도"))                     // true
+    println(set.add("사과"))                     // false  이미 있어서 무시됐다
+
+    val seen = mutableSetOf<String>()
+    for (n in listOf("A", "B", "A")) println("$n : ${if (seen.add(n)) "처음" else "중복"}")
+
+    // 4-1. 중복 제거
+    val names = listOf("김철수", "이영희", "김철수")
+    println(names.toSet())                      // [김철수, 이영희]   결과가 Set
+    println(names.distinct())                   // [김철수, 이영희]   결과가 List
+
+    // 4-2. 집합 연산 - 중위 함수라 점 없이 쓴다
+    val a = setOf(1, 2, 3, 4)
+    val b = setOf(3, 4, 5)
+    println(a union b)                          // [1, 2, 3, 4, 5]
+    println(a intersect b)                      // [3, 4]
+    println(a subtract b)                       // [1, 2]
+    println(a + b)                              // union 과 같다
+    println(a - b)                              // subtract 와 같다
+
+    // 4-3. Set 을 쓰는 진짜 이유는 contains 가 빠르다는 것이다
+    // List 는 처음부터 끝까지 비교하고, Set 은 hashCode 로 위치를 바로 계산한다.
+    val big = List(200_000) { it }
+    val bigSet = big.toSet()
+    var t = System.currentTimeMillis()
+    repeat(1000) { big.contains(199_999) }
+    println("List: ${System.currentTimeMillis() - t}ms")
+    t = System.currentTimeMillis()
+    repeat(1000) { bigSet.contains(199_999) }
+    println("Set : ${System.currentTimeMillis() - t}ms")
+
+    // 그래서 걸러 낼 조건 목록은 미리 Set 으로 만들어 둔다.
+    val banned = listOf("A", "B").toSet()
+    println(listOf("A", "C", "D").filter { it !in banned })      // [C, D]
+}
+
+// 5. Map
+fun a_exam5() {
+    // 6-1 순회하는 도중에 목록을 바꾸면 안 된다 (자바와 같은 ConcurrentModificationException)
+    //   for (n in list) { if (n % 2 == 0) list.remove(n) }      <- 예외!
+    val a = mutableListOf(1, 2, 3, 4, 5)
+    a.removeAll { it % 2 == 0 }                     // 조건으로 한 번에 지운다
+    println(a)                                      // [1, 3, 5]
+    println(listOf(1, 2, 3, 4, 5).filter { it % 2 != 0 })    // 또는 새로 걸러 낸다
+
+    // 6-2. += 는 상황에 따라 다르게 동작한다
+    var v1 = listOf(1, 2)               // var + 읽기 전용 -> 새 리스트를 만들어 가리킨다
+    v1 += 3
+    val v2 = mutableListOf(1, 2)        // val + 가변      -> add 가 불린다. 원본이 바뀐다
+    v2 += 3
+    println("$v1 / $v2")                // [1, 2, 3] / [1, 2, 3]   결과는 같아 보이지만 다르다
+
+    // 6-3. toList() 는 얕은 복사다. 리스트는 새로 생기지만 안의 객체는 원본과 같다.
+    val inner = mutableListOf(1, 2)
+    val outerCopy = mutableListOf(inner).toMutableList()
+    inner.add(3)
+    println(outerCopy)                              // [[1, 2, 3]]   같이 바뀐다
+
+    // 6-4. 내가 만든 클래스는 Set / Map 키로 쓰면 이상하게 동작한다  <- 가장 중요
+    val p1 = APoint(1, 2)
+    val p2 = APoint(1, 2)                           // 내용이 완전히 같은 점
+
+    println(p1 == p2)                               // false !!
+    println(setOf(p1, p2).size)                     // 2 !!   중복 제거가 안 됐다
+
+    val m = mutableMapOf<APoint, String>()
+    m[APoint(1, 2)] = "값"
+    println(m[APoint(1, 2)])                        // null !!  방금 넣었는데 못 찾는다
+
+    // 자바와 똑같은 이유다. equals/hashCode 를 만들지 않으면 주소를 비교한다.
+}
 
 fun main() {
     a_exam1()
     a_exam2()
+    a_exam3()
+    a_exam4()
+    a_exam5()
 }
 
 
