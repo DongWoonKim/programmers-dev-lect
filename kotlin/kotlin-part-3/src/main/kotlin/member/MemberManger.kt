@@ -27,5 +27,18 @@ class MemberManger(planNo: Int) {
     // 전체조회
     fun getAll(): List<Member> = members.toList()
 
+    // 추가
+    fun addMember(member: Member): Boolean {
+
+        // 정원 체크
+        if ( isFull ) return false
+
+        // 이메일 중복 체크
+        if ( members.any { it.email == member.email } ) return false
+
+        members.add(member)
+        return true
+    }
+
 
 }
