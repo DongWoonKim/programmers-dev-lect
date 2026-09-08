@@ -31,3 +31,36 @@
 //   "값을 담아 나르는 것이 주된 일"인 클래스에 쓴다.  회원, 상품, 주문, 좌표, 응답 결과 ...
 //   반대로 동작이 중심인 클래스(MemberManager, MemberApp 같은)는 보통 클래스로 둔다.
 
+// 보통 클래스
+class BPlainMember(val name: String, val email: String)
+
+// data class
+data class BMember(val name: String, val email: String, var age: Int = 0)
+
+// 본문에 선언한 프로퍼티는 equals가 들어가지 않는다.
+data class BBook(val title: String) {
+    var price: Int = 0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
