@@ -52,6 +52,45 @@
 //   "없을 때 무엇을 돌려줄지"를 고르는 함수들이 짝으로 준비되어 있다.
 //     getOrNull / getOrElse { } / getOrDefault / getOrPut { } / first / firstOrNull
 
+val a_prices = mapOf( "아메리카노" to 4500, "카페라떼" to 5000, "바닐라라떼" to 5500 )
+
+class APoint(val x: Int, val y: Int) {
+    override fun toString() = "($x, $y)"
+}
+
+
+// 1. 자바와 달라지는 표기
+fun a_exam1() {
+
+    val list = mutableListOf("사과", "바나나")
+    list.add("포도")
+    println(list[0])
+    list[0] = "체리"
+    println(list.size)
+    println( "포도" in list ) // contains
+    println(list)
+
+
+}
+
+
+fun main() {
+    a_exam1()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
