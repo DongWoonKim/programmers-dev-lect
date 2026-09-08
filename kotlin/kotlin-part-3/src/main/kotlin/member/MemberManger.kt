@@ -42,7 +42,7 @@ class MemberManger(planNo: Int) {
 
     // removeAll을 사용하면 코드가 간소해진다.
     fun deleteMember( email: String ): Boolean = members.removeAll { it.email == email }
-    
+
     /*
         // removeAt
         fun deleteMember(email: String): Boolean {
