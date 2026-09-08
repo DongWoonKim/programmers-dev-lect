@@ -66,8 +66,73 @@ fun b_exam1() {
 
 }
 
+// 2. data class 와 컬렉션
+fun b_exam2() {
+    val list = listOf(
+        BMember("김철수", "kim@a.com"),
+        BMember("이영희", "lee@a.com"),
+        BMember("김철수", "kim@a.com")       // 위와 내용이 같은 회원
+    )
+
+    // 2-1. contains / indexOf 가 '내용'으로 동작한다
+    println(list.contains(BMember("이영희", "lee@a.com")))      // true
+    println(list.indexOf(BMember("김철수", "kim@a.com")))       // 0
+    println(BMember("이영희", "lee@a.com") in list)             // true
+    // 보통 클래스였다면 전부 false / -1 이 나온다.
+
+    // 2-2. 중복 제거가 된다
+    println(list.distinct().size)               // 2
+    println(list.toSet().size)                  // 2
+
+    // 2-3. Map 의 키로 쓸 수 있다
+    val visits = mutableMapOf<BMember, Int>()
+    visits[BMember("김철수", "kim@a.com")] = 5
+    println(visits[BMember("김철수", "kim@a.com")])              // 5   제대로 찾는다
+
+    // 2-4. 리스트끼리 비교도 내용으로 된다
+    val a = listOf(BMember("김철수", "kim@a.com"))
+    val b = listOf(BMember("김철수", "kim@a.com"))
+    println(a == b)                             // true
+
+    // 2-5. 출력이 읽을 만해진다. 디버깅할 때 이것만으로도 큰 이득이다.
+    println(list)
+}
+
+// 3. copy - 일부만 바꾼 새 객체
+fun b_exam3() {
+    val origin = BMember("김철수", "kim@a.com", 20)
+
+    // 이름만 바꾼 새 객체
+    val renamed = origin.copy(name = "김영수")
+    println(origin)                 // BMember(name=김철수, email=kim@a.com, age=20)
+    println(renamed)                // BMember(name=김영수, email=kim@a.com, age=20)
+
+    // 인자를 하나도 안 주면 그대로 복사한 새 객체가 나온다
+    val cloned = origin.copy()
+    println(cloned == origin)       // true    내용은 같고
+    println(cloned === origin)      // false   객체는 다르다
+
+    // copy 는 '고치는' 대신 '새로 만드는' 방식이다.
+    // 원본이 그대로 남으므로, 여러 곳에서 같은 객체를 공유해도 안전하다.
+    val members = listOf(
+        BMember("김철수", "kim@a.com", 20),
+        BMember("이영희", "lee@a.com", 30)
+    )
+
+    // 모두의 나이를 한 살씩 올린 '새 리스트'를 만든다. 원본은 건드리지 않는다.
+    val aged = members.map { it.copy(age = it.age + 1) }
+    println(members)                // 나이 20, 30
+    println(aged)                   // 나이 21, 31
+
+    // 주의! copy 는 얕은 복사다. 안에 든 컬렉션은 원본과 공유한다.
+    // (A_collection 예제 6-3 의 얕은 복사와 같은 이야기다)
+}
+
+
 fun main() {
     b_exam1()
+    b_exam2()
+    b_exam3()
 }
 
 
