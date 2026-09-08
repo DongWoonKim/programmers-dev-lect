@@ -54,14 +54,12 @@ class MemberManger(planNo: Int) {
             return true
         }
 
-            // remove
-            fun deleteMember2(email: String): Boolean {
-
-                val member = members.find{ it.email == email }?.let { return false }
-                return members.remove(member)
-            }
-             */
-
+        // remove
+        fun deleteMember2(email: String): Boolean {
+            val member = members.find{ it.email == email }?: return false
+            return members.remove(member)
+        }
+*/
     fun updateMember(email: String, newEmail: String, name: String, phone: String): Boolean {
 
         // indexOfFirst : 조건에 맞는 첫 번째 '위치'를 준다. 없으면 -1을 반환
