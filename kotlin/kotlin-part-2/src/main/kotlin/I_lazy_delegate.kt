@@ -1,3 +1,4 @@
+import kotlin.properties.Delegates
 
 // * 지연 초기화와 위임 - lateinit, by lazy, by
 
@@ -84,6 +85,19 @@ class AppConfig {
     val appName: String = "코틀린 강의"
 
 }
+
+// 3. Delegates.observable - 값이 바뀔 때마다 알림 받기
+class Player(val name: String) {
+
+    var hp: Int by Delegates.observable(100) {
+        _, old, new -> println("[변경] HP $old -> $new")
+    }
+
+    // 조건에 맞을 때만 값 변경을 허용한다.
+    var level: Int by Delegates.vetoable(1) { _, old, new -> old < new }
+
+}
+
 
 
 // ------------------------------------------------------------
