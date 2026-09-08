@@ -9,7 +9,15 @@ class MemberManger(planNo: Int) {
     val memberCnt: Int
         get() = members.size
     val isFull: Boolean
-        get() = totalCnt <= members.size    
+        get() = totalCnt <= members.size
+
+    // 이메일 조회
+//    fun findByEmail(email: String): Member? = members.find { member -> member.email == email }
+    fun findByEmail(email: String): Member? = members.find { it.email == email }
+
+    // 이름 조회
+//    fun findByName(name: String): Member? = members.find { member -> member.name == name }
+    fun findByName(name: String): Member? = members.find { it.name == name }
 
 
 }
