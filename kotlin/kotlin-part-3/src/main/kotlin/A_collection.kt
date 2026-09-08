@@ -86,9 +86,49 @@ fun a_exam1() {
 
 }
 
+// 2. 읽기 전용과 가변
+fun a_exam2() {
+
+    val readOnly = listOf(1, 2, 3)
+//    readOnly.add(4)
+//    readOnly[0] = 100
+
+    val mutable = mutableListOf(1, 2, 3)
+    mutable.add(4)
+    mutable[0] = 100
+    println(mutable)
+
+    // val : 변수 이름이 다른 객체를 가리키지 못하게 막는다.
+    // List : 그 객체의 내용을 바꾸지 못하게 막는다.
+    val a = mutableListOf(1, 2, 3)
+    a.add(4)
+//    a = mutableListOf(1, 2, 3)
+
+    // 읽기 전용은 불변이 아니다
+    val origin = mutableListOf(1, 2, 3)
+    val view: List<Int> = origin        // 읽기 전용 '창'을 낸 것뿐이다
+    origin.add(4)
+    println(view)                       // [1, 2, 3, 4]   같이 바뀐다!
+    println(view === origin)            // true           같은 객체다
+
+    val copy = origin.toList()          // 이 순간의 내용을 복사한 새 리스트
+    origin.add(5)
+    println("$origin / $copy")          // [1,2,3,4,5] / [1,2,3,4]
+
+    // 2-3. 안에서는 가변으로 만들고, 밖으로는 읽기 전용으로 내보내는 것이 정석이다
+    fun makeList(): List<Int> {
+        val result = mutableListOf<Int>()
+        for (i in 1..3) result.add(i)
+        return result.toList()          // toList() 를 빼면 원본과 이어져 있다
+    }
+    println(makeList())                 // [1, 2, 3]
+
+}
+
 
 fun main() {
     a_exam1()
+    a_exam2()
 }
 
 
