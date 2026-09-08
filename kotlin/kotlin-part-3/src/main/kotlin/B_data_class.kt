@@ -128,11 +128,49 @@ fun b_exam3() {
     // (A_collection 예제 6-3 의 얕은 복사와 같은 이야기다)
 }
 
+// 4. 구조분해
+fun b_exam4() {
+
+    val member = BMember("김철수", "kim@a.com", 20)
+
+    // 주 생성자에 선언한 순서대로 쪼개진다.
+    val (name, email, age) = member
+    println("$name, $email, $age")
+
+    // 필요 없는 것은 밑줄로 건너뛴다.
+    val (n, _, a) = member
+    println("$n, $a")
+
+    // 반복문에서 바로 쪼개기
+    val members = listOf(
+        BMember("김철수", "kim@a.com", 20),
+        BMember("이영희", "lee@a.com", 30)
+    )
+
+    for ( (n, e, a) in members ) {
+        println("$n, $a - $e")
+    }
+
+    // Pair와 Triple 도 같은 원리로 쪼개진다. -> 둘 다 data class로 만들어져 있다.
+    val pair = "사과" to 1000
+    val ( fruit, price ) = pair
+    println("$fruit, $price")
+
+    val tri = Triple(1, "둘", 3.0)
+    val (first, second, third) = tri
+    println("$first - $second - $third")
+
+    for ((k, v) in mapOf("a" to 1)) println("$k=$v")
+
+}
+
+
 
 fun main() {
     b_exam1()
     b_exam2()
     b_exam3()
+    b_exam4()
 }
 
 
