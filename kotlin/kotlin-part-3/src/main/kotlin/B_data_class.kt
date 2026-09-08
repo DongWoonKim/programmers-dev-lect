@@ -210,7 +210,43 @@ fun b_exam6() {
     println(set2)
 }
 
+// 7. data class 를 쓰면 안 되는 자리
+fun b_exam7() {
+    // 7-1. 값이 아니라 '역할'이 중심인 클래스
+    //   MemberManager, MemberApp, ArrayMemberStorage 같은 것은 data class 로 만들지 않는다.
+    //   두 관리자가 "내용이 같으니 같은 것"이라고 판단될 이유가 없다.
 
+    // 7-2. 상속 관계가 필요한 클래스
+    //   data class 는 open 으로 만들 수 없다. 상속받을 수 없다는 뜻이다.
+    //   part-2 의 Member(추상 클래스) - VipMember 처럼 계층이 필요하면 보통 클래스를 쓴다.
+
+    // 7-3. 프로퍼티가 많고, 그중 일부만 비교 기준일 때
+    //   자동 생성되는 equals 는 '전부'를 비교한다. 원하는 것이 아니면 직접 만들어야 한다.
+
+    // 참고) equals/hashCode 를 직접 쓰면 이런 모양이다. data 한 단어가 이것을 대신한다.
+    val m1 = BCustomMember("김철수", "kim@a.com")
+    val m2 = BCustomMember("김철수", "kim@a.com")
+    println(m1 == m2)                       // true
+    println(setOf(m1, m2).size)             // 1
+}
+
+// 직접 만든 equals/hashCode - 이메일만 같으면 같은 회원으로 본다
+class BCustomMember(val name: String, val email: String) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true                 // 같은 객체면 볼 것도 없다
+        if (other !is BCustomMember) return false       // 자료형이 다르면 다르다
+
+        return email == other.email                     // 이메일만 비교한다
+    }
+
+    // equals 를 고쳤으면 hashCode 도 반드시 함께 고쳐야 한다.
+    // "equals 가 true 면 hashCode 도 같아야 한다"는 것이 규칙이다.
+    // 이 규칙을 어기면 Set 과 Map 이 조용히 잘못 동작한다. (자바와 같은 계약이다)
+    override fun hashCode(): Int = email.hashCode()
+
+    override fun toString(): String = "BCustomMember($name, $email)"
+}
 
 fun main() {
     b_exam1()
@@ -219,6 +255,7 @@ fun main() {
     b_exam4()
     b_exam5()
     b_exam6()
+    b_exam7()
 }
 
 
