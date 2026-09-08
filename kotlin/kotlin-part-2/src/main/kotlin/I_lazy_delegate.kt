@@ -140,9 +140,48 @@ fun i_exam2() {
     println(config.settings)
 }
 
+// ------------------------------------------------------------
+// 예제 3. observable - 값이 바뀔 때마다 알림 받기
+// ------------------------------------------------------------
+fun i_exam3() {
+    val player = Player("홍길동")
+
+    println("초기 HP: ${player.hp}")
+
+    // 값을 바꿀 때마다 등록해 둔 블록이 실행된다.
+    player.hp = 80                      //   [변경] HP 100 -> 80
+    player.hp = 50                      //   [변경] HP 80 -> 50
+    player.hp = 100                     //   [변경] HP 50 -> 100
+
+    println("최종 HP: ${player.hp}")
+}
+
+// ------------------------------------------------------------
+// 예제 4. vetoable - 조건에 맞을 때만 값 바꾸기
+// ------------------------------------------------------------
+fun i_exam4() {
+    val player = Player("홍길동")
+
+    println("초기 레벨: ${player.level}")   // 1
+
+    player.level = 5
+    println("5 로 변경 시도 -> ${player.level}")     // 5   (오르는 것이므로 허용)
+
+    player.level = 3
+    println("3 으로 변경 시도 -> ${player.level}")   // 5   (내려가는 것이라 거부됨!)
+
+    player.level = 10
+    println("10 으로 변경 시도 -> ${player.level}")  // 10  (허용)
+
+    // H_encapsulation 의 커스텀 setter 로도 비슷한 일을 할 수 있지만,
+    // 위임을 쓰면 그 규칙을 여러 프로퍼티에 재사용할 수 있다.
+}
+
 fun main() {
     i_exam1()
     i_exam2()
+    i_exam3()
+    i_exam4()
 }
 
 
