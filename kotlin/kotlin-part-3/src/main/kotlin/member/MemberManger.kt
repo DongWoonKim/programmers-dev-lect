@@ -19,5 +19,13 @@ class MemberManger(planNo: Int) {
 //    fun findByName(name: String): Member? = members.find { member -> member.name == name }
     fun findByName(name: String): Member? = members.find { it.name == name }
 
+    // keyword 조회(일부 키워드만 가지고 조회)
+    // 이름 keyword가 들어간 회원 '전부' 찾는다.
+    // '김'
+    fun searchByName(keyword: String): List<Member> = members.filter { it.name.contains(keyword) }
+
+    // 전체조회
+    fun getAll(): List<Member> = members.toList()
+
 
 }
