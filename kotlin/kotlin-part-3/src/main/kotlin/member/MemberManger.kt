@@ -62,14 +62,20 @@ class MemberManger(planNo: Int) {
     }
      */
 
-    fun updateMember(member: Member): Boolean {
+    fun updateMember(email: String, newEmail: String, name: String, phone: String): Boolean {
 
         // indexOfFirst : 조건에 맞는 첫 번째 '위치'를 준다. 없으면 -1을 반환
-        val idx = members.indexOfFirst { it.email == member.email }
+        val idx = members.indexOfFirst { it.email == email }
         if (idx == -1) return false
 
-        
+        // 이메일을 바꾸는 경우에만 중복을 검사한다.
+        // newEmail != email 을 빼면, 이름만 바꾸려 할 때 자기 이메일이 중복으로 걸려서 수정이 거부된다.
+        if ( newEmail != email && members.any { it.email == newEmail } ) return false
 
+        // 고치는 대신 새로 만들어서 갈아 끼운다.
+        members[idx] = members[idx].copy(name = name, email = email, phone = phone)
+
+        return true
     }
 
 }
