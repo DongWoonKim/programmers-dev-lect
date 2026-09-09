@@ -1,3 +1,4 @@
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -100,9 +101,40 @@ fun d_exam2() = runBlocking {
     // runBlocking 은 안에서 띄운 코루틴이 전부 끝날 때까지 기다렸다가 빠져나간다.
 }
 
+// 3. 순차 실행과 동시 실행 - async / await
+suspend fun d_fetchUser(id: Int): String {
+    delay(500)
+    return "User $id"
+}
+
+suspend fun d_fetchScore(id: Int): Int {
+    delay(500)
+    return id * 10
+}
+
+fun d_exam3() = runBlocking {
+
+    // 순차 실행
+    val sequential = measureTimeMillis {
+        val user = d_fetchUser(1)
+        val score = d_fetchScore(1)
+        println("순차 : $user / $score")
+    }
+    println("순차 실행 : ${sequential}ms")
+
+    // 동시 실행
+    val concurrent = measureTimeMillis {
+        val user = async { d_fetchUser(1) }
+        val score = async { d_fetchScore(1) }
+        println("동시 : ${user.await()} / ${score.await()}")
+    }
+    println("동시 실행 : ${concurrent}ms")
+
+}
+
 
 fun main() {
-    d_exam2()
+    d_exam3()
 }
 
 
