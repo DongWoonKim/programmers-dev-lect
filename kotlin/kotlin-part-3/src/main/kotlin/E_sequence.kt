@@ -176,6 +176,11 @@ fun e_exam4() {
     val underThousand = generateSequence(1) { if (it * 3 < 1000 ) it * 3 else null }
     println(underThousand.toList())
 
+    // 4-3 무한 시퀀스에 filter
+    println(
+        generateSequence (1) { it + 1 }.filter { it % 3 == 0 }.take(5).toList()
+    )
+
 }
 
 
