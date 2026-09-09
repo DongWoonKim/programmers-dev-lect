@@ -1,3 +1,4 @@
+import kotlin.system.measureTimeMillis
 
 // * 동시성과 코루틴
 
@@ -45,7 +46,30 @@
 // - 부모를 취소하면 자식이 전부 취소된다.
 // - 자식 하나가 예외로 죽으면 형제와 부모까지 취소된다.
 
+// 1. 스레드와 코루틴의 무게 차이
+fun d_exam1() {
 
+    val threadTime = measureTimeMillis {
+        val threads = List(10_000) {
+            // apply 없이 .start()라고 쓰면 start()의 반환값인 Unit이 담겨 join을 부를 수 없다.
+            // apply는 블록을 실행한 뒤 자기 자신을 돌려준다.
+            Thread { Thread.sleep(100) }.apply { start() }
+        }
+
+        // join : 스레드가 끝날 때까지 기다린다.
+        threads.forEach { it.join() }
+    }
+    println("스레드 1만 개 : ${threadTime}ms")
+
+    val coroutineTime = measureTimeMillis {
+
+    }
+    println("코루틴 10만 개 : ${coroutineTime}ms")
+}
+
+fun main() {
+    d_exam1()
+}
 
 
 
