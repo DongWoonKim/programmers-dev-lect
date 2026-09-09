@@ -181,6 +181,22 @@ fun e_exam4() {
         generateSequence (1) { it + 1 }.filter { it % 3 == 0 }.take(5).toList()
     )
 
+    // 4-4 sequence { } 로 직접 하나씩 내어 주기
+    // yield를 만나면 값을 하나 내어 주고 그 자리에서 멈춰 있다가 다음 값을 요구하면 이어서 실행한다.
+    val custom = sequence {
+        println("첫 번째 값을 준비한다.")
+        yield(1)
+
+        println("두 번째 값을 준비한다.")
+        yield(2)
+
+        println("나머지를 한꺼번에 준비한다.")
+        yieldAll(listOf(3, 4, 5))
+    }
+
+    println(
+        custom.take(2).toList()
+    )
 }
 
 
