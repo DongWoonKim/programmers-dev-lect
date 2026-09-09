@@ -159,9 +159,24 @@ fun e_exam3() {
     )
 }
 
+// 4. 끝이 없는 시퀀스
+fun e_exam4() {
+
+    // 4-1 generateSequence(시작값) { 다음값 }
+    val naturals = generateSequence(1) { it + 1 }
+    println( naturals.take(10).toList() )
+
+    // 2의 거듭제곱
+    println(
+        generateSequence (1) { it * 2 }.take(10).toList()
+    )
+    // 1 -> 1*2, 2*2, 4*2 ,...
+
+}
+
 
 fun main() {
-    e_exam3()
+    e_exam4()
 }
 
 
