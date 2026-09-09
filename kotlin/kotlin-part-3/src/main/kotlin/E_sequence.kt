@@ -29,13 +29,14 @@
 // onEach { }         들여다보기만 하고 원소를 흘려보낸다.
 
 // [최종 연산] 시퀀스가 아닌 것을 돌려준다. 이때 전체가 실행된다.
-// toList() / toSet()
-// first() / find { }
-// count()
-// sum() / sumOf { }
-// forEach { }
-// any { } / all { }
-// maxOrNull()
+// toList() / toSet() 결과를 모아 리스트나 집합으로 만든다. 가장 많이 사용된다.
+// first() / find { } 조건에 맞는 첫 원소를 꺼낸다 -> 찾는 즉시 멈춘다.
+// count()            개수를 센다
+// sum() / sumOf { }  합계를 낸다.
+// forEach { }        하나씩 꺼내 쓰고 끝낸다.
+// any { } / all { }  하나라도 맞는가 / 전부 맞는가 -> 판정이 나면 즉시 멈춘다
+// maxOrNull()        최댓값 전부 봐야 하므로 중간에 멈추지 못한다.
+// * 최종 연산을 부르지 않으면 중간 연산은 한 줄도 실행되지 않는다. 시퀀스의 메커니즘.
 
 fun e_isEven(n: Int): Boolean {
     println(" filter($n)")
