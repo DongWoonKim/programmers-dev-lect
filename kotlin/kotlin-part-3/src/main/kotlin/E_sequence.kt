@@ -172,6 +172,10 @@ fun e_exam4() {
     )
     // 1 -> 1*2, 2*2, 4*2 ,...
 
+    // 4-2 조건을 붙여 끝내기 -> 다음 값으로 null을 돌려주면 시퀀스가 끝난다.
+    val underThousand = generateSequence(1) { if (it * 3 < 1000 ) it * 3 else null }
+    println(underThousand.toList())
+
 }
 
 
