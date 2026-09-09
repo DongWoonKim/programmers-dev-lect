@@ -71,6 +71,7 @@ fun e_double(n: Int): Int {
     return n * 2
 }
 
+// 1. 실행 순서가 다르다.
 fun e_exam1() {
 
     val nums = listOf(1, 2, 3, 4, 5, 6)
@@ -103,8 +104,44 @@ fun e_exam1() {
 
 }
 
-fun main() {
-    e_exam1()
+// 2. 최종 연산이 없으면 실행되지 않는다.
+fun e_exam2() {
+
+    val nums = listOf(1, 2, 3, 4, 5, 6)
+
+    println("[중간 연산만]")
+    val seq = nums.asSequence().filter { e_isEven(it) }.map { e_double(it) }
+    println("여기까지 아무것도 출력되지 않는다.")
+    println(seq)
+
+    println("[최종 연산을 부르면]")
+    println(seq.toList())
+
+    println("[다시 사용]")
+    println(seq.count())
+
+
 }
+
+fun main() {
+    e_exam2()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
