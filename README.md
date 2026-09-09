@@ -16,6 +16,12 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.09</b></summary>
+
+1. [kotlin-part-3: C, D, E](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-3/src/main/kotlin)
+
+</details>
+<details open>
 <summary><b>09.08</b></summary>
 
 1. [kotlin-part-2: I](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
