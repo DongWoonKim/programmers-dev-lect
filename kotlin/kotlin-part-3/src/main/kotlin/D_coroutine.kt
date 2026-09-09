@@ -38,9 +38,11 @@ import kotlin.system.measureTimeMillis
 // 종류
 
 // 4. 코루틴 빌더
-// - runBlocking { } :
-// - launch { } :
-// - async { } :
+// - runBlocking { } : 보통함수 안에서 suspend함수를 부를 수 있게 해준다.
+// 안의 코루틴이 전부 끝날 때까지, 이것을 부른 스레드는 그 자리에 붙잡혀있다.
+// 다음 줄로 넘어가지도, 다른 일을 하지도 못한다. Thread.sleep 과 같은 상태다
+// - launch { } : 결과가 필요 없는 일을 띄운다.
+// - async { } : 결과가 필요한 일을 띄운다. Deferred를 돌려주고 await()로 결과를 받는다.
 // * launch 와 async는 아무 데서나 못 쓴다. CoroutineScope 안에서만 쓸 수 있다.
 
 // 5. 구조화된 동시성
