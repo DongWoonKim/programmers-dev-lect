@@ -5,6 +5,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.system.measureTimeMillis
 
 // * 동시성과 코루틴
@@ -183,6 +184,20 @@ fun d_exam5() = runBlocking {
     delay(500)
     job.cancelAndJoin()
     println("취소완료")
+
+    // 시간 제한 두기
+    // withTimeoutOrNull(ms) { } : 이 블록을 ms 안에 끝내라 라는 뜻
+    // 제 시간에 끝나면 -> 블록의 결과를 그대로 돌려준다.
+    // 시간을 넘기면 -> 블록을 취소하고 null을 돌려준다.
+    val result = withTimeoutOrNull(300) {
+        d_fetchUser(1)
+    }
+    println("타임아웃 결과 : $result")
+
+    val ok = withTimeoutOrNull(1000) {
+        d_fetchUser(1)
+    }
+    println("타임아웃 결과 : $ok")
 
 }
 
