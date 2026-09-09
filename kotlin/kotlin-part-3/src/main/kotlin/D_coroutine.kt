@@ -1,5 +1,6 @@
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -140,9 +141,33 @@ fun d_exam3() = runBlocking {
     println("10명 조회 : ${all}ms")
 }
 
+// 4. suspend 함수와 구조화된 동시성
+// 여러 개를 동시에 처리하는 일을 하는 함수로 묶고 싶다.
+// 그런데 함수 안에서 async를 쓰려면 스코프가 필요하고, coroutineScope를 쓴다.
+suspend fun d_exam4(id: Int): String = coroutineScope {
 
-fun main() {
-    d_exam3()
+    val userName = async { d_fetchUser(id) }
+    val score = async { d_fetchScore(id) }
+
+
+    // coroutineScope는 안의 코루틴이 전부 끝나야 빠져나간다.
+    // 마지막 식이 coroutineScope의 값이 되고, 그대로 함수의 반환값이 된다.
+    "(${userName.await()} / ${score.await()}점)"
+}
+
+fun d_exam4_start() = runBlocking {
+    val time = measureTimeMillis {
+        println(d_exam4(1))
+    }
+    println("${time}ms")
+
+    // runBlocking과 coroutineScope는 둘 다 "자식이 끝날 때까지 기다린다."는 점이 같지만,
+    // runBlocking : 기다리는 동안 스레드를 붙잡고 있다. -> 코루틴 밖(보통 함수)에서 들어갈 때 쓴다.
+    // coroutineScope : 기다리는 동안 스레드를 놓아준다. -> 이미 코루틴 안(suspend 함수)안에서 쓴다.
+}
+
+fun main() = runBlocking {
+    d_exam4_start()
 }
 
 
