@@ -15,6 +15,26 @@
 // 원소 하나가 filter -> map 을 통과하고, 그다음 원소가 다시 filter -> map을 통과한다.
 // first()가 답을 얻는 순간 나머지 원소는 아예 건드리지도 않는다.
 
+// 2. 중간 연산과 최종 연산
+// [중간 연산] 시퀀스를 돌려준다. 이 시점에는 아무것도 계산하지 않는다.
+// map { it * 10 }
+// filter { it > 3 }
+// take (2)
+// drop (2)
+// distinct ()
+// sorted ()
+// flatMap { }
+// onEach { }
+
+// [최종 연산] 시퀀스가 아닌 것을 돌려준다. 이때 전체가 실행된다.
+// toList() / toSet()
+// first() / find { }
+// count()
+// sum() / sumOf { }
+// forEach { }
+// any { } / all { }
+// maxOrNull()
+
 fun e_isEven(n: Int): Boolean {
     println(" filter($n)")
     return n % 2 == 0
