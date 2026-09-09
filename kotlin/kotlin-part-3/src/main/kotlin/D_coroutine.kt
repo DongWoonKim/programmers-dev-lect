@@ -210,7 +210,7 @@ fun d_exam5() = runBlocking {
 
 }
 
-fun main() = runBlocking {
+fun main() {
     d_exam5()
 }
 
