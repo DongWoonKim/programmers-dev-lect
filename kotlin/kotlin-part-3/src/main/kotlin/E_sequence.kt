@@ -46,6 +46,7 @@ import kotlin.system.measureTimeMillis
 // (1) : 시작값
 // 1 -> 1+1=2, 2+1=3, 3+1=4,... 끝없이 이어진다.
 // 끝이 없으므로 take(n) 같은 것으로 반드시 끊어 줘야한다.
+// sequence{ yield(1); yield(2) } 직접 하나씩 내어 주기
 
 // 4. 언제 쓰나 / 언제 쓰지 않나
 // 쓰면 좋을 때
