@@ -1,4 +1,5 @@
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -130,6 +131,13 @@ fun d_exam3() = runBlocking {
     }
     println("동시 실행 : ${concurrent}ms")
 
+    // 컬렉션과 함께 사용
+    val all = measureTimeMillis {
+        val users = (1..10).map{ id -> async { d_fetchUser(id) } } // 10개를 전부 띄운다.
+            .awaitAll() // 한꺼번에 기다린다.
+        println(users)
+    }
+    println("10명 조회 : ${all}ms")
 }
 
 
