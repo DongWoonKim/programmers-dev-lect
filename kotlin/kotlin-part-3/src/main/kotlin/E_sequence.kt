@@ -200,9 +200,30 @@ fun e_exam4() {
     )
 }
 
+// 5. 시퀀스가 손해인 경우
+
+data class E_Student(val name: String, val age: Int)
+
+val e_students = listOf(
+    E_Student("User1", 21),
+    E_Student("User2", 22),
+    E_Student("User3", 23),
+    E_Student("User4", 24),
+    E_Student("User5", 25),
+)
+
+fun e_exam5() {
+    // 틀린 코드는 아니지만 시퀀스로 얻는 것이 거의 없다.
+    val result = e_students.asSequence()
+        .sortedByDescending { it.age }
+        .map { it.name }
+        .take(3)
+        .toList()
+
+}
 
 fun main() {
-    e_exam4()
+    e_exam5()
 }
 
 
