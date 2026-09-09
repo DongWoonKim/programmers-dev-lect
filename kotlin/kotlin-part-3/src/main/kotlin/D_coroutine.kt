@@ -1,5 +1,6 @@
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -166,8 +167,27 @@ fun d_exam4_start() = runBlocking {
     // coroutineScope : 기다리는 동안 스레드를 놓아준다. -> 이미 코루틴 안(suspend 함수)안에서 쓴다.
 }
 
+// 5. 취소와 타임아웃
+fun d_exam5() = runBlocking {
+
+    // launch가 돌려주는 job으로 취소한다.
+    val job = launch {
+        repeat(10) {
+            i ->
+            println(" 작업중 $i")
+            delay(200)
+        }
+        println("이 줄은 실행되지 않는다.")
+    }
+
+    delay(500)
+    job.cancelAndJoin()
+    println("취소완료")
+
+}
+
 fun main() = runBlocking {
-    d_exam4_start()
+    d_exam5()
 }
 
 
