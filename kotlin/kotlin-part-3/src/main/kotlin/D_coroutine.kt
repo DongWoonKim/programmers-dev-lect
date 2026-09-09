@@ -1,3 +1,6 @@
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
 // * 동시성과 코루틴
@@ -62,6 +65,16 @@ fun d_exam1() {
     println("스레드 1만 개 : ${threadTime}ms")
 
     val coroutineTime = measureTimeMillis {
+        // runBlocking은 코루틴을 시작시키는 자리다. 이 중괄호 안이 코루틴 한 개(부모)다
+        runBlocking {
+            // repeat(n) {} : 블록을 n번 실행하는 반복문이다.
+            repeat(100_000) {
+                launch {
+                    delay(100)
+                }
+            }
+
+        }
 
     }
     println("코루틴 10만 개 : ${coroutineTime}ms")
