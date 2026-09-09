@@ -82,8 +82,27 @@ fun d_exam1() {
     println("코루틴 10만 개 : ${coroutineTime}ms")
 }
 
+// 2. runBlocking 과 launch
+fun d_exam2() = runBlocking {
+    // d_exam2는 보통 함수라 suspend함수를 호출하지 못한다. runBlocking이 가능하게 해준다.
+
+    println("1. 시작")
+
+    // launch는 코루틴을 띄우고 '바로 다음 줄로 넘어간다'. 끝날 때까지 기다리지 않는다.
+    launch {
+        delay(1000)
+        println("3. launch 안 (1초 뒤)")
+    }
+    // ... 코루틴들 종료
+
+    println("2. launch 다음 줄(바로 실행)")
+
+    // runBlocking 은 안에서 띄운 코루틴이 전부 끝날 때까지 기다렸다가 빠져나간다.
+}
+
+
 fun main() {
-    d_exam1()
+    d_exam2()
 }
 
 
