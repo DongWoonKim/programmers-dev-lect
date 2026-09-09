@@ -1,3 +1,4 @@
+import kotlin.system.measureTimeMillis
 
 // * 시퀀스 - 필요할 때만 계산하기
 
@@ -120,11 +121,32 @@ fun e_exam2() {
     println("[다시 사용]")
     println(seq.count())
 
-
 }
 
+// 3. 중간에 멈출 수 있다.
+fun e_exam3() {
+
+    val nums = (1..1_000_000).toList()
+
+    // 100만 개 중에서 "1000으로 나누어떨어지는 첫 번째 수의 두 배"를 구한다.
+    // 3-1 List :  100만 개를 전부 걸러 낸 뒤 그것을 전부 변환하고 그중 첫 번째를 꺼낸다.
+    val t = measureTimeMillis {
+        val a = nums.filter { it % 1000 == 0 }.map { it * 2 }.first()
+        println(a)
+    }
+    println(" List : ${t}ms ")
+
+    // 3-2 Sequence : 1000까지만 검사하고 바로 끝난다. 나머지 999,000개는 보지도 않는다.
+    val st = measureTimeMillis {
+        val b = nums.asSequence().filter { it % 1000 == 0 }.map { it * 2 }.first()
+        println(b)
+    }
+    println(" Sequence : ${st}ms ")
+}
+
+
 fun main() {
-    e_exam2()
+    e_exam3()
 }
 
 
