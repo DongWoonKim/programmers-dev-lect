@@ -142,6 +142,21 @@ fun e_exam3() {
         println(b)
     }
     println(" Sequence : ${st}ms ")
+
+    // take(n) 도 필요한 만큼만 계산하고 멈춘다
+    println(
+        // [7, 14, 21, 28, 35]
+        nums.asSequence().filter { it % 7 == 0 }.take(5).toList()
+    )
+
+    // 원소가 적으면 시퀀스가 손해다.
+    val small = listOf(1, 2, 3, 4, 5)
+    println(
+        small.filter { it > 2}.map { it * 2 } // 이쪽이 낫다.
+    )
+    println(
+        small.asSequence().filter { it % 2 == 0 }.map{ it * 2 }.toList()
+    )
 }
 
 
