@@ -176,6 +176,7 @@ class MemberApp(private val manager: MemberManager) {
         }
 
         println("[이름순]")
+        println( " ${ manager.sortedByName().joinToString( ", ") { it.name } }" )
 
     }
 
