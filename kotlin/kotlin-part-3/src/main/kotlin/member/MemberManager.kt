@@ -1,6 +1,6 @@
 package member
 
-class MemberManger(planNo: Int) {
+class MemberManager(planNo: Int) {
 
     val totalCnt = planNo * 10
     // val : 요소를 추가하고 삭제할 수 있다. 단 주소참조 변경은 불가능
