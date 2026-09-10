@@ -34,6 +34,6 @@ class BoardService (private val repository: BoardRepository) {
     }
 
     // 게시글 상세 조회
-    fun getBoard(id: Long): Board? = repository.findByIdOrNull(id);
+    fun getBoard(id: Long): Board? = repository.findByIdOrNull(id)
 
 }
