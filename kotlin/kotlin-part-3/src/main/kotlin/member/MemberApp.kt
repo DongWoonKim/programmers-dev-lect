@@ -9,6 +9,7 @@ class MemberApp(private val manager: MemberManager) {
             when(printMenu()) {
                 1 -> addMember()
                 2 -> selectByEmail()
+                3 -> selectByName()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -58,6 +59,21 @@ class MemberApp(private val manager: MemberManager) {
         val email = readln()
 
         val member = manager.findByEmail(email)
+        if ( member == null) {
+            println("찾으시는 정보가 없습니다.")
+            return
+        }
+
+        println(member.display)
+
+    }
+
+    private fun selectByName() {
+
+        println("이름을 입력하세요.")
+        val name = readln()
+
+        val member = manager.findByName(name)
         if ( member == null) {
             println("찾으시는 정보가 없습니다.")
             return
