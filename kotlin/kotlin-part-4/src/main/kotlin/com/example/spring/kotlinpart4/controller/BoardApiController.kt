@@ -7,4 +7,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/boards")
 class BoardApiController(private val boardService: BoardService) {
+
+
 }
