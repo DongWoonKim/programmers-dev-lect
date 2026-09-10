@@ -2,7 +2,9 @@ package com.example.spring.kotlinpart4.controller
 
 import com.example.spring.kotlinpart4.dto.BoardCreateRequest
 import com.example.spring.kotlinpart4.dto.BoardPageResponse
+import com.example.spring.kotlinpart4.dto.BoardResponse
 import com.example.spring.kotlinpart4.service.BoardService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,8 +30,11 @@ class BoardApiController(private val boardService: BoardService) {
     }
 
     @GetMapping("/{id}")
-    fun getBoard(@PathVariable("id") id: Long) {
+    fun getBoard(@PathVariable("id") id: Long): ResponseEntity<BoardResponse> {
 
+        val board = boardService.getBoard(id) ?: return ResponseEntity.notFound().build()
+
+        return ResponseEntity.ok( BoardResponse.from(board) )
     }
 
 }
