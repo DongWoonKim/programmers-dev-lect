@@ -3,6 +3,7 @@ package com.example.spring.kotlinpart4.service
 import com.example.spring.kotlinpart4.domain.entity.Board
 import com.example.spring.kotlinpart4.domain.repository.BoardRepository
 import com.example.spring.kotlinpart4.dto.BoardCreateRequest
+import com.example.spring.kotlinpart4.dto.BoardUpdateRequest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
@@ -35,5 +36,15 @@ class BoardService (private val repository: BoardRepository) {
 
     // 게시글 상세 조회
     fun getBoard(id: Long): Board? = repository.findByIdOrNull(id)
+
+    // 트랜잭션 안에서 조회한 엔티티는 영속 상태라, 값을 바꾸면
+    // 트랜잭션이 끝날 때 JPA가 변경을 감지해 UPDATE SQL을 자동으로 날린다.(dirty checking)
+    @Transactional
+    fun updateBoard(id: Long, request: BoardUpdateRequest) {
+
+        val board = repository.findByIdOrNull(id) ?: return
+
+        board.update(request.title, request.content)
+    }
 
 }

@@ -79,7 +79,10 @@ data class BoardResponse(
 
 }
 
-
+data class BoardUpdateRequest(
+    val title: String,
+    val content: String,
+)
 
 
 
