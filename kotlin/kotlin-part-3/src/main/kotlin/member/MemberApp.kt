@@ -16,6 +16,7 @@ class MemberApp(private val manager: MemberManager) {
                 5 -> updateMember()
                 6 -> deleteMember()
                 7 -> searchByName()
+                8 -> printStatics()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -177,6 +178,17 @@ class MemberApp(private val manager: MemberManager) {
 
         println("[이름순]")
         println( " ${ manager.sortedByName().joinToString( ", ") { it.name } }" )
+
+        val duplicatedNames = manager.duplicatedNames()
+        if (duplicatedNames.isNotEmpty()) {
+
+            println("[이름이 겹치는 회원]")
+            duplicatedNames.forEach {
+                (name, members) ->
+                println(" $name : ${members.size}명 ${ members.joinToString(", ") { it.email } } ")
+            }
+
+        }
 
     }
 

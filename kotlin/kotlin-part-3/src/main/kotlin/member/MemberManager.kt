@@ -84,6 +84,6 @@ class MemberManager(planNo: Int) {
 
     fun sortedByName(): List<Member> = members.sortedBy { it.name }
 
-    fun duplicatedName(): Map<String, List<Member>> = members.groupBy { it.name }.filter { it.value.size > 1 }
+    fun duplicatedNames(): Map<String, List<Member>> = members.groupBy { it.name }.filter { it.value.size > 1 }
 
 }
