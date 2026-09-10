@@ -4,6 +4,7 @@ import com.example.spring.kotlinpart4.dto.BoardCreateRequest
 import com.example.spring.kotlinpart4.dto.BoardPageResponse
 import com.example.spring.kotlinpart4.service.BoardService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,6 +25,11 @@ class BoardApiController(private val boardService: BoardService) {
     @PostMapping
     fun createBoard(@RequestBody request: BoardCreateRequest) {
         boardService.createBoard(request)
+    }
+
+    @GetMapping("/{id}")
+    fun getBoard(@PathVariable("id") id: Long) {
+
     }
 
 }
