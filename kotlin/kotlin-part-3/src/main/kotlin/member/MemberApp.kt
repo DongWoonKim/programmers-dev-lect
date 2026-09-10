@@ -8,6 +8,7 @@ class MemberApp(private val manager: MemberManager) {
 
             when(printMenu()) {
                 1 -> addMember()
+                2 -> selectByEmail()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -48,6 +49,21 @@ class MemberApp(private val manager: MemberManager) {
         } else {
             println("이미 존재하는 회원입니다.")
         }
+
+    }
+
+    private fun selectByEmail() {
+
+        println("이메일을 입력하세요.")
+        val email = readln()
+
+        val member = manager.findByEmail(email)
+        if ( member == null) {
+            println("찾으시는 정보가 없습니다.")
+            return
+        }
+
+        println(member.display)
 
     }
 
