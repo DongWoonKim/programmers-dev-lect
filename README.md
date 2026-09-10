@@ -16,12 +16,19 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.10</b></summary>
+
+1. [kotlin-part-3: member](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-3/src/main/kotlin)
+2. [kotlin-part-4: web](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-4)
+
+</details>
+<details>
 <summary><b>09.09</b></summary>
 
 1. [kotlin-part-3: C, D, E](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-3/src/main/kotlin)
 
 </details>
-<details open>
+<details>
 <summary><b>09.08</b></summary>
 
 1. [kotlin-part-2: I](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/kotlin/kotlin-part-2/src/main/kotlin)
