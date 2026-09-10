@@ -1,6 +1,7 @@
 package com.example.spring.kotlinpart4.dto
 
 import com.example.spring.kotlinpart4.domain.entity.Board
+import org.springframework.data.domain.Page
 import java.time.format.DateTimeFormatter
 
 private val DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
@@ -9,14 +10,18 @@ data class BoardPageResponse(
     val boards: List<BoardListItemResponse>,
     val page: Int,
     val totalPages: Int,
-    val totalElements: Int,
+    val totalElements: Long,
     val last: Boolean,
 ) {
     // static
     companion object {
-        fun from() {
-
-        }
+        fun from(page: Page<Board>): BoardPageResponse = BoardPageResponse(
+            boards = page.content.map(BoardListItemResponse::from),
+            page = page.number + 1,
+            totalPages = page.totalPages,
+            totalElements = page.totalElements,
+            last = page.isLast,
+        )
     }
 
 }
