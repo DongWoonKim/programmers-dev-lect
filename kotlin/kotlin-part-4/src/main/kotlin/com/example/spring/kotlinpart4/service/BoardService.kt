@@ -47,4 +47,8 @@ class BoardService (private val repository: BoardRepository) {
         board.update(request.title, request.content)
     }
 
+    fun deleteBoard(id: Long) {
+        repository.deleteById(id)
+    }
+
 }

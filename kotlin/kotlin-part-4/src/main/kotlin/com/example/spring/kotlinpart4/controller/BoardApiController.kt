@@ -6,6 +6,7 @@ import com.example.spring.kotlinpart4.dto.BoardResponse
 import com.example.spring.kotlinpart4.dto.BoardUpdateRequest
 import com.example.spring.kotlinpart4.service.BoardService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -45,6 +46,12 @@ class BoardApiController(private val boardService: BoardService) {
         @RequestBody request: BoardUpdateRequest
     ) {
         boardService.updateBoard(id, request)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteBoard(@PathVariable("id") id: Long) {
+        println("$id is deleted")
+        boardService.deleteBoard(id)
     }
 
 }
