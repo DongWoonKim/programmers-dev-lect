@@ -162,6 +162,23 @@ class MemberApp(private val manager: MemberManager) {
 
     }
 
+    private fun printStatics() {
+
+        if ( manager.memberCnt == 0 ) {
+            println("등록된 회원이 없습니다.")
+            return
+        }
+
+        println("[이메일 도메인별]")
+        manager.groupByDomain().forEach {
+                (domain, members) ->
+            println(" $domain : ${members.size}명 ${ members.joinToString(", ") { it.name } } ")
+        }
+
+        println("[이름순]")
+
+    }
+
 }
 
 
