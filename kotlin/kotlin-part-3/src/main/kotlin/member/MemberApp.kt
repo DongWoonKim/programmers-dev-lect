@@ -15,6 +15,7 @@ class MemberApp(private val manager: MemberManager) {
                 4 -> selectAll()
                 5 -> updateMember()
                 6 -> deleteMember()
+                7 -> searchByName()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -139,6 +140,24 @@ class MemberApp(private val manager: MemberManager) {
             println("삭제가 완료되었습니다.")
         } else {
             println("찾으시는 회원이 없습니다.")
+        }
+
+    }
+
+    private fun searchByName() {
+
+        println("검색할 이름의 일부를 입력하세요.")
+        val keyword = readln()
+
+        val found = manager.searchByName(keyword)
+        if ( found.isEmpty() ) {
+            println("검색 결과가 없습니다.")
+            return
+        }
+
+        println("${found.size}명을 찾았습니다.")
+        found.forEachIndexed { index, member ->
+            println("${index + 1}. ${member.display}")
         }
 
     }
