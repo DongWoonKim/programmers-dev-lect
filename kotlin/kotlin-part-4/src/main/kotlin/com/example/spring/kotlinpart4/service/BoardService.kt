@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class BoardService (private val repository: BoardRepository) {
 
+    // 게시글 목록 및 검색 내역 조회
     fun getBoards(page: Int, size: Int, keyword: String?): Page<Board> {
 
         val pageable: Pageable = PageRequest.of(page - 1, size, Sort.by("id").descending())
@@ -25,9 +27,13 @@ class BoardService (private val repository: BoardRepository) {
         }
     }
 
+    // 게시글 작성
     @Transactional
     fun createBoard(request: BoardCreateRequest) {
         repository.save( request.toEntity() )
     }
+
+    // 게시글 상세 조회
+    fun getBoard(id: Long): Board? = repository.findByIdOrNull(id);
 
 }
