@@ -1,5 +1,7 @@
 package member
 
+import jdk.jfr.internal.consumer.EventLog.update
+
 class MemberApp(private val manager: MemberManager) {
 
     fun start() {
@@ -10,7 +12,8 @@ class MemberApp(private val manager: MemberManager) {
                 1 -> addMember()
                 2 -> selectByEmail()
                 3 -> selectByName()
-                4-> selectAll()
+                4 -> selectAll()
+                5 -> updateMember()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -94,6 +97,34 @@ class MemberApp(private val manager: MemberManager) {
 
         all.forEachIndexed { index, member ->
             println("${ index + 1 }. ${member.display}")
+        }
+
+    }
+
+    private fun updateMember() {
+
+        println("수정할 회원의 이메일을 입력하세요.")
+        val email = readln()
+        val member = manager.findByEmail(email)
+        if ( member == null) {
+            println("찾으시는 회원이 없습니다.")
+            return
+        }
+
+        println("현재 정보 -> ${member.display}")
+
+        // ifBlank : 빈 문자열일 때 대신 쓸 값을 정한다.
+        println("새 이름을 입력하세요. (Enter만 누르면 유지)")
+        val name = readln().ifBlank { member.name }
+        println("새 이메일을 입력하세요. (Enter만 누르면 유지)")
+        val newEmail = readln().ifBlank { member.email }
+        println("새 연락처를 입력하세요. (Enter만 누르면 유지)")
+        val phone = readln().ifBlank { member.phone }
+
+        if ( manager.updateMember(email, newEmail, name, phone) ) {
+            println("수정이 완료되었습니다.")
+        } else {
+            println("이미 사용중인 이메일입니다.")
         }
 
     }
