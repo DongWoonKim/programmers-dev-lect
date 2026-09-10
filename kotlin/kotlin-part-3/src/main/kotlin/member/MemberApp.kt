@@ -14,6 +14,7 @@ class MemberApp(private val manager: MemberManager) {
                 3 -> selectByName()
                 4 -> selectAll()
                 5 -> updateMember()
+                6 -> deleteMember()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -125,6 +126,19 @@ class MemberApp(private val manager: MemberManager) {
             println("수정이 완료되었습니다.")
         } else {
             println("이미 사용중인 이메일입니다.")
+        }
+
+    }
+
+    private fun deleteMember() {
+
+        println("삭제할 회원의 이메일을 입력하세요.")
+        val email = readln()
+
+        if ( manager.deleteMember(email) ) {
+            println("삭제가 완료되었습니다.")
+        } else {
+            println("찾으시는 회원이 없습니다.")
         }
 
     }
