@@ -10,6 +10,7 @@ class MemberApp(private val manager: MemberManager) {
                 1 -> addMember()
                 2 -> selectByEmail()
                 3 -> selectByName()
+                4-> selectAll()
                 9 -> {
                     println("이용해주셔서 감사합니다.")
                     return
@@ -80,6 +81,20 @@ class MemberApp(private val manager: MemberManager) {
         }
 
         println(member.display)
+
+    }
+
+    private fun selectAll() {
+
+        val all = manager.getAll()
+        if ( all.isEmpty() ) {
+            println("등록된 회원이 없습니다.")
+            return
+        }
+
+        all.forEachIndexed { index, member ->
+            println("${ index + 1 }. ${member.display}")
+        }
 
     }
 
