@@ -1,5 +1,6 @@
 package com.example.spring.kotlinpart4.controller
 
+import com.example.spring.kotlinpart4.dto.BoardPageResponse
 import com.example.spring.kotlinpart4.service.BoardService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,6 +16,6 @@ class BoardApiController(private val boardService: BoardService) {
         @RequestParam(value = "page", defaultValue = "1") page: Int,
         @RequestParam(value = "size", defaultValue = "10") size: Int,
         @RequestParam(value = "keyword", required = false) keyword: String?
-    ): BoardPageResponse =
+    ): BoardPageResponse = BoardPageResponse.from(boardService.getBoards(page, size, keyword))
 
 }
