@@ -37,5 +37,8 @@ public interface AuthClient {
     ResponseEntity<SignInResponseDto> oauthSignUp(@RequestBody OAuthSignUpRequestDto dto);
 
     @DeleteMapping("/api/users/me")
-    ResponseEntity<WithdrawResponseDto> withdraw(String authorization, String cookie);
+    ResponseEntity<WithdrawResponseDto> withdraw(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestHeader(HttpHeaders.COOKIE) String cookie
+    );
 }
