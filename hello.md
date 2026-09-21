@@ -8,6 +8,21 @@
 
 ---
 <details open>
+<summary><b>14-1 (2026.09.21)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(네트워크/서비스 격리/도커
+- **과제2 — 실습**
+  - 필수 : [docker desktop 설치](https://docs.docker.com/desktop/setup/install/mac-install/) 후 확인. 
+  확인 명령어 터미널에 `docker version` 버전 나오면 성공
+  - 필수 : [AWS 계정](https://aws.amazon.com/ko/console/)
+- **과제3 - 선택 : 과제2까지 끝난경우 아래 항목중 하나를 택하여 진행해주세요**
+  - 개인 복습(전체)
+  - 개인 프로젝트
+  - 알고리즘
+
+</details>
+<details>
 <summary><b>13-4 (2026.09.10)</b></summary>
 
 - **과제1 — 복습**
