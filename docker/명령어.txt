@@ -6,3 +6,24 @@ java -jar build/libs/*.jar
 한번에 실행
 ./gradlew bootRun
 
+./gradlew --status
+./gradlew --stop
+
+*** 도커 ***
+이미지 만들기
+docker build -t config-service:latest .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
