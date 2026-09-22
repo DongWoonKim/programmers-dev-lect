@@ -57,6 +57,12 @@ WORKDIR /app
 # --from=build 가 붙으면 출발지가 호스트가 아니라 앞선 build 스테이지의 파일시스템이다.
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 
+# JVM 메모리 옵션
+# 자바가 쓰는 메모리 = 힙 + 부속비용(클래스정보, 스레드 작업공간 등)
+# 힙메모리 최대 가용 범위를 75% 제한
+# 남긴 25%가 부속비용 자리다.
+# 꽉 채우면 컨테이너 전체가 한도를 넘어 커널이 즉사시킨다.(OOM Killer) - 로그가 안 남음.
+# 반대로 힙 자체가 모자라면 OutOfMemoryError 가 나는데 이건 로그에 남는다.
 ENV JAVA_OPT="-XX:MaxRAMPercentage=75.0"
 EXPOSE 8888
 
