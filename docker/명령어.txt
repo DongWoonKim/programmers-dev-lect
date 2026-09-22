@@ -13,6 +13,21 @@ java -jar build/libs/*.jar
 이미지 만들기
 docker build -t config-service:latest .
 
+컨테이너 실행
+컨테이너는 기본적으로 로컬을 못 본다.
+-v 는 그 벽에 구멍을 하나 뚫어서 로컬 폴더 하나만 보이게 한다.
+docker run -d --name config-service -p 8888:8888 \
+-v /Users/kdw/Desktop/lect/msa/config-repo:/config-repo:ro \
+-e CONFIG_REPO_PATH=file:/config-repo \
+config-serivce:latest
+
+확인 
+- 떠있는 상태 : docker ps
+- 모든 상태 : docker ps -a
+
+비우기(전체)
+docker system prune -a
+
 
 
 
