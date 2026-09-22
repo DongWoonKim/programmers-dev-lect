@@ -63,10 +63,12 @@ COPY --from=build /app/build/libs/*.jar /app/app.jar
 # 남긴 25%가 부속비용 자리다.
 # 꽉 채우면 컨테이너 전체가 한도를 넘어 커널이 즉사시킨다.(OOM Killer) - 로그가 안 남음.
 # 반대로 힙 자체가 모자라면 OutOfMemoryError 가 나는데 이건 로그에 남는다.
-ENV JAVA_OPT="-XX:MaxRAMPercentage=75.0"
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0"
 EXPOSE 8888
 
-ENTRYPOINT ["top", "-b"]
+# sh -c 가 $JAVA_OPTS 풀어서 실행 명령어를 만들어서 실행시키고 빠짐
+# 그 자리에 java가 떠 있음. exec있어야 종료 신호를 java가 직접 받아서 정리하고 끝냄.
+ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar"]
 
 
 
