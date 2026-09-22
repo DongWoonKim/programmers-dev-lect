@@ -22,7 +22,7 @@ WORKDIR /app
 # 호스트 service/gradlew -> 이미지 /app/gradlew
 COPY gradlew ./
 # 호스트 service/gradle/통째로 -> 이미지 /app/gradle
-COPY gradlew gradle
+COPY gradle gradle
 # 호스트 service/settings.gradle -> 이미지 /app/settings.gradle
 COPY settings.gradle .
 # 호스트 service/build.gradle -> 이미지 /app/build.gradle
@@ -32,7 +32,7 @@ COPY build.gradle .
 # ./gradlew는 빌드가 끝나도 안 죽는 백그라운드 JVM을 하나 남겨둔다.
 # 다음 빌드를 더 빠르게 하려고, 하지만 지금은 다음 빌드가 없으니 비활성.
 # 이 빌드는 한 번 하고 죽을 거니 백그라운드 비활성.
-RUN ./gradlew --no-daemon dependecies
+RUN ./gradlew --no-daemon dependencies
 
 # 소스 복사
 # 호스트 service/src/통째로 -> 이미지 /app/src/
@@ -40,7 +40,7 @@ RUN ./gradlew --no-daemon dependecies
 COPY src src
 
 # 빌드
-RUN ./gradlew -no-daemon clean bootJar -x test
+RUN ./gradlew --no-daemon clean bootJar -x test
 
 # ====== Runtime stage ======
 # 새 FROM = 앞의 build 스테이지를 통째로 버리고 빈 이미지에서 다시 시작
