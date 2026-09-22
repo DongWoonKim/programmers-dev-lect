@@ -26,11 +26,19 @@ docker run -d --name config-service -p 8888:8888 \
 docker build -t auth-service:latest .
 
 docker run -d --name auth-service -p 8082:8082 \
-docker run -d --name auth-service -p 8082:8082 \
   -e CONFIG_SERVICE_URL="http://host.docker.internal:8888" \
   -e DB_URL="jdbc:mysql://host.docker.internal:3306/board_auth?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8" \
   -e BOARD_SERVICE_URL="http://host.docker.internal:8081" \
   auth-service:latest
+
+=> board-service
+docker build -t board-service:latest .
+
+docker run -d --name board-service -p 8081:8081 \
+  -e CONFIG_SERVICE_URL="http://host.docker.internal:8888" \
+  -e DB_URL="jdbc:mysql://host.docker.internal:3306/board_auth?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8" \
+  -e AUTH_SERVICE_URL="http://host.docker.internal:8082" \
+  board-service:latest
 
 
 확인 
@@ -43,6 +51,8 @@ docker logs -f config-service
 비우기(전체)
 docker system prune -a
 
+멈추기 
+docker stop [컨테이너ID]
 
 
 
