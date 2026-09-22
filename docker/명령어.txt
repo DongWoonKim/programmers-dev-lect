@@ -1,0 +1,7 @@
+./gradlew clean
+빌드
+./gradlew bootJar -x test
+실행
+java -jar build/libs/*.jar
+
+./gradlew bootRun
