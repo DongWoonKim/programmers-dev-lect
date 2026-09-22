@@ -28,6 +28,19 @@ COPY settings.gradle .
 # 호스트 service/build.gradle -> 이미지 /app/build.gradle
 COPY build.gradle .
 
+# 의존성만 먼저 받아 캐시화
+# ./gradlew는 빌드가 끝나도 안 죽는 백그라운드 JVM을 하나 남겨둔다.
+# 다음 빌드를 더 빠르게 하려고, 하지만 지금은 다음 빌드가 없으니 비활성.
+# 이 빌드는 한 번 하고 죽을 거니 백그라운드 비활성.
+RUN ./gradlew --no-daemon dependecies
+
+# 소스 복사
+# 호스트 service/src/통째로 -> 이미지 /app/src/
+# 가장 자주 바뀌는 파일이라 맨 뒤에 둔다.
+COPY src src
+
+# 빌드
+RUN ./gradlew -no-daemon clean bootJar -x test
 
 # ====== Runtime stage ======
 FROM eclipse-temurin:25-jre
