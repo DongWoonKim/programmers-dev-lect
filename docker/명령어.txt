@@ -10,6 +10,7 @@ java -jar build/libs/*.jar
 ./gradlew --stop
 
 *** 도커 ***
+=> config-service
 이미지 만들기
 docker build -t config-service:latest .
 
@@ -20,6 +21,17 @@ docker run -d --name config-service -p 8888:8888 \
   -v /Users/kdw/Desktop/lect/msa/config-repo:/config-repo:ro \
   -e CONFIG_REPO_PATH=file:/config-repo \
   config-service:latest
+
+=> auth-serivice
+docker build -t auth-service:latest .
+
+docker run -d --name auth-service -p 8082:8082 \
+docker run -d --name auth-service -p 8082:8082 \
+  -e CONFIG_SERVICE_URL="http://host.docker.internal:8888" \
+  -e DB_URL="jdbc:mysql://host.docker.internal:3306/board_auth?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8" \
+  -e BOARD_SERVICE_URL="http://host.docker.internal:8081" \
+  auth-service:latest
+
 
 확인 
 - 떠있는 상태 : docker ps
