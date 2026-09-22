@@ -43,6 +43,31 @@ COPY src src
 RUN ./gradlew -no-daemon clean bootJar -x test
 
 # ====== Runtime stage ======
+# 새 FROM = 앞의 build 스테이지를 통째로 버리고 빈 이미지에서 다시 시작
+# 여기서부터 쌓이는 것만 실제로 배포되는 이미지에 들어간다.
+
+# jre = 실행기만(java)만. javac 도 Gradle도 소스도 없다..
+# 위 build 스테이지와 달리 이 이미지는 서버에 올라가 계속 살아 있으므로
+# "없어도 되는 건 하나도 넣지 않는다."가 원칙이다.
 FROM eclipse-temurin:25-jre
 
+WORKDIR /app
+
+
 ENTRYPOINT ["top", "-b"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
