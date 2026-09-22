@@ -74,6 +74,7 @@ public class UserService {
                 .toList();
     }
 
+    @Transactional
     public SignInResponseDto oauthSignUp(OAuthSignUpRequestDto requestDto) {
         SignupPayloadDto payload = tokenService.getSignupPayload(requestDto.getSignupToken());
         Role role = requestDto.getRole();
