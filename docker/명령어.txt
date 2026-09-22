@@ -40,6 +40,16 @@ docker run -d --name board-service -p 8081:8081 \
   -e AUTH_SERVICE_URL="http://host.docker.internal:8082" \
   board-service:latest
 
+=> edge-service
+docker build -t edge-service:latest .
+docker run -d --name edge-service -p 8000:8000 \
+  -e AUTH_SERVICE_URL=http://host.docker.internal:8082 \
+  board-service:latest
+  -e BOARD_SERVICE_URL=http://host.docker.internal:8081 \
+  board-service:latest
+  -e TRUSTED_PROXIES='.*' \
+edge-service:latest
+
 
 확인 
 - 떠있는 상태 : docker ps
