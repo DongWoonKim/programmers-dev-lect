@@ -53,6 +53,12 @@ FROM eclipse-temurin:25-jre
 
 WORKDIR /app
 
+# 빌드 산출물 복사
+# --from=build 가 붙으면 출발지가 호스트가 아니라 앞선 build 스테이지의 파일시스템이다.
+COPY --from=build /app/build/libs/*.jar /app/app.jar
+
+ENV JAVA_OPT="-XX:MaxRAMPercentage=75.0"
+EXPOSE 8888
 
 ENTRYPOINT ["top", "-b"]
 
