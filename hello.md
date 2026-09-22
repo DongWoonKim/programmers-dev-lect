@@ -24,7 +24,7 @@
 <summary><b>14-1 (2026.09.21)</b></summary>
 
 - **과제1 — 복습**
-  - 필수 : 수업내용 복습(네트워크/서비스 격리/도커
+  - 필수 : 수업내용 복습(네트워크/서비스 격리/도커)
 - **과제2 — 실습**
   - 필수 : [docker desktop 설치](https://docs.docker.com/desktop/setup/install/mac-install/) 후 확인. 
   확인 명령어 터미널에 `docker version` 버전 나오면 성공
