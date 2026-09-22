@@ -16,6 +16,13 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.22</b></summary>
+
+1. [직접 로컬에서 띄우기 및 도커 명령어](https://github.com/DongWoonKim/programmers-dev-lect/tree/master/docker)
+2. [도커파일 작성](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/msa/config-service/Dockerfile)
+
+</details>
+<details>
 <summary><b>09.21</b></summary>
 
 1. [네트워크: network](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/1.network.md)
