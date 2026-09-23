@@ -85,6 +85,19 @@ docker compose -f docker-compose.front.yml up -d --build
 --build 는 소스가 바뀌었을 때 이미지를 다시 만든다.
 코드 수정 후 붙여야 반영된다.
 
+종료 (역순 - front -> service -> data)
+docker compose -f docker-compose.data.yml down
+docker compose -f docker-compose.service.yml down
+docker compose -f docker-compose.front.yml down
+
+완전 초기화 (DB 데이터까지 삭제)
+docker compose -f docker-compose.data.yml down -v
+
+상태 확인
+docker ps # 전체 컨테이너
+docker compose -f docker-compose.service.yml ps # 해당 파일만
+docker logs -f auth-service # 로그 확인
+docker compose -f docker-compose.service.yml log -f # 해당 파일 전체 로그
 
 
 
