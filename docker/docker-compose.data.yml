@@ -28,10 +28,19 @@ services:
       # root 계정 비밀번호
       MYSQL_ROOT_PASSWORD: 1234
     
+    # 포트매핑 "호스트포트:컨테이너포트"
+    # - 컨테이너 내부 MySQL은 3306에서 동작
+    # - 호스트(내 PC)에서 3307로 접속 -> 컨테이너 내부 3306으로 접속
     ports:
       - "3307:3306"
+    
+    volumes:
+      - ./db:/dcoker-entrypoint-initdb.d:ro
+      - mysql-data:/var/lib/mysql
+
       
+
 # named volume 선언
 # - named volume은 컨테이너가 삭제되어도 데이터가 유지된다.
 volumes:
-  mysql-data: {}    
+  mysql-data: {}
