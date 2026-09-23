@@ -7,3 +7,28 @@ networks:
   msa-network:
     name: msa-network
     external: true
+
+services:
+  config-service:
+    build: ../msa/config-service
+    image: config-service:latest
+    container_name: config-service
+    volumes:
+      - ../msa/config-repo:/config-repo:ro
+    environment:
+      CONFIG_REPO_PATH: file:/config-repo
+    ports:
+      - "8888:8888"
+    # 헬스체크
+    # eclipse-temurin:25-jre에는 curl이 없어서, bash를 이용해 TCP 연결로 헬스체크를 한다.
+    # bash 내장기능인 /dev/tcp/host/port 를 이용.
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/8888"]
+      interval: 5s # 5초마다 체크
+      timeout: 3s # 3초 안에 응답 없으면 실패로 간주
+      retries: 20 # 20회 실패하면 unhealthy로 간주
+    networks:
+      - msa-network
+
+volumes:
+  board-uploads: {}
