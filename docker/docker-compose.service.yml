@@ -50,6 +50,28 @@ services:
       - "8082:8082"
     networks:
       - msa-network
+  
+  board-service:
+    build: ../msa/board-service
+    image: board-service:latest
+    container_name: board-service
+    depends_on:
+      config-service:
+        condition: service_healthy
+    environment:
+      CONFIG_SERVICE_URL: "http://config-service:8888"
+      DB_URL: "jdbc:mysql://mysql:3306/board_app?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8"
+      AUTH_SERVICE_URL: "http://auth-service:8082"
+    volumes:
+      # 방법 1
+      - board-uploads:/app/uploads
+      # 방법 2 : 업로드 파일은 외부 호스트 PC에 저장하고, 컨테이너 안에서는 그걸 바로 읽는 방식 
+      # - ../msa/board-service/uploads:/app/uploads
+    ports:
+      - "8081:8081"
+    networks:
+      - msa-network
+    
 
 volumes:
   board-uploads: {}
