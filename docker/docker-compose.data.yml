@@ -1,0 +1,23 @@
+
+name: msa-data
+
+# 네트워크 선언
+# - 서비스 compose(docker-compose.service.yml)와 컨테이너끼리 통신하려면
+#   동일한 네트워크를 사용해야 한다. 그 공용 네트워크를 여기선 만든다.
+# - 이 파일이 네트워크의 주인이다. 그래서 data를 반드시 먼저 실행해야(up) 한다.
+networks:
+  msa-network:
+    name: msa-network
+
+services:
+  mysql:
+    # Docker Hub 공식 MySQL 이미지
+    image: mysql:9.4
+    container_name: mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+# named volume 선언
+# - named volume은 컨테이너가 삭제되어도 데이터가 유지된다.
+volumes:
+  mysql-data: {}    
