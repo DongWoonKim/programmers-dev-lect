@@ -25,6 +25,12 @@ echo
 echo "[3/3] 프론트 : web"
 docker compose -f docker-compose.front.yml up -d --build
 
+# 실행 중인 컨테이너를 표로 출력한다.
+# - --format : 출력 형식을 직접 지정한다.
+# - "table" : 맨 앞에 쓰면 머리글(Names, Status, Ports)을 붙이고 열을 맞춰준다.
+# - {{}} : GO 템플릿 문법. 컨테이너 정보를 꺼낸다.
+# .Names 이름 / .Status 상태 / .Ports 포트 매핑
+# -> docker psxw
 echo
 echo "=== 실행 상태 ==="
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
