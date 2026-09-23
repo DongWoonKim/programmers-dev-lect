@@ -38,10 +38,18 @@ services:
     depends_on:
       config-service:
         condition: service_healthy
+    # 같은 네트워크(msa-network)에 속한 컨테이너끼리는 컨테너이름이 도메인이름이 된다. 
+    # 그래서 config-service 컨테이너를 도메인처럼 접근 가능하다.
     environment:
       CONFIG_SERVICE_URL: "http://config-service:8888"
+      # mysql의 포트가 3307이 아니라, 3306인 점에 주의
+      # 3307은 내 PC에서 컨테이의 mysql에 접속할 때만 쓰는 포트이다.
       DB_URL: "jdbc:mysql://mysql:3306/board_auth?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8"
       BOARD_SERVICE_URL: "http://board-service:8081"
+    ports:
+      - "8082:8082"
+    networks:
+      - msa-network
 
 volumes:
   board-uploads: {}
