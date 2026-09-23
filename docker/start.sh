@@ -13,3 +13,14 @@ set -e
 # $0 : 실행된 스크립트 경로 -> /Users/kdw/Desktop/.../docker/start.sh
 # dirname : 경로에서 디렉토리만 추출한다. -> /Users/kdw/Desktop/.../docker
 cd "$(dirname "$0")" # => cd "/Users/kdw/Desktop/.../docker"
+
+echo "[1/3] 데이터 : mas-network 생성 + MySQL"
+docker compose -f docker-compose.data.yml up -d
+
+echo
+echo "[2/3] 서비스 : config -> auth/board/edge"
+docker compose -f docker-compose.service.yml up -d --build
+
+echo
+echo "[3/3] 프론트 : web"
+docker compose -f docker-compose.front.yml up -d --build
