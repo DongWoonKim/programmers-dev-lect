@@ -20,3 +20,11 @@ docker compose -f docker-compose.service.yml down $VOLUMES
 
 echo "[3/3 데이터 : MySQL + msa-network]"
 docker compose -f docker-compose.data.yml down $VOLUMES
+
+echo
+echo "=== 실행 상태 ==="
+docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+echo
+echo "=== 남은 볼륨 ==="
+docker volume ls
