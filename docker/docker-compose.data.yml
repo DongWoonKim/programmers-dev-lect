@@ -55,6 +55,12 @@ services:
       # /var/lib/mysql 은 MySQL 이 데이터를 파일로 저장하는 폴더다(데이터 디렉토리)
       # MySQL 은 논리 주소만 보고 쓰고, 그 요청을 Docker 가 물리 저장소로 돌려놓는다.
       - mysql-data:/var/lib/mysql
+    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p1234"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
       
 
