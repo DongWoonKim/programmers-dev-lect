@@ -52,6 +52,8 @@ services:
       # * 순서가 중요하면 01-, 02- 이런 식으로 파일명을 붙여주면 된다. ex) 01-board.sql, 02-auth.sql,
       - ./db:/dcoker-entrypoint-initdb.d:ro
       # 2) DB 데이터 보관
+      # /var/lib/mysql 은 MySQL 이 데이터를 파일로 저장하는 폴더다(데이터 디렉토리)
+      # MySQL 은 논리 주소만 보고 쓰고, 그 요청을 Docker 가 물리 저장소로 돌려놓는다.
       - mysql-data:/var/lib/mysql
 
       
