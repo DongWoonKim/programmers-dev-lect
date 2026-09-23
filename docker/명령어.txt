@@ -92,6 +92,8 @@ docker compose -f docker-compose.front.yml down
 
 완전 초기화 (DB 데이터까지 삭제)
 docker compose -f docker-compose.data.yml down -v
+docker compose -f docker-compose.service.yml down -v
+docker compose -f docker-compose.front.yml down -v
 
 상태 확인
 docker ps # 전체 컨테이너
