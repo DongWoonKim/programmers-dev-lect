@@ -106,8 +106,13 @@ docker compose -f docker-compose.service.yml restart auth-service
 # 코드 수정이 있었을 시
 docker compose -f docker-compose.service.yml up -d --build auth-service
 
+*** 쉘 스크립트 실행 권한 ***
+chmod +x start.sh
+chmod +x stop.sh
 
-
+*** 쉘 스크립트 실행 ***
+./start.sh
+./stop.sh
 
 
 
