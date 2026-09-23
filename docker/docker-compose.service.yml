@@ -1,0 +1,9 @@
+
+name: msa-service
+
+# 네트워크 선언
+# 이미 만들어진 것을 가져다 쓴다. 그래서 external: true 를 붙인다.
+networks:
+  msa-network:
+    name: msa-network
+    external: true
