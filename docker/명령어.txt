@@ -99,6 +99,11 @@ docker compose -f docker-compose.service.yml ps # 해당 파일만
 docker logs -f auth-service # 로그 확인
 docker compose -f docker-compose.service.yml log -f # 해당 파일 전체 로그
 
+개별 재시작
+docker compose -f docker-compose.service.yml restart auth-service
+# 코드 수정이 있었을 시
+docker compose -f docker-compose.service.yml up -d --build auth-service
+
 
 
 
