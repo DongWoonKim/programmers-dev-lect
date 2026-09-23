@@ -14,9 +14,23 @@ services:
     # Docker Hub 공식 MySQL 이미지
     image: mysql:9.4
     container_name: mysql
+
+    # 컨테이너가 시작될 때 실행할 명령어
+    # 서버 기본 문자셋
+    # - MySQL 이미지의 기본 클라이언트 문자셋이 latin1이라, 이걸 지정하지 않으면
+    #   db/*.sql 의 한글이 깨친 채로 저장된다.
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+
+    # 컨테이너 안으로 전달될 환경변수
+    environment:
+      # root 계정 비밀번호
+      MYSQL_ROOT_PASSWORD: 1234
+    
+    ports:
+      - "3307:3306"
+      
 # named volume 선언
 # - named volume은 컨테이너가 삭제되어도 데이터가 유지된다.
 volumes:
