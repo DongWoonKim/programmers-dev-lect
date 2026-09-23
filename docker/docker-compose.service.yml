@@ -71,7 +71,22 @@ services:
       - "8081:8081"
     networks:
       - msa-network
-    
+  
+  edge-service:
+    build: ../msa/edge-service
+    image: edge-service:latest
+    container_name: edge-service
+    depends_on:
+      config-service:
+        condition: service_healthy
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:8082
+      BOARD_SERVICE_URL: http://board-service:8081
+      TRUSTED_PROXIES: ".*"
+    ports:
+      - "8000:8000"
+    networks:
+      - msa-network
 
 volumes:
   board-uploads: {}
