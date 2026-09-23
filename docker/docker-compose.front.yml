@@ -1,0 +1,19 @@
+
+name: msa-front
+
+services:
+  web-service:
+    build: ../msa/web-service
+    image: web-service:latest
+    container_name: web-service
+    environment:
+      EDGE_SERVICE_URL: "http://edge-service:8000"
+    ports:
+      - "8080:8080"
+    networks:
+      - msa-network
+
+networks:
+  msa-network:
+    name: msa-network
+    external: true
