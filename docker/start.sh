@@ -24,3 +24,8 @@ docker compose -f docker-compose.service.yml up -d --build
 echo
 echo "[3/3] 프론트 : web"
 docker compose -f docker-compose.front.yml up -d --build
+
+echo
+echo "=== 실행 상태 ==="
+docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
