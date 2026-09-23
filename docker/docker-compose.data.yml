@@ -56,11 +56,14 @@ services:
       # MySQL 은 논리 주소만 보고 쓰고, 그 요청을 Docker 가 물리 저장소로 돌려놓는다.
       - mysql-data:/var/lib/mysql
     
+    # 헬스체크
+    # - mysqladmin ping 으로 실제 MySQL 서버가 실제 응답 여부를 확인해서 healty / unhealthy 상태를 판단.
+    # - 다른 서비스에서 depends_on + codition: service_healthy 로 활용 가능
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p1234"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+      interval: 5s # 5초마다 체크
+      timeout: 3s # 3초 안에 응답 없으면 실패로 간주
+      retries: 20 # 20회 실패하면 unhealthy로 간주
 
       
 
