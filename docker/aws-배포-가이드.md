@@ -84,3 +84,10 @@ scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@15.164.188.158:~/
 - rm -rf <폴더> : 확이 없이 강제 삭제
 리눅스에는 휴지통이 없다. rm은 즉시 영구 삭제다.
 sudo rm -rf / -> 서버를 통째로 날린다.
+
+### 파일쓰기 - 리다이렉션/파이프, heredoc
+- > : 결과를 파일에 덮어쓰기 echo hello > a.txt
+- >> : 결과를 파일 끝에 추가 echo world >> a.txt
+- | : 앞 명령 결과를 뒤 명령어의 입력으로 docker ps | grep auth
+- cat <<'EOF'> 파일 ~ 여러줄을 파일로 저장
+  EOF
