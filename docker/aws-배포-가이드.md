@@ -64,4 +64,11 @@ scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@15.164.188.158:~/
 - .이름 : 숨긴파일 -ls로는 안 보이고 ls -a로 보인다. (.git, .env, .ssh)
 
 ### 이동/조회
-
+- pwd : 현재 위치 출력
+- ls : 목록
+- ls -a : 숨김파일 포함
+- cd <폴더> : 이동
+- cat <파일> : 파일 내용 전체 출력
+- grep <단어> <파일> : 파일에서 단어가 있는 줄만
+- tail -f <파일> : 파일 끝을 실시간으로 계속 보기(로그 확인 - ctrl+c로 종료)
+- head -n 20 <파일> / tail -n 20 <파일> : 앞/뒤 20줄
