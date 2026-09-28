@@ -133,3 +133,9 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 ## 3. DB서버 셋팅
 - sudo apt update && sudo apt upgrade -y
 - sudo timedatectl set-timezone Asia/Seoul
+- sudo apt install -y mysql-server
+- mysql --version
+- sudo systemctl status mysql
+- sudo systemctl enable mysql
+- mysql설정 파일
+- sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
