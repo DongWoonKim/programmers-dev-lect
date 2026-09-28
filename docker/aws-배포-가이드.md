@@ -49,5 +49,8 @@
 - 라우팅 편집 : 0.0.0.0/0 NAT-GW(msa-nat) 추가
 - 작업 -> 서브넷 편집 -> msa-private-a-subnet
 
-
+# scp : Secure Copy. ssh 연결로 파일을 복사하는 명령
+# -i ~/Desktop/msa-key.pem : 서버에 접속할 때 쓸 키(ssh -i)
+# ~/Desktop/msa-key.pem : 복사할 파일
+# ubuntu@15.164.188.158:~/ : 보낼 곳. (사용자@서버주소:경로)
 scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@15.164.188.158:~/
