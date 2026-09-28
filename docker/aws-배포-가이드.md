@@ -115,3 +115,11 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 ### 관리자 권한, 사용자
 - sudo <명령> : 관리자 권한으로 실행
 - whoami : 현재 사용자
+
+### 패키지/서비스 관리(우분투 기준)
+- sudo apt update : 설치 가능한 패키지 목록 갱신
+- sudo apt upgrade -y : 설치된 패키지 업그레이드
+- sudo apt install -y <패키지> : 설치(git, nginx, mysql-server,...)
+- sudo systemctl status <서비스명> : 상태(active running이면 정상)
+- sudo systemctl start/stop/restart <서비스> : 시작/중지/재시작
+- sudo systemctl enable <서비스> : 부팅 시 자동 시작
