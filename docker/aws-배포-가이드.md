@@ -123,3 +123,9 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 - sudo systemctl status <서비스명> : 상태(active running이면 정상)
 - sudo systemctl start/stop/restart <서비스> : 시작/중지/재시작
 - sudo systemctl enable <서비스> : 부팅 시 자동 시작
+
+### 접속/파일 전송
+- ssh -i <키> ubuntu@<IP> : 서버 접속
+- exit : 접속 종료
+- scp -i <키> <내파일> ubuntu@<IP>:~/ : 내 pc -> 서버 복사
+- scp -i <키> ubuntu@<IP>:~/<파일> . : 서버 -> 내 pc 복사
