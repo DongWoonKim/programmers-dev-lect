@@ -129,3 +129,7 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 - exit : 접속 종료
 - scp -i <키> <내파일> ubuntu@<IP>:~/ : 내 pc -> 서버 복사
 - scp -i <키> ubuntu@<IP>:~/<파일> . : 서버 -> 내 pc 복사
+
+## 3. DB서버 셋팅
+- sudo apt update && sudo apt upgrade -y
+- sudo timedatectl set-timezone Asia/Seoul
