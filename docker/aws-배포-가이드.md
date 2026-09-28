@@ -150,3 +150,8 @@ GRANT ALL PRIVILEGES ON board_auth.* TO 'app'@'10.0.1.%';
 GRANT ALL PRIVILEGES ON board_app.* TO 'app'@'10.0.1.%';
 FLUSH PRIVILEGES;
 ```
+
+## 4. 자원 삭제
+- EC2(비용), NAT-GW(비용), EIP(비용), 
+- 보안그룹, 키 페어
+- VPC(subnet, igw, routing table) 
