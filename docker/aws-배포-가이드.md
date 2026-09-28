@@ -30,6 +30,7 @@
 - subnet(msa-public-a-subnet)
 - 퍼블릭 IP 자동 할당 : 활성화
 - 보안그룹 : msa-app-sg
+- 탄력적 IP 생성 및 할당
 - msa-db
 - t3.small
 - 키 페어 : pem키 설정
@@ -47,3 +48,6 @@
 - vpc : msa-vpc
 - 라우팅 편집 : 0.0.0.0/0 NAT-GW(msa-nat) 추가
 - 작업 -> 서브넷 편집 -> msa-private-a-subnet
+
+
+scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@15.164.188.158:~/
