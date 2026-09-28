@@ -139,3 +139,6 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 - sudo systemctl enable mysql
 - mysql설정 파일
 - sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+-> bind-address : 127.0.0.1 -> 0.0.0.0
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_unicode_ci
