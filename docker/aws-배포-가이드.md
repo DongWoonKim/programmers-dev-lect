@@ -14,7 +14,7 @@
 - 생성후 -> 작업 -> vpc연결(msa-vpc) 
 - 이렇게 해줘야 라우팅 테이블에서 연동 가능
 ### 4) NAT
-- IGW가 먼저 셋팅이 되어야 NAT GW 목록에서 msa-vpc를 선택할 수 있다.
+- IGW가 먼저 셋팅이 되어야(라우팅테이블까지 완료) NAT GW 목록에서 msa-vpc를 선택할 수 있다.
 - vpc : msa-vpc
 ### 5) 보안그룹
 - msa-app-sg
