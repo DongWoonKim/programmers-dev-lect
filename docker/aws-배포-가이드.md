@@ -142,3 +142,11 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 -> bind-address : 127.0.0.1 -> 0.0.0.0
 character-set-server    = utf8mb4
 collation-server        = utf8mb4_unicode_ci
+- sudo systemctl restart mysql
+- 접속 : sudo mysql
+```SQL
+CREATE USER 'app'@'10.0.1.%' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON board_auth.* TO 'app'@'10.0.1.%';
+GRANT ALL PRIVILEGES ON board_app.* TO 'app'@'10.0.1.%';
+FLUSH PRIVILEGES;
+```
