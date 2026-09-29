@@ -150,12 +150,18 @@ GRANT ALL PRIVILEGES ON board_app.* TO 'app'@'10.0.1.%';
 FLUSH PRIVILEGES;
 ```
 
-## 4. Docker설치 (ec2 : msa-app)
+## 4. Docker & git설치 (ec2 : msa-app)
 - sudo apt update && sudo apt upgrade -y
 - sudo timedatectl set-timezone Asia/Seoul
 - curl -fsSL https://get.docker.com | sudo sh
 - sudo usermod -aG docker ubuntu     # sudo 없이 docker 사용
 - exit                               # 그룹 반영을 위해 재접속
+- ssh 재접속
+- docker version
+- docker compose version
+- sudo apt install -y git
+- ssh-keygen -t ed25519 -C "msa-app-deploy" -f ~/.ssh/github_deploy -N ""
+
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
