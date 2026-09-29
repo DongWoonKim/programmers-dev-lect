@@ -379,6 +379,12 @@ server {
 
 ```
 - cat /etc/nginx/sites-available/msa
+```bash
+sudo ln -s /etc/nginx/sites-available/msa /etc/nginx/sites-enabled/msa
+sudo rm /etc/nginx/sites-enabled/default
+sudo nginx -t                 # 문법 검사 — "syntax is ok"
+sudo systemctl reload nginx
+```
 
 
 ## . 자원 삭제
