@@ -161,6 +161,13 @@ FLUSH PRIVILEGES;
 - docker compose version
 - sudo apt install -y git
 - ssh-keygen -t ed25519 -C "msa-app-deploy" -f ~/.ssh/github_deploy -N ""
+```
+ssh-keygen : ssh 키를 만드는 프로그램
+-t ed25519 : 키 종류(알고리즘). RSA보다 짧고 빠르면서 안전한 최신 방식(GitHub 권장)
+-C "msa-app-deploy" : 공개키 끝에 붙어 어떤 키인지 알아보는 용도. 인증 과는 무관
+-f ~/.ssh/github_deploy : 저장할 파일 경로
+-N "" : 키 암호를 빈 값으로 설정하여, 서버가 사람없이 자동으로 git pull할 수 있게한다.
+```
 - cat ~/.ssh/github_deploy.pub
 
 
