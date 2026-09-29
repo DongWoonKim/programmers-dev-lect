@@ -402,9 +402,18 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo nginx -t                 # 문법 검사 — "syntax is ok"
 sudo systemctl reload nginx
 ```
+요청 흐름:
+```
+브라우저 ─:80→ Nginx ─┬─ /                 → web-service:8080 ─Feign→ edge:8000 ─→ auth / board
+                      └─ /oauth2/**         → edge:8000 → auth:8082
+                         /login/oauth2/**
+```
 
 docker compose -f docker-compose.aws.yml down
 cmd + shift + delete 캐시비우기
+
+### 카카오 디벨로퍼스 등록
+- http://Elastic-IP/login/oauth2/code/kakao
 
 ## 6. 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
