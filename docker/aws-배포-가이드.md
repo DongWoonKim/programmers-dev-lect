@@ -284,7 +284,7 @@ volumes:
 ```
 - docker 폴더 : vi docker-compose.aws.yml
 - docker 폴더
-```
+```bash
 cat <<'EOF' > .env
 PUBLIC_HOST=<Elastic IP>
 DB_HOST=10.0.11.x
@@ -294,6 +294,39 @@ DB_PASSWORD=1234
 JAVA_OPTS=-Xms64m -Xmx256m -XX:MaxMetaspaceSize=160m -Xss512k -XX:+UseSerialGC -XX:TieredStopAtLevel=1
 EOF
 chmod 600 .env
+```
+- 배포 스크립트
+```bash
+cat <<'EOF' > deploy.sh
+#!/bin/bash
+# 사용법
+#   ./deploy.sh                      전체 서비스 갱신
+#   ./deploy.sh board-service        지정한 서비스만 갱신
+set -e
+cd "$(dirname "$0")"
+
+COMPOSE="docker compose -f docker-compose.aws.yml"
+SERVICES="${*:-config-service auth-service board-service edge-service web-service}"
+
+echo "[1/4] 최신 코드 받기"
+# --ff-only : 서버에서 코드를 고쳐서 GitHub과 갈라졌으면 병합하지 말고 실패시킨다
+git pull --ff-only
+
+echo "[2/4] 이미지 빌드 (메모리 때문에 하나씩)"
+for s in $SERVICES; do
+  echo "  - $s"
+  $COMPOSE build "$s"
+done
+
+echo "[3/4] 컨테이너 교체"
+$COMPOSE up -d $SERVICES
+
+echo "[4/4] 이전 이미지 정리"
+docker image prune -f
+
+echo
+$COMPOSE ps
+EOF
 ```
 
 ## . 자원 삭제
