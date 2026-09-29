@@ -345,6 +345,16 @@ chmod +x deploy.sh
 ### 설치
 - sudo apt install -y nginx
 - curl -I http://127.0.0.1
+### 설정 파일 구조
+```
+/etc/nginx/
+├─ nginx.conf              ← 메인 설정. 맨 아래에서 sites-enabled/* 를 불러온다
+├─ sites-available/        ← 사이트별 설정 파일 "보관함" (여기 있다고 적용되진 않음)
+│   ├─ default             ← 설치 시 기본 제공 (Welcome to nginx 페이지)
+│   └─ msa                 ← 우리가 만들 파일 (이름은 자유 — board, myapp 등 아무거나)
+└─ sites-enabled/          ← 실제 "적용"되는 곳. 보관함 파일을 가리키는 링크만 둔다
+    └─ default → ../sites-available/default   (설치 직후 상태)
+```
 ### 설정 파일
 - sudo vi /etc/nginx/sites-available/msa
 ```bash
