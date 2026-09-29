@@ -378,6 +378,8 @@ server {
 }
 
 ```
+- cat /etc/nginx/sites-available/msa
+
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
