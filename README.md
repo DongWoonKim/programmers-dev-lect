@@ -16,6 +16,12 @@
 <summary><b>📅 26.09</b></summary>
 <blockquote open>
 <details open>
+<summary><b>09.29</b></summary>
+
+1. [aws 인프라 구축 및 서비스 구동](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/docker/aws-%EB%B0%B0%ED%8F%AC-%EA%B0%80%EC%9D%B4%EB%93%9C.md)
+
+</details>
+<details>
 <summary><b>09.28</b></summary>
 
 1. [aws 인프라 구축 및 리눅스 필수 명령어](https://github.com/DongWoonKim/programmers-dev-lect/blob/master/docker/aws-%EB%B0%B0%ED%8F%AC-%EA%B0%80%EC%9D%B4%EB%93%9C.md)
