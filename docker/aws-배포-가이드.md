@@ -406,7 +406,7 @@ sudo systemctl reload nginx
 docker compose -f docker-compose.aws.yml down
 cmd + shift + delete 캐시비우기
 
-## . 자원 삭제
+## 6. 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
 - 보안그룹, 키 페어
 - VPC(subnet, igw, routing table) 
