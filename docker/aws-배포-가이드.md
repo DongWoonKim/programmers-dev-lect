@@ -328,6 +328,11 @@ echo
 $COMPOSE ps
 EOF
 ```
+```bash
+실행권한(docker폴더)
+chmod +x deploy.sh
+./deploy.sh
+```
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
