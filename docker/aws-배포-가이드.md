@@ -167,8 +167,25 @@ ssh-keygen : ssh 키를 만드는 프로그램
 -C "msa-app-deploy" : 공개키 끝에 붙어 어떤 키인지 알아보는 용도. 인증 과는 무관
 -f ~/.ssh/github_deploy : 저장할 파일 경로
 -N "" : 키 암호를 빈 값으로 설정하여, 서버가 사람없이 자동으로 git pull할 수 있게한다.
+
+~/.ssh/github_deploy     : 개인키 - 자물쇠의 "열쇠"
+~/.ssh/github_deploy.pub : 공개키 - 자물쇠의 "자물통"
+
+인증흐름
+1. GitHub에 공개키 등록(Deploy key)
+2. 서버가 git pull 할 때 개인키로 서명한다
+3. GitHub가 등록된 공개키로 서명을 검증 -> 맞으면 통과
 ```
 - cat ~/.ssh/github_deploy.pub
+- 서버의 ~/.ssh/conifg
+```
+cat <<'EOF' >> ~/.ssh/config
+Host github.com
+    IdentityFile ~/.ssh/github_deploy
+    IdentitiesOnly yes
+EOF
+chmod 600 ~/.ssh/config
+```
 
 
 ## . 자원 삭제
