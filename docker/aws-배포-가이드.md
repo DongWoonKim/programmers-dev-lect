@@ -178,7 +178,7 @@ ssh-keygen : ssh 키를 만드는 프로그램
 ```
 - cat ~/.ssh/github_deploy.pub
 - 서버의 ~/.ssh/conifg
-```
+```bash
 cat <<'EOF' >> ~/.ssh/config
 Host github.com
     IdentityFile ~/.ssh/github_deploy
@@ -186,6 +186,13 @@ Host github.com
 EOF
 chmod 600 ~/.ssh/config
 ```
+- cat <<'EOF' >> ~ EOF : 두 EOF 사이 내용을 입력으로 쓴다.
+- >> ~/.ssh/config : 그 내용을 파일 끝에 추가한다. / > 로 쓰면 기존 내용을 덮어쓴다.
+- Host github.com : github.com에 접속할 때만 적용된다.
+- IdentityFile ~/.ssh/github_deploy : 그때 사용할 개인키 파일위치 지정
+- IdentitiesOnly yes : 지정한 키만 쓰고 다른 키는 시도하지 않는다.
+
+
 - ssh -T git@github.com
 - git clone git@github.com:DongWoonKim/programmers-dev-lect.git
 - 폴더명 변경 : mv ~/programmers-dev-lect ~/app
