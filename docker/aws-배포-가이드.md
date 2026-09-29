@@ -30,7 +30,7 @@
 - subnet(msa-public-a-subnet)
 - 퍼블릭 IP 자동 할당 : 활성화
 - 보안그룹 : msa-app-sg
-- 탄력적 IP 생성 및 할당
+- 탄력적 IP 생성 및 할당(생성한 탄력적IP -> 탄력적 IP 주소연결 -> 인스턴스 선택, 프라이빗 IP 선택)
 - msa-db
 - t3.small
 - 키 페어 : pem키 설정
@@ -53,7 +53,7 @@
 # -i ~/Desktop/msa-key.pem : 서버에 접속할 때 쓸 키(ssh -i)
 # ~/Desktop/msa-key.pem : 복사할 파일
 # ubuntu@15.164.188.158:~/ : 보낼 곳. (사용자@서버주소:경로)
-scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@15.164.188.158:~/
+scp -i ~/Desktop/msa-key.pem ~/Desktop/msa-key.pem ubuntu@3.39.65.107:~/
 
 ## 2.리눅스 기본 명령어
 ### 경로표기
@@ -130,15 +130,14 @@ sudo rm -rf / -> 서버를 통째로 날린다.
 - scp -i <키> <내파일> ubuntu@<IP>:~/ : 내 pc -> 서버 복사
 - scp -i <키> ubuntu@<IP>:~/<파일> . : 서버 -> 내 pc 복사
 
-## 3. DB서버 셋팅
+## 3. DB서버 셋팅(ec2 : msa-db)
 - sudo apt update && sudo apt upgrade -y
 - sudo timedatectl set-timezone Asia/Seoul
 - sudo apt install -y mysql-server
 - mysql --version
 - sudo systemctl status mysql
 - sudo systemctl enable mysql
-- mysql설정 파일
-- sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+- mysql설정 파일 : sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 -> bind-address : 127.0.0.1 -> 0.0.0.0
 character-set-server    = utf8mb4
 collation-server        = utf8mb4_unicode_ci
@@ -151,7 +150,14 @@ GRANT ALL PRIVILEGES ON board_app.* TO 'app'@'10.0.1.%';
 FLUSH PRIVILEGES;
 ```
 
-## 4. 자원 삭제
+## 4. Docker설치 (ec2 : msa-app)
+- sudo apt update && sudo apt upgrade -y
+- sudo timedatectl set-timezone Asia/Seoul
+- curl -fsSL https://get.docker.com | sudo sh
+- sudo usermod -aG docker ubuntu     # sudo 없이 docker 사용
+- exit                               # 그룹 반영을 위해 재접속
+
+## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
 - 보안그룹, 키 페어
 - VPC(subnet, igw, routing table) 
