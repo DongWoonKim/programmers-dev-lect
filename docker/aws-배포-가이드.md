@@ -282,6 +282,19 @@ services:
 volumes:
   board-uploads: {}
 ```
+- docker 폴더 : vi docker-compose.aws.yml
+- docker 폴더
+```
+cat <<'EOF' > .env
+PUBLIC_HOST=<Elastic IP>
+DB_HOST=10.0.11.x
+DB_USER=app
+DB_PASSWORD=1234
+# 서비스당 JVM 메모리 제한 (5개 × ~300MB)
+JAVA_OPTS=-Xms64m -Xmx256m -XX:MaxMetaspaceSize=160m -Xss512k -XX:+UseSerialGC -XX:TieredStopAtLevel=1
+EOF
+chmod 600 .env
+```
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
