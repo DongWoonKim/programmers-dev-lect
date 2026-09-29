@@ -346,6 +346,38 @@ chmod +x deploy.sh
 - sudo apt install -y nginx
 - curl -I http://127.0.0.1
 ### 설정 파일
+- sudo vi /etc/nginx/sites-available/msa
+```bash
+server {
+    listen 80 default_server;
+    server_name _;
+
+    # 게시글 첨부 최대 10MB (board-service multipart 설정과 맞춤)
+    # Nginx 기본값은 1MB라 이걸 안 하면 "413 Request Entity Too Large"
+    client_max_body_size 10M;
+
+    # 공통 프록시 헤더 — 뒷단이 "브라우저가 원래 친 주소"를 알 수 있게 (auth application.yaml 주석 참고)
+    proxy_set_header Host              $host;
+    proxy_set_header X-Real-IP         $remote_addr;
+    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host  $host;
+
+    # 카카오 로그인 시작/콜백 → edge → auth
+    location /oauth2/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+    location /login/oauth2/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    # 나머지 전부(화면 + /api/**) → web-service (BFF가 Feign으로 edge에 중계)
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+}
+
+```
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
