@@ -390,7 +390,14 @@ server {
 ```
 - cat /etc/nginx/sites-available/msa
 ```bash
+# msa 설정 켜기
+- ln -s : 바로가기 링크 생성 -> ln -s <원본> <링크 위치>
+- Nginx는 sites-enabled/ 안의 파일만 읽는다.(nginx.conf 의 include sites-enabled/* )
+- 보관함(sites-available)의 msa를 가리키는 링크를 enabled에 두면 적용된다.
 sudo ln -s /etc/nginx/sites-available/msa /etc/nginx/sites-enabled/msa
+# 기본 사이트 끄기
+- 설치 시 default가 이미 켜져 있고 listen 80 default_server를 선점한다.
+- 그대로 두면 msa와 80번 포트가 겹쳐 에러가 나거나 요청이 default로 빠질 수도 있다.
 sudo rm /etc/nginx/sites-enabled/default
 sudo nginx -t                 # 문법 검사 — "syntax is ok"
 sudo systemctl reload nginx
