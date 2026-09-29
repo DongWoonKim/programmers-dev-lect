@@ -341,9 +341,11 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
-## 5. NGINX 설치
+## 5. NGINX 
+### 설치
 - sudo apt install -y nginx
 - curl -I http://127.0.0.1
+### 설정 파일
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
