@@ -187,7 +187,101 @@ EOF
 chmod 600 ~/.ssh/config
 ```
 - ssh -T git@github.com
+- git clone git@github.com:DongWoonKim/programmers-dev-lect.git
+- 폴더명 변경 : mv ~/programmers-dev-lect ~/app
+- docker-compose.aws.yml
+```yaml
+name: msa-aws
 
+networks:
+  msa-network:
+    name: msa-network
+
+x-common: &common
+  restart: unless-stopped
+  networks: [msa-network]
+
+services:
+  config-service:
+    <<: *common
+    build: ../msa/config-service
+    image: config-service:latest
+    container_name: config-service
+    volumes:
+      - ../msa/config-repo:/config-repo:ro
+    environment:
+      CONFIG_REPO_PATH: file:/config-repo
+      JAVA_OPTS: ${JAVA_OPTS}
+    # ports 없음 → 호스트에도 공개하지 않는다. 같은 네트워크의 컨테이너만 접근
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/8888"]
+      interval: 5s
+      timeout: 3s
+      retries: 40            
+
+  auth-service:
+    <<: *common
+    build: ../msa/auth-service
+    image: auth-service:latest
+    container_name: auth-service
+    depends_on:
+      config-service: { condition: service_healthy }
+    environment:
+      CONFIG_SERVICE_URL: http://config-service:8888 
+      DB_URL: "jdbc:mysql://${DB_HOST}:3306/board_auth?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      BOARD_SERVICE_URL: http://board-service:8081
+      # OAuth 성공 후 브라우저를 돌려보낼 주소 (application.yaml 의 web-service.url)
+      WEB_SERVICE_URL: http://${PUBLIC_HOST}
+      JAVA_OPTS: ${JAVA_OPTS}
+
+  board-service:
+    <<: *common
+    build: ../msa/board-service
+    image: board-service:latest
+    container_name: board-service
+    depends_on:
+      config-service: { condition: service_healthy }
+    environment:
+      CONFIG_SERVICE_URL: http://config-service:8888
+      DB_URL: "jdbc:mysql://${DB_HOST}:3306/board_app?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      AUTH_SERVICE_URL: http://auth-service:8082
+      JAVA_OPTS: ${JAVA_OPTS}
+    volumes: 
+      - board-uploads:/app/uploads
+
+  edge-service:
+    <<: *common
+    build: ../msa/edge-service
+    image: edge-service:latest
+    container_name: edge-service
+    depends_on:
+      config-service: { condition: service_healthy }
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:8082
+      BOARD_SERVICE_URL: http://board-service:8081 
+      TRUSTED_PROXIES: ".*"
+      JAVA_OPTS: ${JAVA_OPTS}
+    ports:
+      - "127.0.0.1:8000:8000"   # ← 호스트의 Nginx만 접근 가능 (외부 X)
+
+  web-service:
+    <<: *common
+    build: ../msa/web-service
+    image: web-service:latest
+    container_name: web-service
+    environment:
+      EDGE_SERVICE_URL: http://edge-service:8000
+      JAVA_OPTS: ${JAVA_OPTS}
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  board-uploads: {}
+```
 
 ## . 자원 삭제
 - EC2(비용), NAT-GW(비용), EIP(비용), 
