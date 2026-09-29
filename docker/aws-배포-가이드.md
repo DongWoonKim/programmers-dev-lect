@@ -186,6 +186,7 @@ Host github.com
 EOF
 chmod 600 ~/.ssh/config
 ```
+- ssh -T git@github.com
 
 
 ## . 자원 삭제
