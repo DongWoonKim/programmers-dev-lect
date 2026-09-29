@@ -161,6 +161,7 @@ FLUSH PRIVILEGES;
 - docker compose version
 - sudo apt install -y git
 - ssh-keygen -t ed25519 -C "msa-app-deploy" -f ~/.ssh/github_deploy -N ""
+- cat ~/.ssh/github_deploy.pub
 
 
 ## . 자원 삭제
