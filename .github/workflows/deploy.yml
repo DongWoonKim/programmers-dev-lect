@@ -59,6 +59,7 @@ jobs:
                 # ${{ secrets.이름 }} : 저장소 Settings -> Secrets and variables -> Actions -> Repository secrets에 등록한 값
                 host: ${{ secrets.EC2_HOST }} # msa-app eip
                 username: ubuntu 
+                # cat ~/Desktop/msa-key.pem -> '%' 반드시 제거 or 메모장으로 열기
                 key: ${{ secrets.EC2_SSH_KEY }} # msa-key.pem
                 command_timeout: 40m # 기본 10분 -> 40분으로 늘림. 서버 빌드시간
                 # | : 여러 줄을 그대로
