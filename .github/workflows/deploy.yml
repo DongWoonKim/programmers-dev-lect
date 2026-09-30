@@ -52,14 +52,16 @@ jobs:
         steps:
             - name: Deploy to msa-app
               # uses : 다른사람이 만들어 둔 Action(재사용)을 가져다 쓴다.
-              # appleboy/ssh-actions@v1 : "SSH로 원격 서버에 접속해 명령을 실행" 하는 공개 Action
-              uses: appleboy/ssh-actions@v1
+              # appleboy/ssh-action@v1 : "SSH로 원격 서버에 접속해 명령을 실행" 하는 공개 Action
+              uses: appleboy/ssh-action@v1
               # with : 그 Action에 넘기는 입력값
               with:
-                host: ${{ secrets.EC2_HOST }}
-                username: ubuntu
-                key: ${{ secrets.EC2_SSH_KEY }}
-                command_timeout: 40m
+                # ${{ secrets.이름 }} : 저장소 Settings -> Secrets and variables -> Actions -> Repository secrets에 등록한 값
+                host: ${{ secrets.EC2_HOST }} # msa-app eip
+                username: ubuntu 
+                key: ${{ secrets.EC2_SSH_KEY }} # msa-key.pem
+                command_timeout: 40m # 기본 10분 -> 40분으로 늘림. 서버 빌드시간
+                # | : 여러 줄을 그대로
                 script: |
                     cd ~/app/docker
                     ./deploy.sh
