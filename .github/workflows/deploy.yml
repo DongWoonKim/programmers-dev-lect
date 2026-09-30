@@ -39,5 +39,27 @@ on:
             - "msa/**"
             - "docker/**"
             - ".github/workflows/deploy.yml"
+    # Actions 탭의 "Run workflow" 버튼으로 수동 실행도 가능하게 한다.
+    # 코드 변경 없이 다시 배포(.env만 수정 등), 실패한 배포 재시도, paths 에 안 걸린 push
+    workflow_dispatch:
+
 # 무엇을 할지
 jobs:
+    deploy:
+        # 어떤 머신에서 돌릴지
+        runs-on: ubuntu-latest
+        # 순서대로 실행할 단계들
+        steps:
+            - name: Deploy to msa-app
+              # uses : 다른사람이 만들어 둔 Action(재사용)을 가져다 쓴다.
+              # appleboy/ssh-actions@v1 : "SSH로 원격 서버에 접속해 명령을 실행" 하는 공개 Action
+              uses: appleboy/ssh-actions@v1
+              # with : 그 Action에 넘기는 입력값
+              with:
+                host: ${{ secrets.EC2_HOST }}
+                username: ubuntu
+                key: ${{ secrets.EC2_SSH_KEY }}
+                command_timeout: 40m
+                script: |
+                    cd ~/app/docker
+                    ./deploy.sh
