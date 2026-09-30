@@ -8,5 +8,15 @@
 # CD (Continuous Delivery/Deployment, 지속적 전달/배포)
 # - 통과한 코드를 서버까지 "자동으로" 내보내는 것.
 
+# 왜 사용하나?
+# 수동 배포(ssh접속 -> git clone/pull -> build -> up) 사람이 매번 같은 순서를 반복하면 빠뜨리기 쉽다.
+# 자동화면 push 만으로 항상 같은 절차가 진행되고, 언제 누가 무엇을 배포했는지 기록이 남는다.
 
+# 우리 전략
+# CD만 한다 : push되면 서버에 접속해서 배포 스크립트 실행
+# CI -> deploy.sh 안에서 이뤄진다.
+
+# GitHub Actions = GitHub가 제공하는 CI/CD 도구
+# 저장소에 .yml 파일(워크플로)만 두면, 정해진 이벤트(push 등)마다 GitHub 서버(러너)가 대신 실행
+# 비슷한 도구 : Jenkins, GitLab CI, AWS CodePipeline,...
 
