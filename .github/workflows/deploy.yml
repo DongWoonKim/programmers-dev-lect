@@ -31,7 +31,7 @@ name: Deploy to EC2
 on:
     push:
         branches:
-            - master # 이 브랜치에 push할 때만 실행(test브랜치로 사용하고 싶으면 test로 변경하면된다.)
+            - deploy-test # 이 브랜치에 push할 때만 실행(test브랜치로 사용하고 싶으면 test로 변경하면된다.)
         # 아래 경로의 파일이 바뀐 push만
         # - 수업 자료(md 등)만 바꾼 push로는 배포하지 않는다.
         # - ** : 하위 폴더까지 전부
@@ -53,6 +53,7 @@ jobs:
             - name: Deploy to msa-app
               # uses : 다른사람이 만들어 둔 Action(재사용)을 가져다 쓴다.
               # appleboy/ssh-action@v1 : "SSH로 원격 서버에 접속해 명령을 실행" 하는 공개 Action
+              # 보안그룹 : msa-app-sg에 ssh - 0.0.0.0/0 허용으로 바꿀 것
               uses: appleboy/ssh-action@v1
               # with : 그 Action에 넘기는 입력값
               with:
