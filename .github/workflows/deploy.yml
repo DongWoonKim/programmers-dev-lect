@@ -23,3 +23,21 @@
 # GitHub Actions - EC2 자동 배포
 # git push -> GitHub Actions -> SSH로 msa-app접속 -> deploy.sh(git pull -> docker build -> docker up -d)
 # 파일 위치 규칙 : 저장소의 루트트 .github/workflows/ 안의 .yml 만 github가 인식한다.
+
+# Actions 탭에 표시될 워크플로 이름
+name: Deploy to EC2
+
+# 언제 실행할지(트리거)
+on:
+    push:
+        branches:
+            - master # 이 브랜치에 push할 때만 실행(test브랜치로 사용하고 싶으면 test로 변경하면된다.)
+        # 아래 경로의 파일이 바뀐 push만
+        # - 수업 자료(md 등)만 바꾼 push로는 배포하지 않는다.
+        # - ** : 하위 폴더까지 전부
+        paths:
+            - "msa/**"
+            - "docker/**"
+            - ".github/workflows/deploy.yml"
+# 무엇을 할지
+jobs:
