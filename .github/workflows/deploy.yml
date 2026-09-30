@@ -20,3 +20,6 @@
 # 저장소에 .yml 파일(워크플로)만 두면, 정해진 이벤트(push 등)마다 GitHub 서버(러너)가 대신 실행
 # 비슷한 도구 : Jenkins, GitLab CI, AWS CodePipeline,...
 
+# GitHub Actions - EC2 자동 배포
+# git push -> GitHub Actions -> SSH로 msa-app접속 -> deploy.sh(git pull -> docker build -> docker up -d)
+# 파일 위치 규칙 : 저장소의 루트트 .github/workflows/ 안의 .yml 만 github가 인식한다.
