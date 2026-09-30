@@ -8,6 +8,21 @@
 
 ---
 <details open>
+<summary><b>15-3 (2026.09.30)</b></summary>
+
+- **과제1 — 복습**
+  - 필수 : 수업내용 복습(github actions)
+- **과제2 — 실습**
+  - 필수 : 인프라 구축 후 데이터베이스 셋팅까지 + github actions
+  - 선택 : vpc + subnet + ec2*2 까지 생성 -> 테라폼 & IaC
+  -- aws cli설치, iam사용자(AdministratorAccess) 만들어서 aws cli에 등록.
+  -- terraform설치 -> 자원 정의 작성
+- **과제3 - 선택 : 과제2까지 끝난경우 아래 항목중 하나를 택하여 진행해주세요**
+  - 개인 복습(전체)
+  - 개인 프로젝트 -> 인프라에 띄워보기
+  - 알고리즘
+
+</details>
 <summary><b>15-1 (2026.09.28)</b></summary>
 
 - **과제1 — 복습**
