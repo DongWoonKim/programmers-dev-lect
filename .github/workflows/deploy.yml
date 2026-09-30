@@ -1,0 +1,12 @@
+
+# CI/CD 란?
+
+# CI (Continuous Integration, 지속적 통합)
+# - 여러 사람이 올린 코드를 "자주" 합치고, 합칠 때마다 자동으로 빌드/테스트해서 깨진 코드를 빨리 발견하는 것
+# push할 때마다 ./gradlew build /test 자동 실행 -> 실패 하면 바로 알림
+
+# CD (Continuous Delivery/Deployment, 지속적 전달/배포)
+# - 통과한 코드를 서버까지 "자동으로" 내보내는 것.
+
+
+
